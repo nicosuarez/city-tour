@@ -1,0 +1,1083 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="web.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="webModelsStoreContainer">
+          <EntitySet Name="AudioGuide" EntityType="web.Models.Store.AudioGuide" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookingCommerce" EntityType="web.Models.Store.BookingCommerce" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Business" EntityType="web.Models.Store.Business" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Commerce" EntityType="web.Models.Store.Commerce" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CommerceQuery" EntityType="web.Models.Store.CommerceQuery" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Company" EntityType="web.Models.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Event" EntityType="web.Models.Store.Event" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Location" EntityType="web.Models.Store.Location" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="web.Models.Store.Person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonAudioGuide" EntityType="web.Models.Store.PersonAudioGuide" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonAudioGuideEvent" EntityType="web.Models.Store.PersonAudioGuideEvent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Reservation" EntityType="web.Models.Store.Reservation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tour" EntityType="web.Models.Store.Tour" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TourEvent" EntityType="web.Models.Store.TourEvent" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_AudioGuide_Commerce" Association="web.Models.Store.FK_AudioGuide_Commerce">
+            <End Role="Commerce" EntitySet="Commerce" />
+            <End Role="AudioGuide" EntitySet="AudioGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commerce_BookingCommerce" Association="web.Models.Store.FK_Commerce_BookingCommerce">
+            <End Role="BookingCommerce" EntitySet="BookingCommerce" />
+            <End Role="Commerce" EntitySet="Commerce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commerce_Company" Association="web.Models.Store.FK_Commerce_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Commerce" EntitySet="Commerce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commerce_Location" Association="web.Models.Store.FK_Commerce_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Commerce" EntitySet="Commerce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommerceQuery_Commerce" Association="web.Models.Store.FK_CommerceQuery_Commerce">
+            <End Role="Commerce" EntitySet="Commerce" />
+            <End Role="CommerceQuery" EntitySet="CommerceQuery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommerceQuery_Person" Association="web.Models.Store.FK_CommerceQuery_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="CommerceQuery" EntitySet="CommerceQuery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Business" Association="web.Models.Store.FK_Company_Business">
+            <End Role="Business" EntitySet="Business" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Commerce" Association="web.Models.Store.FK_Event_Commerce">
+            <End Role="Commerce" EntitySet="Commerce" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuide_AudioGuide" Association="web.Models.Store.FK_PersonAudioGuide_AudioGuide">
+            <End Role="AudioGuide" EntitySet="AudioGuide" />
+            <End Role="PersonAudioGuide" EntitySet="PersonAudioGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuide_Person" Association="web.Models.Store.FK_PersonAudioGuide_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonAudioGuide" EntitySet="PersonAudioGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuideEvent_AudioGuide" Association="web.Models.Store.FK_PersonAudioGuideEvent_AudioGuide">
+            <End Role="AudioGuide" EntitySet="AudioGuide" />
+            <End Role="PersonAudioGuideEvent" EntitySet="PersonAudioGuideEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuideEvent_Person" Association="web.Models.Store.FK_PersonAudioGuideEvent_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonAudioGuideEvent" EntitySet="PersonAudioGuideEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_BookingCommerce" Association="web.Models.Store.FK_Reservation_BookingCommerce">
+            <End Role="BookingCommerce" EntitySet="BookingCommerce" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Person" Association="web.Models.Store.FK_Reservation_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_Person" Association="web.Models.Store.FK_Tour_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourEvent_Event" Association="web.Models.Store.FK_TourEvent_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="TourEvent" EntitySet="TourEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourEvent_Tour" Association="web.Models.Store.FK_TourEvent_Tour">
+            <End Role="Tour" EntitySet="Tour" />
+            <End Role="TourEvent" EntitySet="TourEvent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AudioGuide">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CommerceID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingCommerce">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="200" />
+          <Property Name="WebServiceURL" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactMail" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Commerce">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LocationID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="CompanyID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommerceQuery">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CommerceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QueryDate" Type="datetime" Nullable="false" />
+          <Property Name="PersonLatitude" Type="decimal" Nullable="false" />
+          <Property Name="PersonLongitud" Type="decimal" Nullable="false" />
+          <Property Name="ProximityDistance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="CUIT" Type="char" Nullable="false" MaxLength="11" />
+          <Property Name="BusinessID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="CommerceID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" />
+          <Property Name="Longitud" Type="numeric" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonAudioGuide">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AudioGuideID" />
+          </Key>
+          <Property Name="PersonID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AudioGuideID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BuyDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonAudioGuideEvent">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AudioGuideID" />
+          </Key>
+          <Property Name="PersonID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AudioGuideID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PlayDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReservationDate" Type="datetime" Nullable="false" />
+          <Property Name="PersonID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookingCommerceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Nullable="false" />
+          <Property Name="CancellationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tour">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="ScheduleReminder" Type="bit" />
+        </EntityType>
+        <EntityType Name="TourEvent">
+          <Key>
+            <PropertyRef Name="TourID" />
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="TourID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AudioGuide_Commerce">
+          <End Role="Commerce" Type="web.Models.Store.Commerce" Multiplicity="1" />
+          <End Role="AudioGuide" Type="web.Models.Store.AudioGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AudioGuide">
+              <PropertyRef Name="CommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commerce_BookingCommerce">
+          <End Role="BookingCommerce" Type="web.Models.Store.BookingCommerce" Multiplicity="1" />
+          <End Role="Commerce" Type="web.Models.Store.Commerce" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BookingCommerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commerce_Company">
+          <End Role="Company" Type="web.Models.Store.Company" Multiplicity="1" />
+          <End Role="Commerce" Type="web.Models.Store.Commerce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Commerce">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commerce_Location">
+          <End Role="Location" Type="web.Models.Store.Location" Multiplicity="1" />
+          <End Role="Commerce" Type="web.Models.Store.Commerce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Commerce">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommerceQuery_Commerce">
+          <End Role="Commerce" Type="web.Models.Store.Commerce" Multiplicity="1" />
+          <End Role="CommerceQuery" Type="web.Models.Store.CommerceQuery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommerceQuery">
+              <PropertyRef Name="CommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommerceQuery_Person">
+          <End Role="Person" Type="web.Models.Store.Person" Multiplicity="1" />
+          <End Role="CommerceQuery" Type="web.Models.Store.CommerceQuery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommerceQuery">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Business">
+          <End Role="Business" Type="web.Models.Store.Business" Multiplicity="1" />
+          <End Role="Company" Type="web.Models.Store.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Business">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="BusinessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Commerce">
+          <End Role="Commerce" Type="web.Models.Store.Commerce" Multiplicity="1" />
+          <End Role="Event" Type="web.Models.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuide_AudioGuide">
+          <End Role="AudioGuide" Type="web.Models.Store.AudioGuide" Multiplicity="1" />
+          <End Role="PersonAudioGuide" Type="web.Models.Store.PersonAudioGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioGuide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuide">
+              <PropertyRef Name="AudioGuideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuide_Person">
+          <End Role="Person" Type="web.Models.Store.Person" Multiplicity="1" />
+          <End Role="PersonAudioGuide" Type="web.Models.Store.PersonAudioGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuide">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuideEvent_AudioGuide">
+          <End Role="AudioGuide" Type="web.Models.Store.AudioGuide" Multiplicity="1" />
+          <End Role="PersonAudioGuideEvent" Type="web.Models.Store.PersonAudioGuideEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioGuide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuideEvent">
+              <PropertyRef Name="AudioGuideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuideEvent_Person">
+          <End Role="Person" Type="web.Models.Store.Person" Multiplicity="1" />
+          <End Role="PersonAudioGuideEvent" Type="web.Models.Store.PersonAudioGuideEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuideEvent">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_BookingCommerce">
+          <End Role="BookingCommerce" Type="web.Models.Store.BookingCommerce" Multiplicity="1" />
+          <End Role="Reservation" Type="web.Models.Store.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingCommerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="BookingCommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Person">
+          <End Role="Person" Type="web.Models.Store.Person" Multiplicity="1" />
+          <End Role="Reservation" Type="web.Models.Store.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_Person">
+          <End Role="Person" Type="web.Models.Store.Person" Multiplicity="1" />
+          <End Role="Tour" Type="web.Models.Store.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourEvent_Event">
+          <End Role="Event" Type="web.Models.Store.Event" Multiplicity="1" />
+          <End Role="TourEvent" Type="web.Models.Store.TourEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TourEvent">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourEvent_Tour">
+          <End Role="Tour" Type="web.Models.Store.Tour" Multiplicity="1" />
+          <End Role="TourEvent" Type="web.Models.Store.TourEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tour">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TourEvent">
+              <PropertyRef Name="TourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="web.Models" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CityTourEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AudioGuide" EntityType="web.Models.AudioGuide" />
+          <EntitySet Name="BookingCommerce" EntityType="web.Models.BookingCommerce" />
+          <EntitySet Name="Business" EntityType="web.Models.Business" />
+          <EntitySet Name="Commerce" EntityType="web.Models.Commerce" />
+          <EntitySet Name="CommerceQuery" EntityType="web.Models.CommerceQuery" />
+          <EntitySet Name="Company" EntityType="web.Models.Company" />
+          <EntitySet Name="Event" EntityType="web.Models.Event" />
+          <EntitySet Name="Location" EntityType="web.Models.Location" />
+          <EntitySet Name="Person" EntityType="web.Models.Person" />
+          <EntitySet Name="PersonAudioGuide" EntityType="web.Models.PersonAudioGuide" />
+          <EntitySet Name="PersonAudioGuideEvent" EntityType="web.Models.PersonAudioGuideEvent" />
+          <EntitySet Name="Reservation" EntityType="web.Models.Reservation" />
+          <EntitySet Name="Tour" EntityType="web.Models.Tour" />
+          <AssociationSet Name="FK_AudioGuide_Commerce" Association="web.Models.FK_AudioGuide_Commerce">
+            <End Role="Commerce" EntitySet="Commerce" />
+            <End Role="AudioGuide" EntitySet="AudioGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuide_AudioGuide" Association="web.Models.FK_PersonAudioGuide_AudioGuide">
+            <End Role="AudioGuide" EntitySet="AudioGuide" />
+            <End Role="PersonAudioGuide" EntitySet="PersonAudioGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuideEvent_AudioGuide" Association="web.Models.FK_PersonAudioGuideEvent_AudioGuide">
+            <End Role="AudioGuide" EntitySet="AudioGuide" />
+            <End Role="PersonAudioGuideEvent" EntitySet="PersonAudioGuideEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commerce_BookingCommerce" Association="web.Models.FK_Commerce_BookingCommerce">
+            <End Role="BookingCommerce" EntitySet="BookingCommerce" />
+            <End Role="Commerce" EntitySet="Commerce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_BookingCommerce" Association="web.Models.FK_Reservation_BookingCommerce">
+            <End Role="BookingCommerce" EntitySet="BookingCommerce" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Business" Association="web.Models.FK_Company_Business">
+            <End Role="Business" EntitySet="Business" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commerce_Company" Association="web.Models.FK_Commerce_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Commerce" EntitySet="Commerce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Commerce_Location" Association="web.Models.FK_Commerce_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Commerce" EntitySet="Commerce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommerceQuery_Commerce" Association="web.Models.FK_CommerceQuery_Commerce">
+            <End Role="Commerce" EntitySet="Commerce" />
+            <End Role="CommerceQuery" EntitySet="CommerceQuery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Commerce" Association="web.Models.FK_Event_Commerce">
+            <End Role="Commerce" EntitySet="Commerce" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommerceQuery_Person" Association="web.Models.FK_CommerceQuery_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="CommerceQuery" EntitySet="CommerceQuery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuide_Person" Association="web.Models.FK_PersonAudioGuide_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonAudioGuide" EntitySet="PersonAudioGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonAudioGuideEvent_Person" Association="web.Models.FK_PersonAudioGuideEvent_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonAudioGuideEvent" EntitySet="PersonAudioGuideEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Person" Association="web.Models.FK_Reservation_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_Person" Association="web.Models.FK_Tour_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="TourEvent" Association="web.Models.TourEvent">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AudioGuide">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CommerceID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Commerce" Relationship="web.Models.FK_AudioGuide_Commerce" FromRole="AudioGuide" ToRole="Commerce" />
+          <NavigationProperty Name="PersonAudioGuide" Relationship="web.Models.FK_PersonAudioGuide_AudioGuide" FromRole="AudioGuide" ToRole="PersonAudioGuide" />
+          <NavigationProperty Name="PersonAudioGuideEvent" Relationship="web.Models.FK_PersonAudioGuideEvent_AudioGuide" FromRole="AudioGuide" ToRole="PersonAudioGuideEvent" />
+        </EntityType>
+        <EntityType Name="BookingCommerce">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="WebServiceURL" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="ContactMail" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Commerce" Relationship="web.Models.FK_Commerce_BookingCommerce" FromRole="BookingCommerce" ToRole="Commerce" />
+          <NavigationProperty Name="Reservation" Relationship="web.Models.FK_Reservation_BookingCommerce" FromRole="BookingCommerce" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Company" Relationship="web.Models.FK_Company_Business" FromRole="Business" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Commerce">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="LocationID" Type="Guid" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="CompanyID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="AudioGuide" Relationship="web.Models.FK_AudioGuide_Commerce" FromRole="Commerce" ToRole="AudioGuide" />
+          <NavigationProperty Name="BookingCommerce" Relationship="web.Models.FK_Commerce_BookingCommerce" FromRole="Commerce" ToRole="BookingCommerce" />
+          <NavigationProperty Name="Company" Relationship="web.Models.FK_Commerce_Company" FromRole="Commerce" ToRole="Company" />
+          <NavigationProperty Name="Location" Relationship="web.Models.FK_Commerce_Location" FromRole="Commerce" ToRole="Location" />
+          <NavigationProperty Name="CommerceQuery" Relationship="web.Models.FK_CommerceQuery_Commerce" FromRole="Commerce" ToRole="CommerceQuery" />
+          <NavigationProperty Name="Event" Relationship="web.Models.FK_Event_Commerce" FromRole="Commerce" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="CommerceQuery">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="PersonID" Type="Guid" Nullable="false" />
+          <Property Name="CommerceID" Type="Guid" Nullable="false" />
+          <Property Name="QueryDate" Type="DateTime" Nullable="false" />
+          <Property Name="PersonLatitude" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="PersonLongitud" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ProximityDistance" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commerce" Relationship="web.Models.FK_CommerceQuery_Commerce" FromRole="CommerceQuery" ToRole="Commerce" />
+          <NavigationProperty Name="Person" Relationship="web.Models.FK_CommerceQuery_Person" FromRole="CommerceQuery" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="CUIT" Type="String" Nullable="false" MaxLength="11" Unicode="false" FixedLength="true" />
+          <Property Name="BusinessID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Business" Relationship="web.Models.FK_Company_Business" FromRole="Company" ToRole="Business" />
+          <NavigationProperty Name="Commerce" Relationship="web.Models.FK_Commerce_Company" FromRole="Company" ToRole="Commerce" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="CommerceID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Commerce" Relationship="web.Models.FK_Event_Commerce" FromRole="Event" ToRole="Commerce" />
+          <NavigationProperty Name="Tour" Relationship="web.Models.TourEvent" FromRole="Event" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Longitud" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Name" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Commerce" Relationship="web.Models.FK_Commerce_Location" FromRole="Location" ToRole="Commerce" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CommerceQuery" Relationship="web.Models.FK_CommerceQuery_Person" FromRole="Person" ToRole="CommerceQuery" />
+          <NavigationProperty Name="PersonAudioGuide" Relationship="web.Models.FK_PersonAudioGuide_Person" FromRole="Person" ToRole="PersonAudioGuide" />
+          <NavigationProperty Name="PersonAudioGuideEvent" Relationship="web.Models.FK_PersonAudioGuideEvent_Person" FromRole="Person" ToRole="PersonAudioGuideEvent" />
+          <NavigationProperty Name="Reservation" Relationship="web.Models.FK_Reservation_Person" FromRole="Person" ToRole="Reservation" />
+          <NavigationProperty Name="Tour" Relationship="web.Models.FK_Tour_Person" FromRole="Person" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="PersonAudioGuide">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AudioGuideID" />
+          </Key>
+          <Property Name="PersonID" Type="Guid" Nullable="false" />
+          <Property Name="AudioGuideID" Type="Guid" Nullable="false" />
+          <Property Name="BuyDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="AudioGuide" Relationship="web.Models.FK_PersonAudioGuide_AudioGuide" FromRole="PersonAudioGuide" ToRole="AudioGuide" />
+          <NavigationProperty Name="Person" Relationship="web.Models.FK_PersonAudioGuide_Person" FromRole="PersonAudioGuide" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="PersonAudioGuideEvent">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AudioGuideID" />
+          </Key>
+          <Property Name="PersonID" Type="Guid" Nullable="false" />
+          <Property Name="AudioGuideID" Type="Guid" Nullable="false" />
+          <Property Name="PlayDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="AudioGuide" Relationship="web.Models.FK_PersonAudioGuideEvent_AudioGuide" FromRole="PersonAudioGuideEvent" ToRole="AudioGuide" />
+          <NavigationProperty Name="Person" Relationship="web.Models.FK_PersonAudioGuideEvent_Person" FromRole="PersonAudioGuideEvent" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ReservationDate" Type="DateTime" Nullable="false" />
+          <Property Name="PersonID" Type="Guid" Nullable="false" />
+          <Property Name="BookingCommerceID" Type="Guid" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CancellationDate" Type="DateTime" />
+          <NavigationProperty Name="BookingCommerce" Relationship="web.Models.FK_Reservation_BookingCommerce" FromRole="Reservation" ToRole="BookingCommerce" />
+          <NavigationProperty Name="Person" Relationship="web.Models.FK_Reservation_Person" FromRole="Reservation" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Tour">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="PersonID" Type="Guid" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+          <Property Name="ScheduleReminder" Type="Boolean" />
+          <NavigationProperty Name="Person" Relationship="web.Models.FK_Tour_Person" FromRole="Tour" ToRole="Person" />
+          <NavigationProperty Name="Event" Relationship="web.Models.TourEvent" FromRole="Tour" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_AudioGuide_Commerce">
+          <End Role="Commerce" Type="web.Models.Commerce" Multiplicity="1" />
+          <End Role="AudioGuide" Type="web.Models.AudioGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AudioGuide">
+              <PropertyRef Name="CommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuide_AudioGuide">
+          <End Role="AudioGuide" Type="web.Models.AudioGuide" Multiplicity="1" />
+          <End Role="PersonAudioGuide" Type="web.Models.PersonAudioGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioGuide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuide">
+              <PropertyRef Name="AudioGuideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuideEvent_AudioGuide">
+          <End Role="AudioGuide" Type="web.Models.AudioGuide" Multiplicity="1" />
+          <End Role="PersonAudioGuideEvent" Type="web.Models.PersonAudioGuideEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AudioGuide">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuideEvent">
+              <PropertyRef Name="AudioGuideID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commerce_BookingCommerce">
+          <End Role="BookingCommerce" Type="web.Models.BookingCommerce" Multiplicity="1" />
+          <End Role="Commerce" Type="web.Models.Commerce" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BookingCommerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_BookingCommerce">
+          <End Role="BookingCommerce" Type="web.Models.BookingCommerce" Multiplicity="1" />
+          <End Role="Reservation" Type="web.Models.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingCommerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="BookingCommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Business">
+          <End Role="Business" Type="web.Models.Business" Multiplicity="1" />
+          <End Role="Company" Type="web.Models.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Business">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="BusinessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commerce_Company">
+          <End Role="Company" Type="web.Models.Company" Multiplicity="1" />
+          <End Role="Commerce" Type="web.Models.Commerce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Commerce">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Commerce_Location">
+          <End Role="Location" Type="web.Models.Location" Multiplicity="1" />
+          <End Role="Commerce" Type="web.Models.Commerce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Commerce">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommerceQuery_Commerce">
+          <End Role="Commerce" Type="web.Models.Commerce" Multiplicity="1" />
+          <End Role="CommerceQuery" Type="web.Models.CommerceQuery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommerceQuery">
+              <PropertyRef Name="CommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Commerce">
+          <End Role="Commerce" Type="web.Models.Commerce" Multiplicity="1" />
+          <End Role="Event" Type="web.Models.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommerceQuery_Person">
+          <End Role="Person" Type="web.Models.Person" Multiplicity="1" />
+          <End Role="CommerceQuery" Type="web.Models.CommerceQuery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommerceQuery">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuide_Person">
+          <End Role="Person" Type="web.Models.Person" Multiplicity="1" />
+          <End Role="PersonAudioGuide" Type="web.Models.PersonAudioGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuide">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonAudioGuideEvent_Person">
+          <End Role="Person" Type="web.Models.Person" Multiplicity="1" />
+          <End Role="PersonAudioGuideEvent" Type="web.Models.PersonAudioGuideEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PersonAudioGuideEvent">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Person">
+          <End Role="Person" Type="web.Models.Person" Multiplicity="1" />
+          <End Role="Reservation" Type="web.Models.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_Person">
+          <End Role="Person" Type="web.Models.Person" Multiplicity="1" />
+          <End Role="Tour" Type="web.Models.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TourEvent">
+          <End Role="Event" Type="web.Models.Event" Multiplicity="*" />
+          <End Role="Tour" Type="web.Models.Tour" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="webModelsStoreContainer" CdmEntityContainer="CityTourEntities">
+          <EntitySetMapping Name="AudioGuide"><EntityTypeMapping TypeName="web.Models.AudioGuide"><MappingFragment StoreEntitySet="AudioGuide">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="CommerceID" ColumnName="CommerceID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BookingCommerce"><EntityTypeMapping TypeName="web.Models.BookingCommerce"><MappingFragment StoreEntitySet="BookingCommerce">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+            <ScalarProperty Name="WebServiceURL" ColumnName="WebServiceURL" />
+            <ScalarProperty Name="ContactMail" ColumnName="ContactMail" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Business"><EntityTypeMapping TypeName="web.Models.Business"><MappingFragment StoreEntitySet="Business">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Commerce"><EntityTypeMapping TypeName="web.Models.Commerce"><MappingFragment StoreEntitySet="Commerce">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CommerceQuery"><EntityTypeMapping TypeName="web.Models.CommerceQuery"><MappingFragment StoreEntitySet="CommerceQuery">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            <ScalarProperty Name="CommerceID" ColumnName="CommerceID" />
+            <ScalarProperty Name="QueryDate" ColumnName="QueryDate" />
+            <ScalarProperty Name="PersonLatitude" ColumnName="PersonLatitude" />
+            <ScalarProperty Name="PersonLongitud" ColumnName="PersonLongitud" />
+            <ScalarProperty Name="ProximityDistance" ColumnName="ProximityDistance" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Company"><EntityTypeMapping TypeName="web.Models.Company"><MappingFragment StoreEntitySet="Company">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+            <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Event"><EntityTypeMapping TypeName="web.Models.Event"><MappingFragment StoreEntitySet="Event">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="CommerceID" ColumnName="CommerceID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Location"><EntityTypeMapping TypeName="web.Models.Location"><MappingFragment StoreEntitySet="Location">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+            <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Person"><EntityTypeMapping TypeName="web.Models.Person"><MappingFragment StoreEntitySet="Person">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+            <ScalarProperty Name="Created" ColumnName="Created" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonAudioGuide"><EntityTypeMapping TypeName="web.Models.PersonAudioGuide"><MappingFragment StoreEntitySet="PersonAudioGuide">
+            <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            <ScalarProperty Name="AudioGuideID" ColumnName="AudioGuideID" />
+            <ScalarProperty Name="BuyDate" ColumnName="BuyDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonAudioGuideEvent"><EntityTypeMapping TypeName="web.Models.PersonAudioGuideEvent"><MappingFragment StoreEntitySet="PersonAudioGuideEvent">
+            <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            <ScalarProperty Name="AudioGuideID" ColumnName="AudioGuideID" />
+            <ScalarProperty Name="PlayDate" ColumnName="PlayDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Reservation"><EntityTypeMapping TypeName="web.Models.Reservation"><MappingFragment StoreEntitySet="Reservation">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
+            <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            <ScalarProperty Name="BookingCommerceID" ColumnName="BookingCommerceID" />
+            <ScalarProperty Name="Amount" ColumnName="Amount" />
+            <ScalarProperty Name="CancellationDate" ColumnName="CancellationDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Tour"><EntityTypeMapping TypeName="web.Models.Tour"><MappingFragment StoreEntitySet="Tour">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            <ScalarProperty Name="Created" ColumnName="Created" />
+            <ScalarProperty Name="ScheduleReminder" ColumnName="ScheduleReminder" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="TourEvent" TypeName="web.Models.TourEvent" StoreEntitySet="TourEvent">
+            <EndProperty Name="Event">
+              <ScalarProperty Name="ID" ColumnName="EventID" />
+            </EndProperty>
+            <EndProperty Name="Tour">
+              <ScalarProperty Name="ID" ColumnName="TourID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="web.Models.AudioGuide" Width="1.5" PointX="5.25" PointY="4.625" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.BookingCommerce" Width="1.5" PointX="0.75" PointY="8" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Business" Width="1.5" PointX="1.5" PointY="2" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Commerce" Width="1.5" PointX="3" PointY="7.5" Height="2.9070849609374996" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.CommerceQuery" Width="1.5" PointX="8.25" PointY="7.75" Height="2.4140429687499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Company" Width="1.5" PointX="0.75" PointY="4.625" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Event" Width="1.5" PointX="5.25" PointY="12.5" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Location" Width="1.5" PointX="0.75" PointY="11.5" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Person" Width="1.5" PointX="5.25" PointY="0.75" Height="2.4140429687499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.PersonAudioGuide" Width="1.5" PointX="7.5" PointY="4.75" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.PersonAudioGuideEvent" Width="1.5" PointX="7.5" PointY="1.75" Height="1.7566536458333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Reservation" Width="1.5" PointX="6" PointY="7.75" Height="2.2496956380208317" IsExpanded="true" />
+        <EntityTypeShape EntityType="web.Models.Tour" Width="1.5" PointX="7.5" PointY="12.5" Height="1.921000976562496" IsExpanded="true" />
+        <AssociationConnector Association="web.Models.FK_AudioGuide_Commerce" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.75" PointY="7.5" />
+          <ConnectorPoint PointX="3.75" PointY="5.58550048828125" />
+          <ConnectorPoint PointX="5.25" PointY="5.58550048828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_PersonAudioGuide_AudioGuide" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="5.6283268229166659" />
+          <ConnectorPoint PointX="6.916666666666667" PointY="5.628326822916665" />
+          <ConnectorPoint PointX="7.083333333333333" PointY="5.6283268229166659" />
+          <ConnectorPoint PointX="7.135416666666667" PointY="5.628326822916665" />
+          <ConnectorPoint PointX="7.302083333333333" PointY="5.6283268229166659" />
+          <ConnectorPoint PointX="7.5" PointY="5.6283268229166659" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_PersonAudioGuideEvent_AudioGuide" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="4.625" />
+          <ConnectorPoint PointX="6.9410744349011209" PointY="4.4339255650988783" />
+          <ConnectorPoint PointX="7.0589255650988791" PointY="4.3160744349011209" />
+          <ConnectorPoint PointX="7.125" PointY="4.25" />
+          <ConnectorPoint PointX="7.125" PointY="2.6283268229166676" />
+          <ConnectorPoint PointX="7.135416666666667" PointY="2.6283268229166672" />
+          <ConnectorPoint PointX="7.302083333333333" PointY="2.6283268229166676" />
+          <ConnectorPoint PointX="7.5" PointY="2.6283268229166676" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Commerce_BookingCommerce" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="8.96050048828125" />
+          <ConnectorPoint PointX="3" PointY="8.96050048828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Reservation_BookingCommerce" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="8.4489982441406255" />
+          <ConnectorPoint PointX="2.75" PointY="8.4489982441406255" />
+          <ConnectorPoint PointX="2.75" PointY="7.25" />
+          <ConnectorPoint PointX="3.2604141666666666" PointY="7.2499999999999991" />
+          <ConnectorPoint PointX="3.4270808333333336" PointY="7.25" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="7.2499999999999991" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="7.25" />
+          <ConnectorPoint PointX="6.75" PointY="7.25" />
+          <ConnectorPoint PointX="6.75" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Company_Business" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.875" PointY="3.4279589843749996" />
+          <ConnectorPoint PointX="1.875" PointY="4.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Commerce_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.1479243977864586" />
+          <ConnectorPoint PointX="3.3437475" PointY="6.1479243977864586" />
+          <ConnectorPoint PointX="3.3437475" PointY="7.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Commerce_Location" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="12.378326822916666" />
+          <ConnectorPoint PointX="3.75" PointY="12.378326822916666" />
+          <ConnectorPoint PointX="3.75" PointY="10.4070849609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_CommerceQuery_Commerce" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="10.113119303385416" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="10.113119303385416" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="10.113119303385416" />
+          <ConnectorPoint PointX="8.25" PointY="10.113119303385416" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Event_Commerce" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.1562525" PointY="10.4070849609375" />
+          <ConnectorPoint PointX="4.1562525" PointY="13.46050048828125" />
+          <ConnectorPoint PointX="5.25" PointY="13.46050048828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_CommerceQuery_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="1.1801008528645827" />
+          <ConnectorPoint PointX="9.40625" PointY="1.1801008528645827" />
+          <ConnectorPoint PointX="9.40625" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_PersonAudioGuide_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="3.1017342764423068" />
+          <ConnectorPoint PointX="6.9410744349011217" PointY="3.2928087113434272" />
+          <ConnectorPoint PointX="7.0589255650988791" PointY="3.410659841541186" />
+          <ConnectorPoint PointX="7.0660744349011217" PointY="3.4178087113434272" />
+          <ConnectorPoint PointX="7.2776755650988791" PointY="3.629409841541186" />
+          <ConnectorPoint PointX="7.3125" PointY="3.6642342764423068" />
+          <ConnectorPoint PointX="7.3125" PointY="5.1579114114583327" />
+          <ConnectorPoint PointX="7.5" PointY="5.1579114114583327" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_PersonAudioGuideEvent_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="2.1266634114583338" />
+          <ConnectorPoint PointX="7.135416666666667" PointY="2.1266634114583334" />
+          <ConnectorPoint PointX="7.302083333333333" PointY="2.1266634114583338" />
+          <ConnectorPoint PointX="7.5" PointY="2.1266634114583338" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Reservation_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="1.6727067057291669" />
+          <ConnectorPoint PointX="7.21875" PointY="1.6727067057291669" />
+          <ConnectorPoint PointX="7.21875" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Tour_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="2.4087476171875015" />
+          <ConnectorPoint PointX="7" PointY="2.4087476171875015" />
+          <ConnectorPoint PointX="7" PointY="7.5" />
+          <ConnectorPoint PointX="7.135416666666667" PointY="7.4999999999999991" />
+          <ConnectorPoint PointX="7.302083333333333" PointY="7.5" />
+          <ConnectorPoint PointX="8" PointY="7.5" />
+          <ConnectorPoint PointX="8" PointY="12.125" />
+          <ConnectorPoint PointX="8.25" PointY="12.125" />
+          <ConnectorPoint PointX="8.25" PointY="12.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.TourEvent" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="13.460500488281248" />
+          <ConnectorPoint PointX="7.5" PointY="13.460500488281248" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
