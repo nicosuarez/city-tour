@@ -3,10 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web", "web\web.csproj", "{A995D5D2-8910-41DD-B96E-9808C80AFD97}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C65BCE0-16C4-4568-A7F3-47B056FD7A2A}"
+	ProjectSection(SolutionItems) = preProject
+		CityTour.vsmdi = CityTour.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{2236DE07-E1DA-4038-806D-DE3CC1AA294D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{939D84BC-E84B-43C9-B335-28B9B18402D8}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Scripts\Data.Creation.sql = Resources\Scripts\Data.Creation.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web.Test", "web.Test\web.Test.csproj", "{9399D8B4-CC62-4516-97C4-43129EBEF074}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = CityTour.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,8 +36,15 @@ Global
 		{A995D5D2-8910-41DD-B96E-9808C80AFD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A995D5D2-8910-41DD-B96E-9808C80AFD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A995D5D2-8910-41DD-B96E-9808C80AFD97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9399D8B4-CC62-4516-97C4-43129EBEF074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9399D8B4-CC62-4516-97C4-43129EBEF074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9399D8B4-CC62-4516-97C4-43129EBEF074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9399D8B4-CC62-4516-97C4-43129EBEF074}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{939D84BC-E84B-43C9-B335-28B9B18402D8} = {2236DE07-E1DA-4038-806D-DE3CC1AA294D}
 	EndGlobalSection
 EndGlobal
