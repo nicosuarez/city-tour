@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">CityTour - Escuchando SMS</string>
+    <string name="app_name">CityTourSMS</string>
+    <string name="InvalidBodySMS">Mensaje Incorrento</string>
+
+</resources>
