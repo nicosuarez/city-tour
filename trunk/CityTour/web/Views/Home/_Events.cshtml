@@ -1,0 +1,19 @@
+﻿@using Resources
+@model IEnumerable<web.Models.Event>
+<div class="itinerary_list">
+    <h2>@TextStrings.ScheduledEvents</h2>
+    <ul>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+            <li>
+                <a href="#"> 
+                    <span>@TextStrings.Description: @item.Description</span>
+                    <span>@TextStrings.Date: @item.EventDate.ToShortDateString()</span>
+                </a>                            
+            </li>     
+            }
+        }
+    </ul>
+</div>

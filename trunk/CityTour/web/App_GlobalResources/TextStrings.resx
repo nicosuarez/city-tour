@@ -120,6 +120,12 @@
   <data name="CityTour" xml:space="preserve">
     <value>CityTour</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripcion</value>
+  </data>
   <data name="Enter" xml:space="preserve">
     <value>Entrar</value>
   </data>
@@ -137,5 +143,8 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Contraseña</value>
+  </data>
+  <data name="ScheduledEvents" xml:space="preserve">
+    <value>Eventos Agendados</value>
   </data>
 </root>
