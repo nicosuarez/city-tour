@@ -21,7 +21,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("web.Models", "FK_AudioGuide_Commerce", "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Commerce), "AudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.AudioGuide), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_PersonAudioGuide_AudioGuide", "AudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.AudioGuide), "PersonAudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.PersonAudioGuide), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_PersonAudioGuideEvent_AudioGuide", "AudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.AudioGuide), "PersonAudioGuideEvent", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.PersonAudioGuideEvent), true)]
-[assembly: EdmRelationshipAttribute("web.Models", "FK_Commerce_BookingCommerce", "BookingCommerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.BookingCommerce), "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(web.Models.Commerce), true)]
+[assembly: EdmRelationshipAttribute("web.Models", "FK_BookingCommerce_Commerce", "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Commerce), "BookingCommerce", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(web.Models.BookingCommerce), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Reservation_BookingCommerce", "BookingCommerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.BookingCommerce), "Reservation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Reservation), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Company_Business", "Business", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Business), "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Company), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Commerce_Company", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Company), "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Commerce), true)]
@@ -280,6 +280,22 @@ namespace web.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<sysdiagrams> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagrams>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagrams> _sysdiagrams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Tour> Tour
         {
             get
@@ -393,6 +409,14 @@ namespace web.Models
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosysdiagrams(sysdiagrams sysdiagrams)
+        {
+            base.AddObject("sysdiagrams", sysdiagrams);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Tour EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTour(Tour tour)
@@ -424,7 +448,7 @@ namespace web.Models
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="commerceID">Initial value of the CommerceID property.</param>
-        public static AudioGuide CreateAudioGuide(global::System.Guid id, global::System.String description, global::System.Guid commerceID)
+        public static AudioGuide CreateAudioGuide(global::System.Int32 id, global::System.String description, global::System.Int32 commerceID)
         {
             AudioGuide audioGuide = new AudioGuide();
             audioGuide.ID = id;
@@ -441,7 +465,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -459,8 +483,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -492,7 +516,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid CommerceID
+        public global::System.Int32 CommerceID
         {
             get
             {
@@ -507,8 +531,8 @@ namespace web.Models
                 OnCommerceIDChanged();
             }
         }
-        private global::System.Guid _CommerceID;
-        partial void OnCommerceIDChanging(global::System.Guid value);
+        private global::System.Int32 _CommerceID;
+        partial void OnCommerceIDChanging(global::System.Int32 value);
         partial void OnCommerceIDChanged();
 
         #endregion
@@ -614,7 +638,7 @@ namespace web.Models
         /// Create a new BookingCommerce object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static BookingCommerce CreateBookingCommerce(global::System.Guid id)
+        public static BookingCommerce CreateBookingCommerce(global::System.Int32 id)
         {
             BookingCommerce bookingCommerce = new BookingCommerce();
             bookingCommerce.ID = id;
@@ -629,7 +653,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -647,8 +671,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -733,16 +757,16 @@ namespace web.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("web.Models", "FK_Commerce_BookingCommerce", "Commerce")]
+        [EdmRelationshipNavigationPropertyAttribute("web.Models", "FK_BookingCommerce_Commerce", "Commerce")]
         public Commerce Commerce
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Commerce>("web.Models.FK_Commerce_BookingCommerce", "Commerce").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Commerce>("web.Models.FK_BookingCommerce_Commerce", "Commerce").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Commerce>("web.Models.FK_Commerce_BookingCommerce", "Commerce").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Commerce>("web.Models.FK_BookingCommerce_Commerce", "Commerce").Value = value;
             }
         }
         /// <summary>
@@ -754,13 +778,13 @@ namespace web.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Commerce>("web.Models.FK_Commerce_BookingCommerce", "Commerce");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Commerce>("web.Models.FK_BookingCommerce_Commerce", "Commerce");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Commerce>("web.Models.FK_Commerce_BookingCommerce", "Commerce", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Commerce>("web.Models.FK_BookingCommerce_Commerce", "Commerce", value);
                 }
             }
         }
@@ -805,7 +829,7 @@ namespace web.Models
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Business CreateBusiness(global::System.Guid id, global::System.String name)
+        public static Business CreateBusiness(global::System.Int32 id, global::System.String name)
         {
             Business business = new Business();
             business.ID = id;
@@ -821,7 +845,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -839,8 +863,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -914,7 +938,7 @@ namespace web.Models
         /// <param name="locationID">Initial value of the LocationID property.</param>
         /// <param name="address">Initial value of the Address property.</param>
         /// <param name="companyID">Initial value of the CompanyID property.</param>
-        public static Commerce CreateCommerce(global::System.Guid id, global::System.String name, global::System.Guid locationID, global::System.String address, global::System.Guid companyID)
+        public static Commerce CreateCommerce(global::System.Int32 id, global::System.String name, global::System.Int32 locationID, global::System.String address, global::System.Int32 companyID)
         {
             Commerce commerce = new Commerce();
             commerce.ID = id;
@@ -933,7 +957,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -951,8 +975,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -1008,7 +1032,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid LocationID
+        public global::System.Int32 LocationID
         {
             get
             {
@@ -1023,8 +1047,8 @@ namespace web.Models
                 OnLocationIDChanged();
             }
         }
-        private global::System.Guid _LocationID;
-        partial void OnLocationIDChanging(global::System.Guid value);
+        private global::System.Int32 _LocationID;
+        partial void OnLocationIDChanging(global::System.Int32 value);
         partial void OnLocationIDChanged();
     
         /// <summary>
@@ -1056,7 +1080,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid CompanyID
+        public global::System.Int32 CompanyID
         {
             get
             {
@@ -1071,8 +1095,8 @@ namespace web.Models
                 OnCompanyIDChanged();
             }
         }
-        private global::System.Guid _CompanyID;
-        partial void OnCompanyIDChanging(global::System.Guid value);
+        private global::System.Int32 _CompanyID;
+        partial void OnCompanyIDChanging(global::System.Int32 value);
         partial void OnCompanyIDChanged();
 
         #endregion
@@ -1107,16 +1131,16 @@ namespace web.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("web.Models", "FK_Commerce_BookingCommerce", "BookingCommerce")]
+        [EdmRelationshipNavigationPropertyAttribute("web.Models", "FK_BookingCommerce_Commerce", "BookingCommerce")]
         public BookingCommerce BookingCommerce
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BookingCommerce>("web.Models.FK_Commerce_BookingCommerce", "BookingCommerce").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BookingCommerce>("web.Models.FK_BookingCommerce_Commerce", "BookingCommerce").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BookingCommerce>("web.Models.FK_Commerce_BookingCommerce", "BookingCommerce").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BookingCommerce>("web.Models.FK_BookingCommerce_Commerce", "BookingCommerce").Value = value;
             }
         }
         /// <summary>
@@ -1128,13 +1152,13 @@ namespace web.Models
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BookingCommerce>("web.Models.FK_Commerce_BookingCommerce", "BookingCommerce");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BookingCommerce>("web.Models.FK_BookingCommerce_Commerce", "BookingCommerce");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BookingCommerce>("web.Models.FK_Commerce_BookingCommerce", "BookingCommerce", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BookingCommerce>("web.Models.FK_BookingCommerce_Commerce", "BookingCommerce", value);
                 }
             }
         }
@@ -1282,7 +1306,7 @@ namespace web.Models
         /// <param name="personLatitude">Initial value of the PersonLatitude property.</param>
         /// <param name="personLongitud">Initial value of the PersonLongitud property.</param>
         /// <param name="proximityDistance">Initial value of the ProximityDistance property.</param>
-        public static CommerceQuery CreateCommerceQuery(global::System.Guid id, global::System.Guid personID, global::System.Guid commerceID, global::System.DateTime queryDate, global::System.Decimal personLatitude, global::System.Decimal personLongitud, global::System.Int32 proximityDistance)
+        public static CommerceQuery CreateCommerceQuery(global::System.Int32 id, global::System.Int32 personID, global::System.Int32 commerceID, global::System.DateTime queryDate, global::System.Decimal personLatitude, global::System.Decimal personLongitud, global::System.Int32 proximityDistance)
         {
             CommerceQuery commerceQuery = new CommerceQuery();
             commerceQuery.ID = id;
@@ -1303,7 +1327,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -1321,8 +1345,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -1330,7 +1354,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonID
+        public global::System.Int32 PersonID
         {
             get
             {
@@ -1345,8 +1369,8 @@ namespace web.Models
                 OnPersonIDChanged();
             }
         }
-        private global::System.Guid _PersonID;
-        partial void OnPersonIDChanging(global::System.Guid value);
+        private global::System.Int32 _PersonID;
+        partial void OnPersonIDChanging(global::System.Int32 value);
         partial void OnPersonIDChanged();
     
         /// <summary>
@@ -1354,7 +1378,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid CommerceID
+        public global::System.Int32 CommerceID
         {
             get
             {
@@ -1369,8 +1393,8 @@ namespace web.Models
                 OnCommerceIDChanged();
             }
         }
-        private global::System.Guid _CommerceID;
-        partial void OnCommerceIDChanging(global::System.Guid value);
+        private global::System.Int32 _CommerceID;
+        partial void OnCommerceIDChanging(global::System.Int32 value);
         partial void OnCommerceIDChanged();
     
         /// <summary>
@@ -1569,7 +1593,7 @@ namespace web.Models
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="cUIT">Initial value of the CUIT property.</param>
         /// <param name="businessID">Initial value of the BusinessID property.</param>
-        public static Company CreateCompany(global::System.Guid id, global::System.String name, global::System.String cUIT, global::System.Guid businessID)
+        public static Company CreateCompany(global::System.Int32 id, global::System.String name, global::System.String cUIT, global::System.Int32 businessID)
         {
             Company company = new Company();
             company.ID = id;
@@ -1587,7 +1611,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -1605,8 +1629,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -1686,7 +1710,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid BusinessID
+        public global::System.Int32 BusinessID
         {
             get
             {
@@ -1701,8 +1725,8 @@ namespace web.Models
                 OnBusinessIDChanged();
             }
         }
-        private global::System.Guid _BusinessID;
-        partial void OnBusinessIDChanging(global::System.Guid value);
+        private global::System.Int32 _BusinessID;
+        partial void OnBusinessIDChanging(global::System.Int32 value);
         partial void OnBusinessIDChanged();
 
         #endregion
@@ -1789,7 +1813,7 @@ namespace web.Models
         /// <param name="eventDate">Initial value of the EventDate property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="commerceID">Initial value of the CommerceID property.</param>
-        public static Event CreateEvent(global::System.Guid id, global::System.DateTime eventDate, global::System.String description, global::System.Guid commerceID)
+        public static Event CreateEvent(global::System.Int32 id, global::System.DateTime eventDate, global::System.String description, global::System.Int32 commerceID)
         {
             Event @event = new Event();
             @event.ID = id;
@@ -1807,7 +1831,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -1825,8 +1849,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -1882,7 +1906,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid CommerceID
+        public global::System.Int32 CommerceID
         {
             get
             {
@@ -1897,8 +1921,8 @@ namespace web.Models
                 OnCommerceIDChanged();
             }
         }
-        private global::System.Guid _CommerceID;
-        partial void OnCommerceIDChanging(global::System.Guid value);
+        private global::System.Int32 _CommerceID;
+        partial void OnCommerceIDChanging(global::System.Int32 value);
         partial void OnCommerceIDChanged();
 
         #endregion
@@ -1982,7 +2006,7 @@ namespace web.Models
         /// Create a new Location object.
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
-        public static Location CreateLocation(global::System.Guid id)
+        public static Location CreateLocation(global::System.Int32 id)
         {
             Location location = new Location();
             location.ID = id;
@@ -1997,7 +2021,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -2015,8 +2039,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -2136,7 +2160,7 @@ namespace web.Models
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="created">Initial value of the Created property.</param>
-        public static Person CreatePerson(global::System.Guid id, global::System.String name, global::System.DateTime created)
+        public static Person CreatePerson(global::System.Int32 id, global::System.String name, global::System.DateTime created)
         {
             Person person = new Person();
             person.ID = id;
@@ -2153,7 +2177,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -2171,8 +2195,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -2380,7 +2404,7 @@ namespace web.Models
         /// <param name="personID">Initial value of the PersonID property.</param>
         /// <param name="audioGuideID">Initial value of the AudioGuideID property.</param>
         /// <param name="buyDate">Initial value of the BuyDate property.</param>
-        public static PersonAudioGuide CreatePersonAudioGuide(global::System.Guid personID, global::System.Guid audioGuideID, global::System.DateTime buyDate)
+        public static PersonAudioGuide CreatePersonAudioGuide(global::System.Int32 personID, global::System.Int32 audioGuideID, global::System.DateTime buyDate)
         {
             PersonAudioGuide personAudioGuide = new PersonAudioGuide();
             personAudioGuide.PersonID = personID;
@@ -2397,7 +2421,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonID
+        public global::System.Int32 PersonID
         {
             get
             {
@@ -2415,8 +2439,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _PersonID;
-        partial void OnPersonIDChanging(global::System.Guid value);
+        private global::System.Int32 _PersonID;
+        partial void OnPersonIDChanging(global::System.Int32 value);
         partial void OnPersonIDChanged();
     
         /// <summary>
@@ -2424,7 +2448,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid AudioGuideID
+        public global::System.Int32 AudioGuideID
         {
             get
             {
@@ -2442,8 +2466,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _AudioGuideID;
-        partial void OnAudioGuideIDChanging(global::System.Guid value);
+        private global::System.Int32 _AudioGuideID;
+        partial void OnAudioGuideIDChanging(global::System.Int32 value);
         partial void OnAudioGuideIDChanged();
     
         /// <summary>
@@ -2569,7 +2593,7 @@ namespace web.Models
         /// <param name="personID">Initial value of the PersonID property.</param>
         /// <param name="audioGuideID">Initial value of the AudioGuideID property.</param>
         /// <param name="playDate">Initial value of the PlayDate property.</param>
-        public static PersonAudioGuideEvent CreatePersonAudioGuideEvent(global::System.Guid personID, global::System.Guid audioGuideID, global::System.DateTime playDate)
+        public static PersonAudioGuideEvent CreatePersonAudioGuideEvent(global::System.Int32 personID, global::System.Int32 audioGuideID, global::System.DateTime playDate)
         {
             PersonAudioGuideEvent personAudioGuideEvent = new PersonAudioGuideEvent();
             personAudioGuideEvent.PersonID = personID;
@@ -2586,7 +2610,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonID
+        public global::System.Int32 PersonID
         {
             get
             {
@@ -2604,8 +2628,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _PersonID;
-        partial void OnPersonIDChanging(global::System.Guid value);
+        private global::System.Int32 _PersonID;
+        partial void OnPersonIDChanging(global::System.Int32 value);
         partial void OnPersonIDChanged();
     
         /// <summary>
@@ -2613,7 +2637,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid AudioGuideID
+        public global::System.Int32 AudioGuideID
         {
             get
             {
@@ -2631,8 +2655,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _AudioGuideID;
-        partial void OnAudioGuideIDChanging(global::System.Guid value);
+        private global::System.Int32 _AudioGuideID;
+        partial void OnAudioGuideIDChanging(global::System.Int32 value);
         partial void OnAudioGuideIDChanged();
     
         /// <summary>
@@ -2760,7 +2784,7 @@ namespace web.Models
         /// <param name="personID">Initial value of the PersonID property.</param>
         /// <param name="bookingCommerceID">Initial value of the BookingCommerceID property.</param>
         /// <param name="amount">Initial value of the Amount property.</param>
-        public static Reservation CreateReservation(global::System.Guid id, global::System.DateTime reservationDate, global::System.Guid personID, global::System.Guid bookingCommerceID, global::System.Decimal amount)
+        public static Reservation CreateReservation(global::System.Int32 id, global::System.DateTime reservationDate, global::System.Int32 personID, global::System.Int32 bookingCommerceID, global::System.Decimal amount)
         {
             Reservation reservation = new Reservation();
             reservation.ID = id;
@@ -2779,7 +2803,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -2797,8 +2821,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -2830,7 +2854,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonID
+        public global::System.Int32 PersonID
         {
             get
             {
@@ -2845,8 +2869,8 @@ namespace web.Models
                 OnPersonIDChanged();
             }
         }
-        private global::System.Guid _PersonID;
-        partial void OnPersonIDChanging(global::System.Guid value);
+        private global::System.Int32 _PersonID;
+        partial void OnPersonIDChanging(global::System.Int32 value);
         partial void OnPersonIDChanged();
     
         /// <summary>
@@ -2854,7 +2878,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid BookingCommerceID
+        public global::System.Int32 BookingCommerceID
         {
             get
             {
@@ -2869,8 +2893,8 @@ namespace web.Models
                 OnBookingCommerceIDChanged();
             }
         }
-        private global::System.Guid _BookingCommerceID;
-        partial void OnBookingCommerceIDChanging(global::System.Guid value);
+        private global::System.Int32 _BookingCommerceID;
+        partial void OnBookingCommerceIDChanging(global::System.Int32 value);
         partial void OnBookingCommerceIDChanged();
     
         /// <summary>
@@ -3007,6 +3031,161 @@ namespace web.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="web.Models", Name="sysdiagrams")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagrams : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagrams object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagrams Createsysdiagrams(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagrams sysdiagrams = new sysdiagrams();
+            sysdiagrams.name = name;
+            sysdiagrams.principal_id = principal_id;
+            sysdiagrams.diagram_id = diagram_id;
+            return sysdiagrams;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="web.Models", Name="Tour")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -3020,7 +3199,7 @@ namespace web.Models
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="personID">Initial value of the PersonID property.</param>
         /// <param name="created">Initial value of the Created property.</param>
-        public static Tour CreateTour(global::System.Guid id, global::System.Guid personID, global::System.DateTime created)
+        public static Tour CreateTour(global::System.Int32 id, global::System.Int32 personID, global::System.DateTime created)
         {
             Tour tour = new Tour();
             tour.ID = id;
@@ -3037,7 +3216,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID
+        public global::System.Int32 ID
         {
             get
             {
@@ -3055,8 +3234,8 @@ namespace web.Models
                 }
             }
         }
-        private global::System.Guid _ID;
-        partial void OnIDChanging(global::System.Guid value);
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
         partial void OnIDChanged();
     
         /// <summary>
@@ -3064,7 +3243,7 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid PersonID
+        public global::System.Int32 PersonID
         {
             get
             {
@@ -3079,8 +3258,8 @@ namespace web.Models
                 OnPersonIDChanged();
             }
         }
-        private global::System.Guid _PersonID;
-        partial void OnPersonIDChanging(global::System.Guid value);
+        private global::System.Int32 _PersonID;
+        partial void OnPersonIDChanging(global::System.Int32 value);
         partial void OnPersonIDChanged();
     
         /// <summary>
