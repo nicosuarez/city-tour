@@ -3,10 +3,10 @@
     $('button').button();
 
     // TABS ------------------------------------------------------------------------------------------------------------------ //
-    $('#homeTabs').tabs({ selected: 2 });
+    $('#homeTabs').tabs();
 
     // GEOLOCATION ----------------------------------------------------------------------------------------------------------- //
-    var mapCanvas = $('#mapCanvas').first().get();
+    var mapCanvas = $('#map').first().get();
 
     if (google.maps.Map && mapCanvas) {
         if (Modernizr.geolocation) {
@@ -49,7 +49,7 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
 
-                var map = new google.maps.Map(document.getElementById('mapCanvas'), options);
+                var map = new google.maps.Map(document.getElementById('map'), options);
                 setMarkers(map, places);
             });
         }
