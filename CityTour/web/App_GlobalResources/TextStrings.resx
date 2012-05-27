@@ -129,6 +129,9 @@
   <data name="Enter" xml:space="preserve">
     <value>Entrar</value>
   </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Hora</value>
+  </data>
   <data name="Mail" xml:space="preserve">
     <value>Mail</value>
   </data>

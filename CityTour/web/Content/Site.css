@@ -131,6 +131,11 @@ input[type='text'], input[type='password']
     padding: 5px 0 5px;
 }
 
+.itinerary_list li span
+{
+    display: block;
+}
+
 .itinerary_list a {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
