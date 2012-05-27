@@ -123,6 +123,7 @@ input[type='text'], input[type='password']
 .itinerary_list ul
 {
     list-style: none;
+    padding: 0px;
 }
 
 .itinerary_list li
