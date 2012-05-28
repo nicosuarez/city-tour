@@ -1,5 +1,7 @@
 package com.citytour.sms;
 
+import java.io.File;
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +13,8 @@ import android.widget.Toast;
 
 public class SmsReceiver extends BroadcastReceiver
 {
+	public static SMSActivity smsActivity;
+	
 	@Override
 	public void onReceive(Context context, Intent intent) {
         //---get the SMS message passed in---
@@ -28,30 +32,36 @@ public class SmsReceiver extends BroadcastReceiver
             	String originalAddress = msgs[i].getOriginatingAddress();
             	String smsBody = msgs[i].getMessageBody().toString();             			
             	
-            	String response = generateResponse(context, smsBody);
-            	
-                sendSMS(context, originalAddress, response);        
+            	if ( isAudioguideRequest(context, smsBody) )
+            	{
+            		sendAudioguide(context, originalAddress, smsBody);
+            	} else {
+                	String response = generateResponse(context, smsBody);
+            		sendSMS(context, originalAddress, response);
+            	}
                 
                 showMessage(context, originalAddress, smsBody);
             }
         } 
 	}
 	
+	public boolean isAudioguideRequest(Context context, String smsBody)
+	{
+		String[] tokens = smsBody.split(" ");
+		return tokens[0].equals(context.getString(R.string.SMSAudioguide)) && tokens.length == 2;
+	}
+	
 	public String generateResponse(Context context, String smsBody)
 	{
 		String[] tokens = smsBody.split(" ");
-		String response = context.getString(R.string.InvalidBodySMS);;
-		if (tokens[0].equals("Taxi") && tokens.length>2)
+		String response = context.getString(R.string.InvalidBodySMS);
+		if (tokens[0].equals(context.getString(R.string.SMSTaxi)) && tokens.length>2)
 		{
 			//TODO: Hacer llamado a web services para generar la reserva
 			response = "Taxi reservado. Movil 1520 TaxiPremium";
-		} else if (tokens[0].equals("Pago") && tokens.length == 4) {
+		} else if (tokens[0].equals(context.getString(R.string.SMSPay)) && tokens.length == 4) {
 			//TODO: Hacer llamado a web services para generar el pago			
 			response = "Pago aceptado por $120,40. Nro 1234. Movil 1529";   
-		} else if (tokens[0].equals("Audioguia") && tokens.length == 2) {
-			//TODO: Hacer llamado a web services para obtener la url de la audioguia
-			String audioId = tokens[1];
-			response = "Reproducí tu audioguia en http://citytour.com/audioguia/" + audioId;
 		}
 			
 		return response;
@@ -64,11 +74,32 @@ public class SmsReceiver extends BroadcastReceiver
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, pi, null);        
     }  
-	
+    
+    public void sendAudioguide(Context context, String phoneNumber, String smsBody)
+    {
+    	String[] tokens = smsBody.split(" ");
+    	String filePath = "/sdcard/" + tokens[1] + ".3gp";
+    	if (!this.fileExists(context, filePath))
+    	{
+    		sendSMS(context, phoneNumber, context.getString(R.string.SMSFailureAudioguide));
+    		return;
+    	}
+
+    	String message = context.getString(R.string.SMSSuccessAudioguide);
+    	smsActivity.sendMMS(phoneNumber, message, "file://" + filePath, "video/3gp");
+    	    	
+    }
+	  
     //---display the new SMS message---    
     public void showMessage(Context context, String originalAddress, String smsBody)
     {
         String str = "SMS from " + originalAddress + " :" + smsBody;
         Toast.makeText(context, str, Toast.LENGTH_SHORT).show();    	
+    }
+    
+    public boolean fileExists(Context context, String fileName)
+    {
+    	File file = new File(fileName);
+    	return file.exists();    	
     }
 }

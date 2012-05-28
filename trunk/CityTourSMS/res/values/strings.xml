@@ -4,5 +4,10 @@
     <string name="hello">CityTour - Escuchando SMS</string>
     <string name="app_name">CityTourSMS</string>
     <string name="InvalidBodySMS">Mensaje Incorrento</string>
+    <string name="SMSAudioguide">Audioguia</string>
+    <string name="SMSTaxi">Taxi</string>
+    <string name="SMSPay">Pago</string>
+    <string name="SMSSuccessAudioguide">Te enviamos la audioguia que solicitaste</string>
+    <string name="SMSFailureAudioguide">La audioguia solicitada no existe</string>
 
 </resources>
