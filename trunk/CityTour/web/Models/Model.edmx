@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="web.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="web.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="webModelsStoreContainer">
           <EntitySet Name="AudioGuide" EntityType="web.Models.Store.AudioGuide" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BookingCommerce" EntityType="web.Models.Store.BookingCommerce" store:Type="Tables" Schema="dbo" />
@@ -18,7 +18,6 @@
           <EntitySet Name="PersonAudioGuide" EntityType="web.Models.Store.PersonAudioGuide" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonAudioGuideEvent" EntityType="web.Models.Store.PersonAudioGuideEvent" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Reservation" EntityType="web.Models.Store.Reservation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="web.Models.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tour" EntityType="web.Models.Store.Tour" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TourEvent" EntityType="web.Models.Store.TourEvent" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_AudioGuide_Commerce" Association="web.Models.Store.FK_AudioGuide_Commerce">
@@ -161,9 +160,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Latitude" Type="decimal" />
-          <Property Name="Longitud" Type="numeric" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Latitude" Type="decimal" Nullable="false" />
+          <Property Name="Longitud" Type="numeric" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -202,16 +201,6 @@
           <Property Name="BookingCommerceID" Type="int" Nullable="false" />
           <Property Name="Amount" Type="decimal" Nullable="false" />
           <Property Name="CancellationDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Tour">
           <Key>
@@ -451,7 +440,6 @@
           <EntitySet Name="PersonAudioGuide" EntityType="web.Models.PersonAudioGuide" />
           <EntitySet Name="PersonAudioGuideEvent" EntityType="web.Models.PersonAudioGuideEvent" />
           <EntitySet Name="Reservation" EntityType="web.Models.Reservation" />
-          <EntitySet Name="sysdiagrams" EntityType="web.Models.sysdiagrams" />
           <EntitySet Name="Tour" EntityType="web.Models.Tour" />
           <AssociationSet Name="FK_AudioGuide_Commerce" Association="web.Models.FK_AudioGuide_Commerce">
             <End Role="Commerce" EntitySet="Commerce" />
@@ -607,9 +595,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Decimal" Name="Latitude" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="Longitud" Precision="18" Scale="0" />
-          <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Latitude" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Longitud" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Commerce" Relationship="web.Models.FK_Commerce_Location" FromRole="Location" ToRole="Commerce" />
         </EntityType>
         <EntityType Name="Person">
@@ -660,16 +648,6 @@
           <Property Type="DateTime" Name="CancellationDate" />
           <NavigationProperty Name="BookingCommerce" Relationship="web.Models.FK_Reservation_BookingCommerce" FromRole="Reservation" ToRole="BookingCommerce" />
           <NavigationProperty Name="Person" Relationship="web.Models.FK_Reservation_Person" FromRole="Reservation" ToRole="Person" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="principal_id" Nullable="false" />
-          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="version" />
-          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Tour">
           <Key>
@@ -995,17 +973,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="web.Models.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tour">
             <EntityTypeMapping TypeName="web.Models.Tour">
               <MappingFragment StoreEntitySet="Tour">
@@ -1044,108 +1011,109 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Model">
-        <EntityTypeShape EntityType="web.Models.AudioGuide" Width="1.5" PointX="7.5" PointY="4.375" Height="1.9210009765625102" />
-        <EntityTypeShape EntityType="web.Models.BookingCommerce" Width="1.5" PointX="7.5" PointY="7.125" Height="1.9210009765625102" />
-        <EntityTypeShape EntityType="web.Models.Business" Width="1.5" PointX="0.75" PointY="7.375" Height="1.427958984374996" />
-        <EntityTypeShape EntityType="web.Models.Commerce" Width="1.5" PointX="5.25" PointY="6.625" Height="2.9070849609375102" />
-        <EntityTypeShape EntityType="web.Models.CommerceQuery" Width="1.5" PointX="12.5" PointY="6.875" Height="2.4140429687500102" />
-        <EntityTypeShape EntityType="web.Models.Company" Width="1.5" PointX="3" PointY="7" Height="2.0853483072916674" />
-        <EntityTypeShape EntityType="web.Models.Event" Width="1.5" PointX="7.5" PointY="12.875" Height="1.9210009765625102" />
-        <EntityTypeShape EntityType="web.Models.Location" Width="1.5" PointX="3" PointY="4.125" Height="1.7566536458333246" />
-        <EntityTypeShape EntityType="web.Models.Person" Width="1.5" PointX="7.5" PointY="1.125" Height="2.4140429687500102" />
-        <EntityTypeShape EntityType="web.Models.PersonAudioGuide" Width="1.5" PointX="9.75" PointY="4.5" Height="1.7566536458333388" />
-        <EntityTypeShape EntityType="web.Models.PersonAudioGuideEvent" Width="1.5" PointX="9.75" PointY="1.5" Height="1.7566536458333388" />
-        <EntityTypeShape EntityType="web.Models.Reservation" Width="1.5" PointX="9.75" PointY="7.875" Height="2.2496956380208388" />
-        <EntityTypeShape EntityType="web.Models.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7566536458333246" />
-        <EntityTypeShape EntityType="web.Models.Tour" Width="1.5" PointX="9.75" PointY="12.875" Height="1.9210009765625102" />
+      <Diagram Name="Model" ZoomLevel="21">
+        <EntityTypeShape EntityType="web.Models.AudioGuide" Width="1.5" PointX="7.5" PointY="5" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="web.Models.BookingCommerce" Width="1.5" PointX="7.5" PointY="8" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="web.Models.Business" Width="1.5" PointX="0.75" PointY="8.25" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="web.Models.Commerce" Width="1.5" PointX="5.25" PointY="7.375" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="web.Models.CommerceQuery" Width="1.5" PointX="12.5" PointY="7.625" Height="2.749492187499996" />
+        <EntityTypeShape EntityType="web.Models.Company" Width="1.5" PointX="3" PointY="7.875" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="web.Models.Event" Width="1.5" PointX="7.5" PointY="14.375" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="web.Models.Location" Width="1.5" PointX="3" PointY="5" Height="1.9802864583333282" />
+        <EntityTypeShape EntityType="web.Models.Person" Width="1.5" PointX="7.5" PointY="0.75" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="web.Models.PersonAudioGuide" Width="1.5" PointX="9.75" PointY="5.125" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="web.Models.PersonAudioGuideEvent" Width="1.5" PointX="9.75" PointY="2.125" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="web.Models.Reservation" Width="1.5" PointX="9.75" PointY="8.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="web.Models.Tour" Width="1.5" PointX="9.75" PointY="14.375" Height="2.1725878906250102" />
         <AssociationConnector Association="web.Models.FK_AudioGuide_Commerce" >
-          <ConnectorPoint PointX="6" PointY="6.625" />
-          <ConnectorPoint PointX="6" PointY="5.3355004882812551" />
-          <ConnectorPoint PointX="7.5" PointY="5.3355004882812551" />
+          <ConnectorPoint PointX="6" PointY="7.375" />
+          <ConnectorPoint PointX="6" PointY="6.0862939453125016" />
+          <ConnectorPoint PointX="7.5" PointY="6.0862939453125016" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuide_AudioGuide" >
-          <ConnectorPoint PointX="9" PointY="5.3783268229166694" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="5.3783268229166685" />
-          <ConnectorPoint PointX="9.6770833333333339" PointY="5.3783268229166694" />
-          <ConnectorPoint PointX="9.75" PointY="5.3783268229166694" />
+          <ConnectorPoint PointX="9" PointY="6.1151432291666694" />
+          <ConnectorPoint PointX="9.4479166666666661" PointY="6.1151432291666685" />
+          <ConnectorPoint PointX="9.6770833333333339" PointY="6.1151432291666694" />
+          <ConnectorPoint PointX="9.75" PointY="6.1151432291666694" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuideEvent_AudioGuide" >
-          <ConnectorPoint PointX="9" PointY="4.375" />
-          <ConnectorPoint PointX="9.375" PointY="4" />
-          <ConnectorPoint PointX="9.375" PointY="2.3783268229166694" />
-          <ConnectorPoint PointX="9.75" PointY="2.3783268229166694" />
+          <ConnectorPoint PointX="9" PointY="5" />
+          <ConnectorPoint PointX="9.375" PointY="4.625" />
+          <ConnectorPoint PointX="9.375" PointY="3.1151432291666694" />
+          <ConnectorPoint PointX="9.75" PointY="3.1151432291666694" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_BookingCommerce_Commerce" >
-          <ConnectorPoint PointX="6.75" PointY="8.0855004882812551" />
-          <ConnectorPoint PointX="7.5" PointY="8.0855004882812551" />
+          <ConnectorPoint PointX="6.75" PointY="9.086293945312498" />
+          <ConnectorPoint PointX="7.5" PointY="9.086293945312498" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Reservation_BookingCommerce" >
-          <ConnectorPoint PointX="9" PointY="8.4605004882812551" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="8.4605004882812551" />
-          <ConnectorPoint PointX="9.6770833333333339" PointY="8.4605004882812551" />
-          <ConnectorPoint PointX="9.75" PointY="8.4605004882812551" />
+          <ConnectorPoint PointX="9" PointY="9.461293945312498" />
+          <ConnectorPoint PointX="9.4479166666666661" PointY="9.461293945312498" />
+          <ConnectorPoint PointX="9.6770833333333339" PointY="9.461293945312498" />
+          <ConnectorPoint PointX="9.75" PointY="9.461293945312498" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Company_Business" >
-          <ConnectorPoint PointX="2.25" PointY="8.088979492187498" />
-          <ConnectorPoint PointX="3" PointY="8.088979492187498" />
+          <ConnectorPoint PointX="2.25" PointY="9.0478417968750016" />
+          <ConnectorPoint PointX="3" PointY="9.0478417968750016" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Commerce_Company" >
-          <ConnectorPoint PointX="4.5" PointY="8.0426741536458337" />
-          <ConnectorPoint PointX="5.25" PointY="8.0426741536458337" />
+          <ConnectorPoint PointX="4.5" PointY="9.0574446614583337" />
+          <ConnectorPoint PointX="5.25" PointY="9.0574446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Commerce_Location" >
-          <ConnectorPoint PointX="4.5" PointY="4.7302502441406276" />
-          <ConnectorPoint PointX="5.5937475" PointY="4.7302502441406276" />
-          <ConnectorPoint PointX="5.5937475" PointY="6.625" />
+          <ConnectorPoint PointX="4.5" PointY="5.5431469726562508" />
+          <ConnectorPoint PointX="5.5937475" PointY="5.5431469726562508" />
+          <ConnectorPoint PointX="5.5937475" PointY="7.375" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_CommerceQuery_Commerce" >
-          <ConnectorPoint PointX="6.75" PointY="6.96875" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="6.9687499999999991" />
-          <ConnectorPoint PointX="9.6770833333333339" PointY="6.96875" />
-          <ConnectorPoint PointX="12.5" PointY="6.96875" />
+          <ConnectorPoint PointX="6.75" PointY="7.78125" />
+          <ConnectorPoint PointX="9.4479166666666661" PointY="7.7812499999999991" />
+          <ConnectorPoint PointX="9.6770833333333339" PointY="7.78125" />
+          <ConnectorPoint PointX="12.5" PointY="7.78125" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Event_Commerce" >
-          <ConnectorPoint PointX="6" PointY="9.53208496093751" />
-          <ConnectorPoint PointX="6" PointY="13.835500488281255" />
-          <ConnectorPoint PointX="7.5" PointY="13.835500488281255" />
+          <ConnectorPoint PointX="6" PointY="10.701396484375003" />
+          <ConnectorPoint PointX="6" PointY="15.461293945312502" />
+          <ConnectorPoint PointX="7.5" PointY="15.461293945312502" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_CommerceQuery_Person" >
-          <ConnectorPoint PointX="9" PointY="1.28125" />
-          <ConnectorPoint PointX="13.25" PointY="1.28125" />
-          <ConnectorPoint PointX="13.25" PointY="6.875" />
+          <ConnectorPoint PointX="9" PointY="1.40625" />
+          <ConnectorPoint PointX="13.25" PointY="1.40625" />
+          <ConnectorPoint PointX="13.25" PointY="7.625" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuide_Person" >
-          <ConnectorPoint PointX="9" PointY="3.5009650456730874" />
-          <ConnectorPoint PointX="9.3160744349011217" PointY="3.8170394805742078" />
-          <ConnectorPoint PointX="9.4339255650988783" PointY="3.9348906107719666" />
-          <ConnectorPoint PointX="9.6875" PointY="4.1884650456730874" />
-          <ConnectorPoint PointX="9.6875" PointY="4.9079114114583415" />
-          <ConnectorPoint PointX="9.75" PointY="4.9079114114583415" />
+          <ConnectorPoint PointX="9" PointY="3.4614142644230874" />
+          <ConnectorPoint PointX="9.3160744349011217" PointY="3.7774886993242078" />
+          <ConnectorPoint PointX="9.4339255650988783" PointY="3.8953398295219666" />
+          <ConnectorPoint PointX="9.6875" PointY="4.1489142644230874" />
+          <ConnectorPoint PointX="9.6875" PointY="5.5888196145833415" />
+          <ConnectorPoint PointX="9.75" PointY="5.5888196145833415" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuideEvent_Person" >
-          <ConnectorPoint PointX="9" PointY="1.8766634114583347" />
-          <ConnectorPoint PointX="9.75" PointY="1.8766634114583347" />
+          <ConnectorPoint PointX="9" PointY="2.5575716145833347" />
+          <ConnectorPoint PointX="9.75" PointY="2.5575716145833347" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Reservation_Person" >
-          <ConnectorPoint PointX="9" PointY="3.537888122596164" />
-          <ConnectorPoint PointX="9.3160744349011217" PointY="3.8539625574972844" />
-          <ConnectorPoint PointX="9.4339255650988783" PointY="3.9718136876950432" />
-          <ConnectorPoint PointX="9.59375" PointY="4.131638122596164" />
-          <ConnectorPoint PointX="9.59375" PointY="9.3238500631510419" />
-          <ConnectorPoint PointX="9.75" PointY="9.3238500631510419" />
+          <ConnectorPoint PointX="9" PointY="3.498337341346164" />
+          <ConnectorPoint PointX="9.3160744349011217" PointY="3.8144117762472844" />
+          <ConnectorPoint PointX="9.4339255650988783" PointY="3.9322629064450432" />
+          <ConnectorPoint PointX="9.59375" PointY="4.092087341346164" />
+          <ConnectorPoint PointX="9.59375" PointY="10.415494350260413" />
+          <ConnectorPoint PointX="9.75" PointY="10.415494350260413" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Tour_Person" >
-          <ConnectorPoint PointX="8.99423076923077" PointY="3.5390429687500102" />
-          <ConnectorPoint PointX="9.53125" PointY="4.0760621995192405" />
-          <ConnectorPoint PointX="9.53125" PointY="13.835500488281255" />
-          <ConnectorPoint PointX="9.75" PointY="13.835500488281255" />
+          <ConnectorPoint PointX="8.99423076923077" PointY="3.4994921875000102" />
+          <ConnectorPoint PointX="9.3160744349011217" PointY="3.821335853170361" />
+          <ConnectorPoint PointX="9.4339255650988783" PointY="3.9391869833681197" />
+          <ConnectorPoint PointX="9.53125" PointY="4.0365114182692405" />
+          <ConnectorPoint PointX="9.53125" PointY="15.461293945312505" />
+          <ConnectorPoint PointX="9.75" PointY="15.461293945312505" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.TourEvent" >
-          <ConnectorPoint PointX="9" PointY="13.292750244140628" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="13.292750244140628" />
-          <ConnectorPoint PointX="9.6145833333333339" PointY="13.292750244140628" />
-          <ConnectorPoint PointX="9.75" PointY="13.292750244140628" />
+          <ConnectorPoint PointX="9" PointY="14.855646972656253" />
+          <ConnectorPoint PointX="9.4479166666666661" PointY="14.855646972656253" />
+          <ConnectorPoint PointX="9.6145833333333339" PointY="14.855646972656253" />
+          <ConnectorPoint PointX="9.75" PointY="14.855646972656253" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

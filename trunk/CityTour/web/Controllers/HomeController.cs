@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using web.Models;
 using System.Linq;
 using System;
+using web.Views.DataContracts.Assemblers;
+using System.Web.Helpers;
+using web.Views.DataContracts;
+using System.Web.Script.Serialization;
 
 namespace web.Controllers
 {
@@ -89,6 +93,16 @@ namespace web.Controllers
             }
 
             return location;            
+        }
+
+        public JsonResult GetEventLocations() 
+        {
+            var locations = entities.Event.Select( e => e.Commerce.Location ).Distinct().ToList();
+           
+            return new DataContractJsonResult{
+                Data = locations.Select(l => LocationAssembler.Assemble(l)).ToList(),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
 
         private Company CreateDummyCompany()
