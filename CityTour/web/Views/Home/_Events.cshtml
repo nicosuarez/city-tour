@@ -71,7 +71,26 @@
 
                     var map = new google.maps.Map(document.getElementById('itineraryMap'), options);
                     setMarkers(map, places);
+
+                    //Adds current location to places;
+                    places.push({ lat: position.coords.latitude, long: position.coords.longitude});
+                    joinLocations(map, places);
                 });
+
+                
+                function joinLocations(map, locations) {
+                    var lineCordinates = [];                    
+                    $.each(locations, function(i, location){
+                        lineCordinates.push(new google.maps.LatLng(location.lat, location.long));
+                    });
+                    var Line = new google.maps.Polyline({
+                        path: lineCordinates,                        
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 1.0,
+                        strokeWeight: 2
+                    });
+                    Line.setMap(map);
+                }
             }
             else {
                 // Identificación manual por dirección.
