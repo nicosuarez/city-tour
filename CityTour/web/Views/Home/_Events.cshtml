@@ -18,3 +18,18 @@
         }
     </ul>
 </div>
+<div class="event_map"></div>
+<script type="text/javascript">
+    function loadMap() {
+        $.ajax({
+            url: './Home/GetEventLocations',
+            success: function (locations) {
+                $('.event_map').html(locations[0].name);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        loadMap();
+    });
+</script>
