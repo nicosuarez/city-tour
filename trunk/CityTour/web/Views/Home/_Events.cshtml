@@ -18,15 +18,65 @@
         }
     </ul>
 </div>
-<div class="event_map"></div>
+<div class="itinerary_map">
+    <div id="itineraryMap" class="itinerary_map_canvas"></div>
+</div>
+
 <script type="text/javascript">
     function loadMap() {
         $.ajax({
             url: './Home/GetEventLocations',
             success: function (locations) {
-                $('.event_map').html(locations[0].name);
+                renderMap('itineraryMap', locations);
             }
         });
+    }
+
+    function renderMap(elementId, locations) {       
+        if (google.maps.Map) {
+            if (Modernizr.geolocation) {
+                var places = locations;
+
+                function setMarkers(map, locations) {
+                    var image = new google.maps.MarkerImage('content/images/person.png',
+                        new google.maps.Size(40, 40), // This size of the marker.
+                        new google.maps.Point(0, 0), // The origin for this image.
+                        new google.maps.Point(20, 30) // The anchor for this image.
+                    );
+
+                    var youAreHereMarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(map.center.$a, map.center.ab),
+                        map: map,
+                        icon: image,
+                        title: 'You are here',
+                        zIndex: 1
+                    });
+
+                    $.each(locations, function (i, location) {
+                        var marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(location.lat, location.long),
+                            map: map,
+                            title: location.name,
+                            zIndex: location.ranking
+                        });
+                    });
+                }
+
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var options = {
+                        zoom: 15,
+                        center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    var map = new google.maps.Map(document.getElementById('itineraryMap'), options);
+                    setMarkers(map, places);
+                });
+            }
+            else {
+                // Identificación manual por dirección.
+            }
+        }
     }
 
     $(document).ready(function () {

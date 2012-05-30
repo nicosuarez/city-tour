@@ -82,12 +82,12 @@ namespace web.Controllers
 
         private Location CreateDummyLocation()
         {
-            const string locationName = "Dummy Location Name";
+            const string locationName = "Facultad de Ingeniería de la UBA";
             Location location = entities.Location.Where(l => l.Name == locationName).FirstOrDefault();
 
             if (location == null)
             {
-                location = new Location { Name = locationName };
+                location = new Location { Name = locationName, Latitude = -34.617617M, Longitud = -58.368495M };
                 entities.Location.AddObject(location);
                 entities.SaveChanges();
             }
