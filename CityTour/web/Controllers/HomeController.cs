@@ -28,7 +28,8 @@ namespace web.Controllers
         {
             const int eventsToCreate = 4;
             
-            Commerce commerce = CreateDummyCommerce();
+            Commerce commerce1 = CreateDummyCommerce("Fiuba Paseo Colon", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Paseo Colon", -34.617617M, -58.368495M));
+            Commerce commerce2 = CreateDummyCommerce("Fiuba Las Heras", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Las Heras", -34.588399M, -58.396277M));
             for (int i = 0; i < eventsToCreate; i++)
 			{
                 string eventDescription = string.Format("Evento numero {0}", i);
@@ -39,7 +40,7 @@ namespace web.Controllers
                     {
                         EventDate = DateTime.Now.AddDays(i),
                         Description = eventDescription,
-                        Commerce = commerce
+                        Commerce = (eventsToCreate % (i + 1)) < 1 ? commerce1 : commerce2
                     };
 
                     if (!entities.Event.Any(e => e.Description == myEvent.Description))
@@ -52,9 +53,8 @@ namespace web.Controllers
             entities.SaveChanges();                    	        
         }
 
-        private Commerce CreateDummyCommerce()
-        {    
-            const string commerceName = "Dummy Commerce Name";
+        private Commerce CreateDummyCommerce(string commerceName, Location location)
+        {  
             Commerce commerce = entities.Commerce.Where(c => c.Name == commerceName).FirstOrDefault();
             if (commerce == null)
             {   
@@ -65,9 +65,8 @@ namespace web.Controllers
                     Address = "Dummy Address"                    
                 };
 
-                Location location = CreateDummyLocation();
                 Company company = CreateDummyCompany();
-                commerce.LocationID = location.ID;
+                commerce.Location = location;
                 commerce.CompanyID = company.ID;
                 entities.Commerce.AddObject(commerce);
                 entities.SaveChanges();
@@ -80,14 +79,13 @@ namespace web.Controllers
             return commerce;
         }
 
-        private Location CreateDummyLocation()
-        {
-            const string locationName = "Facultad de Ingeniería de la UBA";
-            Location location = entities.Location.Where(l => l.Name == locationName).FirstOrDefault();
+        private Location CreateDummyLocation(string name, decimal latitude, decimal longitude)
+        {           
+            Location location = entities.Location.Where(l => l.Name == name).FirstOrDefault();
 
             if (location == null)
             {
-                location = new Location { Name = locationName, Latitude = -34.617617M, Longitud = -58.368495M };
+                location = new Location { Name = name, Latitude = latitude, Longitud = longitude };
                 entities.Location.AddObject(location);
                 entities.SaveChanges();
             }
