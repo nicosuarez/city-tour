@@ -82,6 +82,7 @@ input[type='text'], input[type='password']
 {
     border: 1px solid #AED0EA;
     border-top: none;
+    height: 480px;
 }
 
 /* Styles for validation helpers
@@ -118,6 +119,18 @@ input[type='text'], input[type='password']
 {
     float: right;
     width: 340px;
+}
+
+.itinerary_map
+{
+    float: left;
+}
+
+.itinerary_map_canvas
+{
+    width: 540px;
+    height: 470px;
+    margin: 0 auto;   
 }
 
 .itinerary_list ul
