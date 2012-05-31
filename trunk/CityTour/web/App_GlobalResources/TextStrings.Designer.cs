@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Account.
+        /// </summary>
+        internal static string NewAccount {
+            get {
+                return ResourceManager.GetString("NewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contraseña.
         /// </summary>
         internal static string Password {
@@ -156,6 +165,15 @@ namespace Resources {
         internal static string ScheduledEvents {
             get {
                 return ResourceManager.GetString("ScheduledEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buscar.
+        /// </summary>
+        internal static string SearchBy {
+            get {
+                return ResourceManager.GetString("SearchBy", resourceCulture);
             }
         }
     }

@@ -33,13 +33,13 @@ input[type='text'], input[type='password']
 
 .header .logo
 {
-    float: left;
     font-family: Magneto;
     font-size: 80px;
     font-weight: normal;
     font-style: normal;
     font-variant: normal;
     text-transform: none;
+    text-align: center; 
     color: #333399;
     text-decoration: none;
 }
@@ -55,11 +55,27 @@ input[type='text'], input[type='password']
     font-weight: bold;
 }
 
+.DropDownType {
+	float:left;margin-left:41%;
+}
+
+.map {
+	float:left;margin-left:15%;
+	
+}
+
+#Log{
+	float: right;
+    text-align: right;	
+    margin: 0px auto;
+}
+
 .mapCanvas
 {
     width: 640px;
     height: 480px;
     margin: 0 auto;
+	alignment-adjust: central;
 }
 
 #homeTabs.ui-widget-content
@@ -78,7 +94,7 @@ input[type='text'], input[type='password']
     -webkit-border-bottom-left-radius: 0px;
 }
 
-#homeTabs > div
+#homeTabs
 {
     border: 1px solid #AED0EA;
     border-top: none;

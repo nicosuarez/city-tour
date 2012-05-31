@@ -15,21 +15,33 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </head>
 <body>
+    <div id="homeTabs">
+        <span>
+	            <ul>
+		            <li><a href="/Views/Home/"><%: TextStrings.NearLocations%></a></li>
+                    <li><a href="/Views/Home/"><%: TextStrings.SearchBy%></a></li>
+		            <li><a href="/Views/Home/"><%: TextStrings.MyReservations%></a></li>
+		            <li><a href="/Views/Home/"><%: TextStrings.MyItinerary%></a></li>
+                    <span id="Log">
+                        [ <a href="../Home"><%: TextStrings.Enter%></a> ] 
+                        [ <a href="../Home"><%: TextStrings.NewAccount%></a> ]
+                     </span>
+	            </ul>
+        </span>
+        
+    </div>
     <div class="main-body ui-widget ui-widget-content ui-corner-all">
         <div class="header">
             <div class="logo">
                 <%: TextStrings.CityTour%>
             </div>
-            <div class="login">
-                <div><span><%: TextStrings.Mail%>:</span><%: Html.TextBox("username") %></div>
-                <div><span><%: TextStrings.Password%>:</span><%: Html.Password("password") %></div>
-                <button id="btnLogin"><%: TextStrings.Enter%></button>
-            </div>
             <div class="ui-helper-clearfix"></div>
         </div>
         <div class="content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
-    </div>
+
+        </div>
+            
 </body>
 </html>

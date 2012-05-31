@@ -129,7 +129,11 @@
   <data name="Enter" xml:space="preserve">
     <value>Entrar</value>
   </data>
-  <data name="Hour" xml:space="preserve">
+  <data name="NewAccount" xml:space="preserve">
+    <value>New Account</value>
+  </data>
+	
+	<data name="Hour" xml:space="preserve">
     <value>Hora</value>
   </data>
   <data name="Mail" xml:space="preserve">
@@ -144,7 +148,10 @@
   <data name="NearLocations" xml:space="preserve">
     <value>Lugares Cercanos</value>
   </data>
-  <data name="Password" xml:space="preserve">
+	<data name="SearchBy" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+	<data name="Password" xml:space="preserve">
     <value>Contraseña</value>
   </data>
   <data name="ScheduledEvents" xml:space="preserve">
