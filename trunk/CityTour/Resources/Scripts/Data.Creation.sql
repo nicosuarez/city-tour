@@ -40,8 +40,8 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Lo
 BEGIN
 CREATE TABLE [dbo].[Location](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[Latitude] [decimal](18, 0) NOT NULL,
-	[Longitud] [numeric](18, 0) NOT NULL,
+	[Latitude] [decimal](18, 9) NOT NULL,
+	[Longitud] [numeric](18, 9) NOT NULL,
 	[Name] [nvarchar](200) NOT NULL,
  CONSTRAINT [PK_Location] PRIMARY KEY CLUSTERED 
 (
