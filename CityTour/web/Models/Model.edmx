@@ -160,8 +160,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Latitude" Type="decimal" Nullable="false" />
-          <Property Name="Longitud" Type="numeric" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Nullable="false" Scale="9" />
+          <Property Name="Longitud" Type="numeric" Nullable="false" Scale="9" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityType Name="Person">
