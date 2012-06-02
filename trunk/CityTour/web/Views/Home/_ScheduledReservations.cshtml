@@ -2,21 +2,23 @@
 @model IEnumerable<web.Models.Reservation>
 <div class="item_list left">
     <h2>@TextStrings.ScheduledReservations</h2>
-    <ul>
-        @if (Model != null)
-        {
-            foreach (var reservation in Model)
+    <div class="inner">
+        <ul>
+            @if (Model != null)
             {
-            <li>
-                <a href="#"> 
-                    <span>@TextStrings.ClientName: @reservation.Person.Name</span>
-                    <span>@TextStrings.Mail: @reservation.Person.EmailAddress</span>                    
-                    <span>@TextStrings.Amount: @reservation.Amount</span>
-                    <span>@TextStrings.Date: @reservation.ReservationDate.ToShortDateString()</span>
-                    <span>@TextStrings.Hour: @reservation.ReservationDate.ToString("hh:mm")</span>
-                </a>                            
-            </li>     
+                foreach (var reservation in Model)
+                {
+                <li>
+                    <a href="#"> 
+                        <span>@TextStrings.ClientName: @reservation.Person.Name</span>
+                        <span>@TextStrings.Mail: @reservation.Person.EmailAddress</span>                    
+                        <span>@TextStrings.Amount: @reservation.Amount</span>
+                        <span>@TextStrings.Date: @reservation.ReservationDate.ToShortDateString()</span>
+                        <span>@TextStrings.Hour: @reservation.ReservationDate.ToString("hh:mm")</span>
+                    </a>                            
+                </li>     
+                }
             }
-        }
-    </ul>
+        </ul>
+    </div>
 </div>
