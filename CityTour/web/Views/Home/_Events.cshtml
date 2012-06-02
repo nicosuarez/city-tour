@@ -2,21 +2,23 @@
 @model IEnumerable<web.Models.Event>
 <div class="item_list right">
     <h2>@TextStrings.ScheduledEvents</h2>
-    <ul>
-        @if (Model != null)
-        {
-            foreach (var item in Model)
+    <div class="inner">
+        <ul>
+            @if (Model != null)
             {
-            <li>
-                <a href="#"> 
-                    <span>@TextStrings.Description: @item.Description</span>
-                    <span>@TextStrings.Date: @item.EventDate.ToShortDateString()</span>
-                    <span>@TextStrings.Hour: @item.EventDate.ToString("hh:mm")</span>
-                </a>                            
-            </li>     
+                foreach (var item in Model)
+                {
+                <li>
+                    <a href="#"> 
+                        <span>@TextStrings.Description: @item.Description</span>
+                        <span>@TextStrings.Date: @item.EventDate.ToShortDateString()</span>
+                        <span>@TextStrings.Hour: @item.EventDate.ToString("hh:mm")</span>
+                    </a>                            
+                </li>     
+                }
             }
-        }
-    </ul>
+        </ul>
+    </div>
 </div>
 <div class="itinerary_map">
     <div id="itineraryMap" class="itinerary_map_canvas"></div>
