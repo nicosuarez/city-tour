@@ -33,13 +33,13 @@ input[type='text'], input[type='password']
 
 .header .logo
 {
+    float: left;
     font-family: Magneto;
     font-size: 80px;
     font-weight: normal;
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    text-align: center; 
     color: #333399;
     text-decoration: none;
 }
@@ -55,27 +55,11 @@ input[type='text'], input[type='password']
     font-weight: bold;
 }
 
-.DropDownType {
-	float:left;margin-left:41%;
-}
-
-.map {
-	float:left;margin-left:15%;
-	
-}
-
-#Log{
-	float: right;
-    text-align: right;	
-    margin: 0px auto;
-}
-
 .mapCanvas
 {
     width: 640px;
     height: 480px;
     margin: 0 auto;
-	alignment-adjust: central;
 }
 
 #homeTabs.ui-widget-content
@@ -94,7 +78,7 @@ input[type='text'], input[type='password']
     -webkit-border-bottom-left-radius: 0px;
 }
 
-#homeTabs
+#homeTabs > div
 {
     border: 1px solid #AED0EA;
     border-top: none;
@@ -130,8 +114,8 @@ input[type='text'], input[type='password']
     display: none;
 }
 
-/*Styles for itinerary items*/
-.itinerary_list
+/*Styles for item lists*/
+.item_list
 {
     float: right;
     width: 340px;
@@ -149,23 +133,23 @@ input[type='text'], input[type='password']
     margin: 0 auto;   
 }
 
-.itinerary_list ul
+.item_list ul
 {
     list-style: none;
     padding: 0px;
 }
 
-.itinerary_list li
+.item_list li
 {
     padding: 5px 0 5px;
 }
 
-.itinerary_list li span
+.item_list li span
 {
     display: block;
 }
 
-.itinerary_list a {
+.item_list a {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -186,12 +170,16 @@ input[type='text'], input[type='password']
 	text-decoration:none;
 	text-shadow:1px 1px 0px #ffffff;
     height: 80px;
-}.itinerary_list a:hover {
+}
+
+.item_list a:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
 	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
 	background-color:#dfdfdf;
-}.itinerary_list a:active {
+}
+
+.item_list a:active {
 	position:relative;
 	top:1px;
 }

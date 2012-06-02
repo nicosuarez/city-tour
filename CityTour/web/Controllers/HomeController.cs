@@ -17,11 +17,11 @@ namespace web.Controllers
         public ActionResult Index()
         {   
             CreateDummyEvents();
-            using (CityTourEntities entities = new CityTourEntities())
-            {
-                ViewData["Events"] = entities.Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
-                return View();
-            }
+            CreateDummyReservations();
+
+            ViewData["Events"] = entities.Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
+            ViewData["ScheduledReservations"] = entities.Reservation.Where(r => r.CancellationDate == null).OrderBy(r => r.ReservationDate).ToList(); 
+            return View();           
         }
 
         private void CreateDummyEvents()
@@ -71,12 +71,19 @@ namespace web.Controllers
                 entities.Commerce.AddObject(commerce);
                 entities.SaveChanges();
 
-                BookingCommerce bookingCommerce = new BookingCommerce { ID = commerce.ID};
-                entities.BookingCommerce.AddObject(bookingCommerce);
-                entities.SaveChanges();
+                BookingCommerce bookingCommerce = CreateBookingCommerce(commerce);
             }               
 
             return commerce;
+        }
+
+        private BookingCommerce CreateBookingCommerce(Commerce commerce)
+        {
+            BookingCommerce bookingCommerce = new BookingCommerce { ID = commerce.ID };
+            entities.BookingCommerce.AddObject(bookingCommerce);
+            entities.SaveChanges();
+
+            return bookingCommerce;
         }
 
         private Location CreateDummyLocation(string name, decimal latitude, decimal longitude)
@@ -132,6 +139,69 @@ namespace web.Controllers
             }
 
             return business;
+        }
+
+        private Reservation CreateDummyReservation(decimal amount, BookingCommerce bookingCommerce, Person person, DateTime reservationDate)
+        {
+            Reservation reservation = entities.Reservation.Where(
+                r => r.ReservationDate.Year == reservationDate.Year
+                && r.ReservationDate.Month == reservationDate.Month
+                && r.ReservationDate.Day == reservationDate.Day    
+                && r.PersonID == person.ID
+                && r.BookingCommerceID == bookingCommerce.ID
+            ).FirstOrDefault();
+
+            if (reservation == null)
+            {
+                reservation = new Reservation
+                {
+                    Amount = amount,
+                    BookingCommerce = bookingCommerce,
+                    Person = person,
+                    ReservationDate = reservationDate                    
+                };
+                entities.Reservation.AddObject(reservation);
+                entities.SaveChanges();
+            }            
+
+            return reservation;
+        }
+
+        private void CreateDummyReservations()
+        {    
+            Location location = CreateDummyLocation("Sheraton Retiro", -34.592802M, -58.372765M);
+            Commerce commerce = CreateDummyCommerce("Sheraton Retiro", location);
+            
+            Person booker1 = CreateDummyPerson("Vanesa");
+            Person booker2 = CreateDummyPerson("Ruben");
+            Person booker3 = CreateDummyPerson("Marisol");
+            Person booker4 = CreateDummyPerson("Ariel");
+
+            DateTime oneDay = new DateTime(2012, 6, 10);
+            DateTime anotherDay = new DateTime(2012, 10, 3);
+
+            CreateDummyReservation(100, commerce.BookingCommerce, booker1, oneDay);
+            CreateDummyReservation(200, commerce.BookingCommerce, booker2, oneDay);
+            CreateDummyReservation(300, commerce.BookingCommerce, booker3, anotherDay);
+            CreateDummyReservation(400, commerce.BookingCommerce, booker4, anotherDay);
+           
+            entities.SaveChanges();           
+        }
+
+        private Person CreateDummyPerson(string name)
+        {
+            Person person = entities.Person.Where(p => p.Name == name).FirstOrDefault();
+            if (person == null)
+            {
+                person = new Person
+                {
+                    Name = name,
+                    EmailAddress = "dummy@dummy.com",
+                    Created = DateTime.Now
+                };
+            }
+
+            return person;
         }
     }
 }
