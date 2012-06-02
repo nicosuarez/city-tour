@@ -61,11 +61,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monto.
+        /// </summary>
+        internal static string Amount {
+            get {
+                return ResourceManager.GetString("Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CityTour.
         /// </summary>
         internal static string CityTour {
             get {
                 return ResourceManager.GetString("CityTour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre del Cliente.
+        /// </summary>
+        internal static string ClientName {
+            get {
+                return ResourceManager.GetString("ClientName", resourceCulture);
             }
         }
         
@@ -165,6 +183,15 @@ namespace Resources {
         internal static string ScheduledEvents {
             get {
                 return ResourceManager.GetString("ScheduledEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservas Agendadas.
+        /// </summary>
+        internal static string ScheduledReservations {
+            get {
+                return ResourceManager.GetString("ScheduledReservations", resourceCulture);
             }
         }
         

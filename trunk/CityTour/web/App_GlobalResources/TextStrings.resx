@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Amount" xml:space="preserve">
+    <value>Monto</value>
+  </data>
   <data name="CityTour" xml:space="preserve">
     <value>CityTour</value>
+  </data>
+  <data name="ClientName" xml:space="preserve">
+    <value>Nombre del Cliente</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Fecha</value>
@@ -156,5 +162,8 @@
   </data>
   <data name="ScheduledEvents" xml:space="preserve">
     <value>Eventos Agendados</value>
+  </data>
+  <data name="ScheduledReservations" xml:space="preserve">
+    <value>Reservas Agendadas</value>
   </data>
 </root>
