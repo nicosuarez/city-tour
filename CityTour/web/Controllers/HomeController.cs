@@ -141,7 +141,7 @@ namespace web.Controllers
             return business;
         }
 
-        private Reservation CreateDummyReservation(decimal amount, BookingCommerce bookingCommerce, Person person, DateTime reservationDate)
+        private Reservation CreateDummyReservation(decimal price, BookingCommerce bookingCommerce, Person person, DateTime reservationDate)
         {
             Reservation reservation = entities.Reservation.Where(
                 r => r.ReservationDate.Year == reservationDate.Year
@@ -155,7 +155,7 @@ namespace web.Controllers
             {
                 reservation = new Reservation
                 {
-                    Amount = amount,
+                    Price = price,
                     BookingCommerce = bookingCommerce,
                     Person = person,
                     ReservationDate = reservationDate                    

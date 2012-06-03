@@ -150,8 +150,8 @@ CREATE TABLE [dbo].[CommerceQuery](
 	[PersonID] [int] NOT NULL,
 	[CommerceID] [int] NOT NULL,
 	[QueryDate] [datetime] NOT NULL,
-	[PersonLatitude] [decimal](18, 0) NOT NULL,
-	[PersonLongitud] [decimal](18, 0) NOT NULL,
+	[PersonLatitude] [decimal](18, 9) NOT NULL,
+	[PersonLongitud] [decimal](18, 9) NOT NULL,
 	[ProximityDistance] [int] NOT NULL,
  CONSTRAINT [PK_CommerceQuery] PRIMARY KEY CLUSTERED 
 (
@@ -227,8 +227,10 @@ CREATE TABLE [dbo].[Reservation](
 	[ReservationDate] [datetime] NOT NULL,
 	[PersonID] [int] NOT NULL,
 	[BookingCommerceID] [int] NOT NULL,
-	[Amount] [decimal](18, 0) NOT NULL,
+	[Price] [decimal](18, 9) NOT NULL,
 	[CancellationDate] [datetime] NULL,
+	[Accepted] [bit] NOT NULL DEFAULT((0)),
+	[Detail] [nvarchar](1000) NULL
  CONSTRAINT [PK_Reservation] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
