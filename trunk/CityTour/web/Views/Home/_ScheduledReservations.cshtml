@@ -1,5 +1,26 @@
 ﻿@using Resources
 @model IEnumerable<web.Models.Reservation>
+<script type="text/javascript">
+    function toggleReservation(reservationId) {
+        var actionUrl = '@Url.Action("ToggleReservation", "Home")';
+
+        $.ajax({
+            url: actionUrl,
+            type: 'POST',
+            dataType: 'json',
+            data: { reservationId: reservationId },
+            success: function (accepted) {
+                if (accepted) {
+                    $('.reservation_' + reservationId).html("Accepted!");
+                }
+                else {
+                    $('.reservation_' + reservationId).html("Cancelled!");
+                }
+            }
+        })
+    }
+</script>
+           
 <div class="item_list left">
     <h2>@TextStrings.ScheduledReservations</h2>
     <div class="inner">
@@ -9,12 +30,13 @@
                 foreach (var reservation in Model)
                 {
                 <li>
-                    <a href="#"> 
+                    <a href="javascript:toggleReservation('@reservation.ID')">                    
                         <span>@TextStrings.ClientName: @reservation.Person.Name</span>
                         <span>@TextStrings.Mail: @reservation.Person.EmailAddress</span>                    
-                        <span>@TextStrings.Amount: @reservation.Price</span>
+                        <span>@TextStrings.Price: @reservation.Price</span>
                         <span>@TextStrings.Date: @reservation.ReservationDate.ToShortDateString()</span>
                         <span>@TextStrings.Hour: @reservation.ReservationDate.ToString("hh:mm")</span>
+                        <span class=@("reservation_" + reservation.ID)></span>
                     </a>                            
                 </li>     
                 }
