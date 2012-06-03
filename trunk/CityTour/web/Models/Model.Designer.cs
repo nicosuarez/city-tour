@@ -22,7 +22,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("web.Models", "FK_PersonAudioGuide_AudioGuide", "AudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.AudioGuide), "PersonAudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.PersonAudioGuide), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_PersonAudioGuideEvent_AudioGuide", "AudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.AudioGuide), "PersonAudioGuideEvent", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.PersonAudioGuideEvent), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_BookingCommerce_Commerce", "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Commerce), "BookingCommerce", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(web.Models.BookingCommerce), true)]
-[assembly: EdmRelationshipAttribute("web.Models", "FK_Reservation_BookingCommerce", "BookingCommerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.BookingCommerce), "Reservation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Reservation), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Company_Business", "Business", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Business), "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Company), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Commerce_Company", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Company), "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Commerce), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Commerce_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Location), "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Commerce), true)]
@@ -31,9 +30,10 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("web.Models", "FK_CommerceQuery_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Person), "CommerceQuery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.CommerceQuery), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_PersonAudioGuide_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Person), "PersonAudioGuide", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.PersonAudioGuide), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_PersonAudioGuideEvent_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Person), "PersonAudioGuideEvent", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.PersonAudioGuideEvent), true)]
-[assembly: EdmRelationshipAttribute("web.Models", "FK_Reservation_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Person), "Reservation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Reservation), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Tour_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Person), "Tour", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Tour), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "TourEvent", "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Event), "Tour", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Tour))]
+[assembly: EdmRelationshipAttribute("web.Models", "FK_Reservation_BookingCommerce", "BookingCommerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.BookingCommerce), "Reservation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Reservation), true)]
+[assembly: EdmRelationshipAttribute("web.Models", "FK_Reservation_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Person), "Reservation", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Reservation), true)]
 
 #endregion
 
@@ -264,22 +264,6 @@ namespace web.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Reservation> Reservation
-        {
-            get
-            {
-                if ((_Reservation == null))
-                {
-                    _Reservation = base.CreateObjectSet<Reservation>("Reservation");
-                }
-                return _Reservation;
-            }
-        }
-        private ObjectSet<Reservation> _Reservation;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Tour> Tour
         {
             get
@@ -292,6 +276,22 @@ namespace web.Models
             }
         }
         private ObjectSet<Tour> _Tour;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Reservation> Reservation
+        {
+            get
+            {
+                if ((_Reservation == null))
+                {
+                    _Reservation = base.CreateObjectSet<Reservation>("Reservation");
+                }
+                return _Reservation;
+            }
+        }
+        private ObjectSet<Reservation> _Reservation;
 
         #endregion
         #region AddTo Methods
@@ -385,19 +385,19 @@ namespace web.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Reservation EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToReservation(Reservation reservation)
-        {
-            base.AddObject("Reservation", reservation);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Tour EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTour(Tour tour)
         {
             base.AddObject("Tour", tour);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Reservation EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToReservation(Reservation reservation)
+        {
+            base.AddObject("Reservation", reservation);
         }
 
         #endregion
@@ -2329,28 +2329,6 @@ namespace web.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("web.Models", "FK_Reservation_Person", "Reservation")]
-        public EntityCollection<Reservation> Reservation
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Reservation>("web.Models.FK_Reservation_Person", "Reservation");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Reservation>("web.Models.FK_Reservation_Person", "Reservation", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("web.Models", "FK_Tour_Person", "Tour")]
         public EntityCollection<Tour> Tour
         {
@@ -2363,6 +2341,28 @@ namespace web.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tour>("web.Models.FK_Tour_Person", "Tour", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("web.Models", "FK_Reservation_Person", "Reservation")]
+        public EntityCollection<Reservation> Reservation
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Reservation>("web.Models.FK_Reservation_Person", "Reservation");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Reservation>("web.Models.FK_Reservation_Person", "Reservation", value);
                 }
             }
         }
@@ -2765,15 +2765,17 @@ namespace web.Models
         /// <param name="reservationDate">Initial value of the ReservationDate property.</param>
         /// <param name="personID">Initial value of the PersonID property.</param>
         /// <param name="bookingCommerceID">Initial value of the BookingCommerceID property.</param>
-        /// <param name="amount">Initial value of the Amount property.</param>
-        public static Reservation CreateReservation(global::System.Int32 id, global::System.DateTime reservationDate, global::System.Int32 personID, global::System.Int32 bookingCommerceID, global::System.Decimal amount)
+        /// <param name="price">Initial value of the Price property.</param>
+        /// <param name="accepted">Initial value of the Accepted property.</param>
+        public static Reservation CreateReservation(global::System.Int32 id, global::System.DateTime reservationDate, global::System.Int32 personID, global::System.Int32 bookingCommerceID, global::System.Decimal price, global::System.Boolean accepted)
         {
             Reservation reservation = new Reservation();
             reservation.ID = id;
             reservation.ReservationDate = reservationDate;
             reservation.PersonID = personID;
             reservation.BookingCommerceID = bookingCommerceID;
-            reservation.Amount = amount;
+            reservation.Price = price;
+            reservation.Accepted = accepted;
             return reservation;
         }
 
@@ -2884,24 +2886,24 @@ namespace web.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal Amount
+        public global::System.Decimal Price
         {
             get
             {
-                return _Amount;
+                return _Price;
             }
             set
             {
-                OnAmountChanging(value);
-                ReportPropertyChanging("Amount");
-                _Amount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Amount");
-                OnAmountChanged();
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
             }
         }
-        private global::System.Decimal _Amount;
-        partial void OnAmountChanging(global::System.Decimal value);
-        partial void OnAmountChanged();
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
+        partial void OnPriceChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2926,6 +2928,54 @@ namespace web.Models
         private Nullable<global::System.DateTime> _CancellationDate;
         partial void OnCancellationDateChanging(Nullable<global::System.DateTime> value);
         partial void OnCancellationDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Accepted
+        {
+            get
+            {
+                return _Accepted;
+            }
+            set
+            {
+                OnAcceptedChanging(value);
+                ReportPropertyChanging("Accepted");
+                _Accepted = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Accepted");
+                OnAcceptedChanged();
+            }
+        }
+        private global::System.Boolean _Accepted;
+        partial void OnAcceptedChanging(global::System.Boolean value);
+        partial void OnAcceptedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Detail
+        {
+            get
+            {
+                return _Detail;
+            }
+            set
+            {
+                OnDetailChanging(value);
+                ReportPropertyChanging("Detail");
+                _Detail = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Detail");
+                OnDetailChanged();
+            }
+        }
+        private global::System.String _Detail;
+        partial void OnDetailChanging(global::System.String value);
+        partial void OnDetailChanged();
 
         #endregion
     

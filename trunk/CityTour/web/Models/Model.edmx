@@ -132,8 +132,8 @@
           <Property Name="PersonID" Type="int" Nullable="false" />
           <Property Name="CommerceID" Type="int" Nullable="false" />
           <Property Name="QueryDate" Type="datetime" Nullable="false" />
-          <Property Name="PersonLatitude" Type="decimal" Nullable="false" />
-          <Property Name="PersonLongitud" Type="decimal" Nullable="false" />
+          <Property Name="PersonLatitude" Type="decimal" Nullable="false" Scale="9" />
+          <Property Name="PersonLongitud" Type="decimal" Nullable="false" Scale="9" />
           <Property Name="ProximityDistance" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Company">
@@ -199,8 +199,10 @@
           <Property Name="ReservationDate" Type="datetime" Nullable="false" />
           <Property Name="PersonID" Type="int" Nullable="false" />
           <Property Name="BookingCommerceID" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Nullable="false" />
+          <Property Name="Price" Type="decimal" Nullable="false" Scale="9" />
           <Property Name="CancellationDate" Type="datetime" />
+          <Property Name="Accepted" Type="bit" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Tour">
           <Key>
@@ -439,7 +441,6 @@
           <EntitySet Name="Person" EntityType="web.Models.Person" />
           <EntitySet Name="PersonAudioGuide" EntityType="web.Models.PersonAudioGuide" />
           <EntitySet Name="PersonAudioGuideEvent" EntityType="web.Models.PersonAudioGuideEvent" />
-          <EntitySet Name="Reservation" EntityType="web.Models.Reservation" />
           <EntitySet Name="Tour" EntityType="web.Models.Tour" />
           <AssociationSet Name="FK_AudioGuide_Commerce" Association="web.Models.FK_AudioGuide_Commerce">
             <End Role="Commerce" EntitySet="Commerce" />
@@ -456,10 +457,6 @@
           <AssociationSet Name="FK_BookingCommerce_Commerce" Association="web.Models.FK_BookingCommerce_Commerce">
             <End Role="Commerce" EntitySet="Commerce" />
             <End Role="BookingCommerce" EntitySet="BookingCommerce" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Reservation_BookingCommerce" Association="web.Models.FK_Reservation_BookingCommerce">
-            <End Role="BookingCommerce" EntitySet="BookingCommerce" />
-            <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
           <AssociationSet Name="FK_Company_Business" Association="web.Models.FK_Company_Business">
             <End Role="Business" EntitySet="Business" />
@@ -493,10 +490,6 @@
             <End Role="Person" EntitySet="Person" />
             <End Role="PersonAudioGuideEvent" EntitySet="PersonAudioGuideEvent" />
           </AssociationSet>
-          <AssociationSet Name="FK_Reservation_Person" Association="web.Models.FK_Reservation_Person">
-            <End Role="Person" EntitySet="Person" />
-            <End Role="Reservation" EntitySet="Reservation" />
-          </AssociationSet>
           <AssociationSet Name="FK_Tour_Person" Association="web.Models.FK_Tour_Person">
             <End Role="Person" EntitySet="Person" />
             <End Role="Tour" EntitySet="Tour" />
@@ -504,6 +497,15 @@
           <AssociationSet Name="TourEvent" Association="web.Models.TourEvent">
             <End Role="Event" EntitySet="Event" />
             <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <EntitySet Name="Reservation" EntityType="web.Models.Reservation" />
+          <AssociationSet Name="FK_Reservation_BookingCommerce" Association="web.Models.FK_Reservation_BookingCommerce">
+            <End Role="BookingCommerce" EntitySet="BookingCommerce" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Person" Association="web.Models.FK_Reservation_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AudioGuide">
@@ -611,8 +613,8 @@
           <NavigationProperty Name="CommerceQuery" Relationship="web.Models.FK_CommerceQuery_Person" FromRole="Person" ToRole="CommerceQuery" />
           <NavigationProperty Name="PersonAudioGuide" Relationship="web.Models.FK_PersonAudioGuide_Person" FromRole="Person" ToRole="PersonAudioGuide" />
           <NavigationProperty Name="PersonAudioGuideEvent" Relationship="web.Models.FK_PersonAudioGuideEvent_Person" FromRole="Person" ToRole="PersonAudioGuideEvent" />
-          <NavigationProperty Name="Reservation" Relationship="web.Models.FK_Reservation_Person" FromRole="Person" ToRole="Reservation" />
           <NavigationProperty Name="Tour" Relationship="web.Models.FK_Tour_Person" FromRole="Person" ToRole="Tour" />
+          <NavigationProperty Name="Reservation" Relationship="web.Models.FK_Reservation_Person" FromRole="Person" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="PersonAudioGuide">
           <Key>
@@ -635,19 +637,6 @@
           <Property Type="DateTime" Name="PlayDate" Nullable="false" />
           <NavigationProperty Name="AudioGuide" Relationship="web.Models.FK_PersonAudioGuideEvent_AudioGuide" FromRole="PersonAudioGuideEvent" ToRole="AudioGuide" />
           <NavigationProperty Name="Person" Relationship="web.Models.FK_PersonAudioGuideEvent_Person" FromRole="PersonAudioGuideEvent" ToRole="Person" />
-        </EntityType>
-        <EntityType Name="Reservation">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="ReservationDate" Nullable="false" />
-          <Property Type="Int32" Name="PersonID" Nullable="false" />
-          <Property Type="Int32" Name="BookingCommerceID" Nullable="false" />
-          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="CancellationDate" />
-          <NavigationProperty Name="BookingCommerce" Relationship="web.Models.FK_Reservation_BookingCommerce" FromRole="Reservation" ToRole="BookingCommerce" />
-          <NavigationProperty Name="Person" Relationship="web.Models.FK_Reservation_Person" FromRole="Reservation" ToRole="Person" />
         </EntityType>
         <EntityType Name="Tour">
           <Key>
@@ -705,18 +694,6 @@
             </Principal>
             <Dependent Role="BookingCommerce">
               <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Reservation_BookingCommerce">
-          <End Type="web.Models.BookingCommerce" Role="BookingCommerce" Multiplicity="1" />
-          <End Type="web.Models.Reservation" Role="Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BookingCommerce">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="BookingCommerceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -816,18 +793,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Reservation_Person">
-          <End Type="web.Models.Person" Role="Person" Multiplicity="1" />
-          <End Type="web.Models.Reservation" Role="Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="PersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Tour_Person">
           <End Type="web.Models.Person" Role="Person" Multiplicity="1" />
           <End Type="web.Models.Tour" Role="Tour" Multiplicity="*" />
@@ -843,6 +808,45 @@
         <Association Name="TourEvent">
           <End Type="web.Models.Event" Role="Event" Multiplicity="*" />
           <End Type="web.Models.Tour" Role="Tour" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="ReservationDate" Nullable="false" />
+          <Property Type="Int32" Name="PersonID" Nullable="false" />
+          <Property Type="Int32" Name="BookingCommerceID" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="9" />
+          <Property Type="DateTime" Name="CancellationDate" />
+          <Property Type="Boolean" Name="Accepted" Nullable="false" />
+          <Property Type="String" Name="Detail" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookingCommerce" Relationship="web.Models.FK_Reservation_BookingCommerce" FromRole="Reservation" ToRole="BookingCommerce" />
+          <NavigationProperty Name="Person" Relationship="web.Models.FK_Reservation_Person" FromRole="Reservation" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Reservation_BookingCommerce">
+          <End Type="web.Models.BookingCommerce" Role="BookingCommerce" Multiplicity="1" />
+          <End Type="web.Models.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingCommerce">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="BookingCommerceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Person">
+          <End Type="web.Models.Person" Role="Person" Multiplicity="1" />
+          <End Type="web.Models.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -961,18 +965,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reservation">
-            <EntityTypeMapping TypeName="web.Models.Reservation">
-              <MappingFragment StoreEntitySet="Reservation">
-                <ScalarProperty Name="CancellationDate" ColumnName="CancellationDate" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="BookingCommerceID" ColumnName="BookingCommerceID" />
-                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
-                <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tour">
             <EntityTypeMapping TypeName="web.Models.Tour">
               <MappingFragment StoreEntitySet="Tour">
@@ -991,6 +983,20 @@
               <ScalarProperty Name="ID" ColumnName="EventID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="web.Models.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="CancellationDate" ColumnName="CancellationDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="BookingCommerceID" ColumnName="BookingCommerceID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1011,7 +1017,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Model" ZoomLevel="21">
+      <Diagram Name="Model" ZoomLevel="65">
         <EntityTypeShape EntityType="web.Models.AudioGuide" Width="1.5" PointX="7.5" PointY="5" Height="2.1725878906250031" />
         <EntityTypeShape EntityType="web.Models.BookingCommerce" Width="1.5" PointX="7.5" PointY="8" Height="2.172587890624996" />
         <EntityTypeShape EntityType="web.Models.Business" Width="1.5" PointX="0.75" PointY="8.25" Height="1.5956835937500031" />
@@ -1023,7 +1029,6 @@
         <EntityTypeShape EntityType="web.Models.Person" Width="1.5" PointX="7.5" PointY="0.75" Height="2.7494921875000102" />
         <EntityTypeShape EntityType="web.Models.PersonAudioGuide" Width="1.5" PointX="9.75" PointY="5.125" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="web.Models.PersonAudioGuideEvent" Width="1.5" PointX="9.75" PointY="2.125" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="web.Models.Reservation" Width="1.5" PointX="9.75" PointY="8.75" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="web.Models.Tour" Width="1.5" PointX="9.75" PointY="14.375" Height="2.1725878906250102" />
         <AssociationConnector Association="web.Models.FK_AudioGuide_Commerce" >
           <ConnectorPoint PointX="6" PointY="7.375" />
@@ -1031,26 +1036,20 @@
           <ConnectorPoint PointX="7.5" PointY="6.0862939453125016" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuide_AudioGuide" >
-          <ConnectorPoint PointX="9" PointY="6.1151432291666694" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="6.1151432291666685" />
-          <ConnectorPoint PointX="9.6770833333333339" PointY="6.1151432291666694" />
-          <ConnectorPoint PointX="9.75" PointY="6.1151432291666694" />
+          <ConnectorPoint PointX="9" PointY="6.2962078685552889" />
+          <ConnectorPoint PointX="9.3854166666666661" PointY="6.296207868555288" />
+          <ConnectorPoint PointX="9.5520833333333339" PointY="6.2962078685552889" />
+          <ConnectorPoint PointX="9.75" PointY="6.2962078685552889" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuideEvent_AudioGuide" >
           <ConnectorPoint PointX="9" PointY="5" />
           <ConnectorPoint PointX="9.375" PointY="4.625" />
-          <ConnectorPoint PointX="9.375" PointY="3.1151432291666694" />
-          <ConnectorPoint PointX="9.75" PointY="3.1151432291666694" />
+          <ConnectorPoint PointX="9.375" PointY="3.2628476804887825" />
+          <ConnectorPoint PointX="9.75" PointY="3.2628476804887825" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_BookingCommerce_Commerce" >
-          <ConnectorPoint PointX="6.75" PointY="9.086293945312498" />
-          <ConnectorPoint PointX="7.5" PointY="9.086293945312498" />
-        </AssociationConnector>
-        <AssociationConnector Association="web.Models.FK_Reservation_BookingCommerce" >
-          <ConnectorPoint PointX="9" PointY="9.461293945312498" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="9.461293945312498" />
-          <ConnectorPoint PointX="9.6770833333333339" PointY="9.461293945312498" />
-          <ConnectorPoint PointX="9.75" PointY="9.461293945312498" />
+          <ConnectorPoint PointX="6.75" PointY="8.96050048828125" />
+          <ConnectorPoint PointX="7.5" PointY="8.96050048828125" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Company_Business" >
           <ConnectorPoint PointX="2.25" PointY="9.0478417968750016" />
@@ -1067,8 +1066,10 @@
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_CommerceQuery_Commerce" >
           <ConnectorPoint PointX="6.75" PointY="7.78125" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="7.7812499999999991" />
-          <ConnectorPoint PointX="9.6770833333333339" PointY="7.78125" />
+          <ConnectorPoint PointX="9.3854166666666661" PointY="7.7812499999999991" />
+          <ConnectorPoint PointX="9.5520833333333339" PointY="7.78125" />
+          <ConnectorPoint PointX="12.166666666666666" PointY="7.7812499999999991" />
+          <ConnectorPoint PointX="12.333333333333334" PointY="7.78125" />
           <ConnectorPoint PointX="12.5" PointY="7.78125" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Event_Commerce" >
@@ -1078,42 +1079,53 @@
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_CommerceQuery_Person" >
           <ConnectorPoint PointX="9" PointY="1.40625" />
-          <ConnectorPoint PointX="13.25" PointY="1.40625" />
-          <ConnectorPoint PointX="13.25" PointY="7.625" />
+          <ConnectorPoint PointX="12.59375" PointY="1.40625" />
+          <ConnectorPoint PointX="12.59375" PointY="7.625" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuide_Person" >
-          <ConnectorPoint PointX="9" PointY="3.4614142644230874" />
-          <ConnectorPoint PointX="9.3160744349011217" PointY="3.7774886993242078" />
-          <ConnectorPoint PointX="9.4339255650988783" PointY="3.8953398295219666" />
-          <ConnectorPoint PointX="9.6875" PointY="4.1489142644230874" />
-          <ConnectorPoint PointX="9.6875" PointY="5.5888196145833415" />
-          <ConnectorPoint PointX="9.75" PointY="5.5888196145833415" />
+          <ConnectorPoint PointX="9" PointY="3.1063496610576919" />
+          <ConnectorPoint PointX="9.3160744349011217" PointY="3.4224240959588124" />
+          <ConnectorPoint PointX="9.4339255650988783" PointY="3.5402752261565711" />
+          <ConnectorPoint PointX="9.4375" PointY="3.5438496610576919" />
+          <ConnectorPoint PointX="9.4375" PointY="5.6793519342776442" />
+          <ConnectorPoint PointX="9.75" PointY="5.6793519342776442" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_PersonAudioGuideEvent_Person" >
-          <ConnectorPoint PointX="9" PointY="2.5575716145833347" />
-          <ConnectorPoint PointX="9.75" PointY="2.5575716145833347" />
-        </AssociationConnector>
-        <AssociationConnector Association="web.Models.FK_Reservation_Person" >
-          <ConnectorPoint PointX="9" PointY="3.498337341346164" />
-          <ConnectorPoint PointX="9.3160744349011217" PointY="3.8144117762472844" />
-          <ConnectorPoint PointX="9.4339255650988783" PointY="3.9322629064450432" />
-          <ConnectorPoint PointX="9.59375" PointY="4.092087341346164" />
-          <ConnectorPoint PointX="9.59375" PointY="10.415494350260413" />
-          <ConnectorPoint PointX="9.75" PointY="10.415494350260413" />
+          <ConnectorPoint PointX="9" PointY="2.5678481313309343" />
+          <ConnectorPoint PointX="9.75" PointY="2.5678481313309343" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.FK_Tour_Person" >
-          <ConnectorPoint PointX="8.99423076923077" PointY="3.4994921875000102" />
-          <ConnectorPoint PointX="9.3160744349011217" PointY="3.821335853170361" />
-          <ConnectorPoint PointX="9.4339255650988783" PointY="3.9391869833681197" />
-          <ConnectorPoint PointX="9.53125" PointY="4.0365114182692405" />
-          <ConnectorPoint PointX="9.53125" PointY="15.461293945312505" />
-          <ConnectorPoint PointX="9.75" PointY="15.461293945312505" />
+          <ConnectorPoint PointX="9" PointY="3.1559650456730766" />
+          <ConnectorPoint PointX="9.3160744349011217" PointY="3.472039480574197" />
+          <ConnectorPoint PointX="9.4339255650988783" PointY="3.5898906107719553" />
+          <ConnectorPoint PointX="9.46875" PointY="3.6247150456730761" />
+          <ConnectorPoint PointX="9.46875" PointY="15.652288264943811" />
+          <ConnectorPoint PointX="9.75" PointY="15.652288264943811" />
         </AssociationConnector>
         <AssociationConnector Association="web.Models.TourEvent" >
-          <ConnectorPoint PointX="9" PointY="14.855646972656253" />
-          <ConnectorPoint PointX="9.4479166666666661" PointY="14.855646972656253" />
-          <ConnectorPoint PointX="9.6145833333333339" PointY="14.855646972656253" />
-          <ConnectorPoint PointX="9.75" PointY="14.855646972656253" />
+          <ConnectorPoint PointX="9" PointY="14.946071553325123" />
+          <ConnectorPoint PointX="9.3854166666666661" PointY="14.946071553325123" />
+          <ConnectorPoint PointX="9.5520833333333339" PointY="14.946071553325123" />
+          <ConnectorPoint PointX="9.75" PointY="14.946071553325123" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="web.Models.Reservation" Width="1.5" PointX="12.75" PointY="4" Height="2.5783902994791674" />
+        <AssociationConnector Association="web.Models.FK_Reservation_BookingCommerce" >
+          <ConnectorPoint PointX="9" PointY="8.96050048828125" />
+          <ConnectorPoint PointX="9.3854166666666661" PointY="8.96050048828125" />
+          <ConnectorPoint PointX="9.5520833333333339" PointY="8.96050048828125" />
+          <ConnectorPoint PointX="12.25" PointY="8.96050048828125" />
+          <ConnectorPoint PointX="12.25" PointY="7.375" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="7.3749999999999991" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="7.375" />
+          <ConnectorPoint PointX="13.5" PointY="7.375" />
+          <ConnectorPoint PointX="13.5" PointY="6.5783902994791674" />
+        </AssociationConnector>
+        <AssociationConnector Association="web.Models.FK_Reservation_Person" >
+          <ConnectorPoint PointX="9" PointY="1.7656275000000008" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="1.7656275000000001" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="1.7656275000000008" />
+          <ConnectorPoint PointX="13.5" PointY="1.7656275000000008" />
+          <ConnectorPoint PointX="13.5" PointY="4" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
