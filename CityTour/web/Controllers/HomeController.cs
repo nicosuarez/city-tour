@@ -20,7 +20,7 @@ namespace web.Controllers
             CreateDummyReservations();
 
             ViewData["Events"] = entities.Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
-            ViewData["ScheduledReservations"] = entities.Reservation.Where(r => r.CancellationDate == null).OrderBy(r => r.ReservationDate).ToList(); 
+            ViewData["ScheduledReservations"] = entities.Reservation.OrderBy(r => r.ReservationDate).ToList(); 
             return View();           
         }
 
@@ -202,6 +202,34 @@ namespace web.Controllers
             }
 
             return person;
+        }
+
+        public JsonResult ToggleReservation(int reservationID)
+        {
+            Reservation reservation = entities.Reservation.Where(r => r.ID == reservationID).FirstOrDefault();
+            bool result = false;
+            if (reservation != null)
+            {
+                if (reservation.Accepted)
+                {
+                    reservation.Accepted = false;
+                    reservation.CancellationDate = DateTime.Now;
+                }
+                else
+                {
+                    reservation.Accepted = true;
+                    reservation.CancellationDate = null;
+                }
+
+                result = reservation.Accepted;
+                entities.SaveChanges();
+            }
+
+            return new DataContractJsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
     }
 }
