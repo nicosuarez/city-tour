@@ -178,6 +178,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aceptada.
+        /// </summary>
+        internal static string ReservationAccepted {
+            get {
+                return ResourceManager.GetString("ReservationAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancelada.
+        /// </summary>
+        internal static string ReservationCancelled {
+            get {
+                return ResourceManager.GetString("ReservationCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eventos Agendados.
         /// </summary>
         internal static string ScheduledEvents {

@@ -165,4 +165,10 @@
   <data name="ScheduledReservations" xml:space="preserve">
     <value>Reservas Agendadas</value>
   </data>
+  <data name="ReservationAccepted" xml:space="preserve">
+    <value>Aceptada</value>
+  </data>
+  <data name="ReservationCancelled" xml:space="preserve">
+    <value>Cancelada</value>
+  </data>
 </root>

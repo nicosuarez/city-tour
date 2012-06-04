@@ -9,12 +9,16 @@
             type: 'POST',
             dataType: 'json',
             data: { reservationId: reservationId },
-            success: function (accepted) {
-                if (accepted) {
-                    $('.reservation_' + reservationId).html("Accepted!");
+            success: function (reservation) {
+                if (reservation.accepted) {
+                    $('.reservation_' + reservationId).html("@TextStrings.ReservationAccepted");
+                    $('.reservation_' + reservationId).removeClass("reservation_cancelled");
+                    $('.reservation_' + reservationId).addClass("reservation_accepted");
                 }
                 else {
-                    $('.reservation_' + reservationId).html("Cancelled!");
+                    $('.reservation_' + reservationId).html("@TextStrings.ReservationCancelled");
+                    $('.reservation_' + reservationId).removeClass("reservation_accepted");
+                    $('.reservation_' + reservationId).addClass("reservation_cancelled");
                 }
             }
         })
