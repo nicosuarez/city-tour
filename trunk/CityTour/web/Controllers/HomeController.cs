@@ -207,7 +207,7 @@ namespace web.Controllers
         public JsonResult ToggleReservation(int reservationID)
         {
             Reservation reservation = entities.Reservation.Where(r => r.ID == reservationID).FirstOrDefault();
-            bool result = false;
+            
             if (reservation != null)
             {
                 if (reservation.Accepted)
@@ -221,13 +221,12 @@ namespace web.Controllers
                     reservation.CancellationDate = null;
                 }
 
-                result = reservation.Accepted;
                 entities.SaveChanges();
             }
 
             return new DataContractJsonResult
             {
-                Data = result,
+                Data = ReservationAssembler.Assemble(reservation),
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

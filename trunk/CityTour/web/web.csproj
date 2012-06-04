@@ -77,10 +77,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\DataContracts\Assemblers\LocationAssembler.cs" />
+    <Compile Include="Views\DataContracts\Assemblers\ReservationAssembler.cs" />
     <Compile Include="Views\DataContracts\DataContractJsonResult.cs" />
     <Compile Include="Views\DataContracts\LocationData.cs" />
+    <Compile Include="Views\DataContracts\ReservationData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\accept.png" />
+    <Content Include="Content\images\cancel.png" />
     <Content Include="Content\images\person.png" />
     <Content Include="Content\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
     <Content Include="Content\themes\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />

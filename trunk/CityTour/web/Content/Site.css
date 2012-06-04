@@ -201,3 +201,19 @@ input[type='text'], input[type='password']
 {
     float: right;
 }
+
+.reservation_accepted
+{
+    float: right;
+    display: block;
+    background: url('images/accept.png') no-repeat right; 
+    padding-right: 20px;
+}
+
+.reservation_cancelled
+{
+    float: right;
+    display: block;
+    background: url('images/cancel.png') no-repeat right; 
+    padding-right: 20px;
+}
