@@ -10,15 +10,16 @@
             dataType: 'json',
             data: { reservationId: reservationId },
             success: function (reservation) {
+                var messageSpan = $('.reservation_' + reservationId);
                 if (reservation.accepted) {
-                    $('.reservation_' + reservationId).html("@TextStrings.ReservationAccepted");
-                    $('.reservation_' + reservationId).removeClass("reservation_cancelled");
-                    $('.reservation_' + reservationId).addClass("reservation_accepted");
+                    messageSpan.html("@TextStrings.ReservationAccepted")
+                    .removeClass("reservation_cancelled")
+                    .addClass("reservation_accepted");
                 }
                 else {
-                    $('.reservation_' + reservationId).html("@TextStrings.ReservationCancelled");
-                    $('.reservation_' + reservationId).removeClass("reservation_accepted");
-                    $('.reservation_' + reservationId).addClass("reservation_cancelled");
+                    messageSpan.html("@TextStrings.ReservationCancelled")
+                    .removeClass("reservation_accepted")
+                    .addClass("reservation_cancelled");
                 }
             }
         })
@@ -40,7 +41,9 @@
                         <span>@TextStrings.Price: @reservation.Price</span>
                         <span>@TextStrings.Date: @reservation.ReservationDate.ToShortDateString()</span>
                         <span>@TextStrings.Hour: @reservation.ReservationDate.ToString("hh:mm")</span>
-                        <span class=@("reservation_" + reservation.ID)></span>
+                        <span class=@("reservation_" + reservation.ID)>
+                            @(reservation.Accepted ? TextStrings.ReservationAccepted : TextStrings.ReservationCancelled)
+                        </span>
                     </a>                            
                 </li>     
                 }
