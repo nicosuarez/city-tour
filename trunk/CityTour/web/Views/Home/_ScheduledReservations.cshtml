@@ -10,7 +10,7 @@
             dataType: 'json',
             data: { reservationId: reservationId },
             success: function (reservation) {
-                var messageSpan = $('.reservation_' + reservationId);
+                var messageSpan = $('#reservation_' + reservationId);
                 if (reservation.accepted) {
                     messageSpan.html("@TextStrings.ReservationAccepted")
                     .removeClass("reservation_cancelled")
@@ -41,7 +41,7 @@
                         <span>@TextStrings.Price: @reservation.Price</span>
                         <span>@TextStrings.Date: @reservation.ReservationDate.ToShortDateString()</span>
                         <span>@TextStrings.Hour: @reservation.ReservationDate.ToString("hh:mm")</span>
-                        <span class=@("reservation_" + reservation.ID)>
+                        <span id=@("reservation_" + reservation.ID) class=@(reservation.Accepted ? "reservation_accepted" : "reservation_cancelled")>
                             @(reservation.Accepted ? TextStrings.ReservationAccepted : TextStrings.ReservationCancelled)
                         </span>
                     </a>                            
