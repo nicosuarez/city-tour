@@ -1,0 +1,12 @@
+﻿label
+{
+    width: 30px;
+}
+
+input 
+{
+	border-radius: 55px;
+}
+#search-by{
+	text-align: right;
+}

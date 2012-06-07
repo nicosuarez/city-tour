@@ -165,6 +165,15 @@
   <data name="ScheduledReservations" xml:space="preserve">
     <value>Reservas Agendadas</value>
   </data>
+  <data name="CommerceCategory" xml:space="preserve">
+    <value>Rubro</value>
+  </data>
+  <data name="CommerceDescription" xml:space="preserve">
+    <value>Descripcion</value>
+  </data>
+  <data name="CommerceName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
   <data name="ReservationAccepted" xml:space="preserve">
     <value>Aceptada</value>
   </data>

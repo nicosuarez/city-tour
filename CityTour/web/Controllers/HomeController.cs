@@ -15,13 +15,18 @@ namespace web.Controllers
         private static CityTourEntities entities = new CityTourEntities();
 
         public ActionResult Index()
-        {   
+        {
             CreateDummyEvents();
             CreateDummyReservations();
-
             ViewData["Events"] = entities.Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
+            ViewData["SearchBy"] = new List<SearchBy> {new SearchBy()};
             ViewData["ScheduledReservations"] = entities.Reservation.OrderBy(r => r.ReservationDate).ToList(); 
-            return View();           
+            return View();          
+        }
+
+        public ActionResult SearchBy()
+        {
+            return View();
         }
 
         private void CreateDummyEvents()
@@ -30,27 +35,27 @@ namespace web.Controllers
             
             Commerce commerce1 = CreateDummyCommerce("Fiuba Paseo Colon", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Paseo Colon", -34.617617M, -58.368495M));
             Commerce commerce2 = CreateDummyCommerce("Fiuba Las Heras", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Las Heras", -34.588399M, -58.396277M));
-            for (int i = 0; i < eventsToCreate; i++)
-			{
-                string eventDescription = string.Format("Evento numero {0}", i);
-                Event myEvent = entities.Event.Where(e => e.Description == eventDescription).FirstOrDefault();
-                if (myEvent == null)
-                {
-                    myEvent = new Event
-                    {
-                        EventDate = DateTime.Now.AddDays(i),
-                        Description = eventDescription,
-                        Commerce = (eventsToCreate % (i + 1)) < 1 ? commerce1 : commerce2
-                    };
+            //for (int i = 0; i < eventsToCreate; i++)
+            //{
+            //    string eventDescription = string.Format("Evento numero {0}", i);
+            //    Event myEvent = entities.Event.Where(e => e.Description == eventDescription).FirstOrDefault();
+            //    if (myEvent == null)
+            //    {
+            //        myEvent = new Event
+            //        {
+            //            EventDate = DateTime.Now.AddDays(i),
+            //            Description = eventDescription,
+            //            Commerce = (eventsToCreate % (i + 1)) < 1 ? commerce1 : commerce2
+            //        };
 
-                    if (!entities.Event.Any(e => e.Description == myEvent.Description))
-                    {
-                        entities.Event.AddObject(myEvent);
-                    }    
-                }
-			}
+            //        if (!entities.Event.Any(e => e.Description == myEvent.Description))
+            //        {
+            //            entities.Event.AddObject(myEvent);
+            //        }    
+            //    }
+            //}
 
-            entities.SaveChanges();                    	        
+            //entities.SaveChanges();                    	        
         }
 
         private Commerce CreateDummyCommerce(string commerceName, Location location)
@@ -114,7 +119,6 @@ namespace web.Controllers
         {
             const string companyName = "Dummy Company Name";
             Company company = entities.Company.Where(l => l.Name == companyName).FirstOrDefault();
-
             if (company == null)
             {
                 Business business = CreateDummyBusiness();
@@ -133,11 +137,17 @@ namespace web.Controllers
 
             if (business == null)
             {
-                business = new Business { Name = businessName };
+                int id = 0;
+                business = new Business { ID = ++id, Name = "Cine" };
                 entities.Business.AddObject(business);
+                int a=entities.SaveChanges();
+                entities.Business.AddObject(new Business { ID = ++id, Name = "Bar"});
+                a = entities.SaveChanges();
+                entities.Business.AddObject(new Business { ID = ++id, Name = "Restaurant" });
+                entities.Business.AddObject(new Business { ID = ++id, Name = "Museo" });
+                entities.Business.AddObject(new Business { ID = ++id, Name = "Teatro" });
                 entities.SaveChanges();
             }
-
             return business;
         }
 
@@ -180,10 +190,10 @@ namespace web.Controllers
             DateTime oneDay = new DateTime(2012, 6, 10);
             DateTime anotherDay = new DateTime(2012, 10, 3);
 
-            CreateDummyReservation(100, commerce.BookingCommerce, booker1, oneDay);
-            CreateDummyReservation(200, commerce.BookingCommerce, booker2, oneDay);
-            CreateDummyReservation(300, commerce.BookingCommerce, booker3, anotherDay);
-            CreateDummyReservation(400, commerce.BookingCommerce, booker4, anotherDay);
+            //CreateDummyReservation(100, commerce.BookingCommerce, booker1, oneDay);
+            //CreateDummyReservation(200, commerce.BookingCommerce, booker2, oneDay);
+            //CreateDummyReservation(300, commerce.BookingCommerce, booker3, anotherDay);
+            //CreateDummyReservation(400, commerce.BookingCommerce, booker4, anotherDay);
            
             entities.SaveChanges();           
         }

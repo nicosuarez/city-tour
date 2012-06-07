@@ -79,6 +79,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rubro.
+        /// </summary>
+        internal static string CommerceCategory {
+            get {
+                return ResourceManager.GetString("CommerceCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Descripcion.
+        /// </summary>
+        internal static string CommerceDescription {
+            get {
+                return ResourceManager.GetString("CommerceDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre.
+        /// </summary>
+        internal static string CommerceName {
+            get {
+                return ResourceManager.GetString("CommerceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fecha.
         /// </summary>
         internal static string Date {
