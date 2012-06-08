@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace web.Models
@@ -13,15 +14,13 @@ namespace web.Models
 
         public String Description { get; set; }
 
-        //public Location Location { get; set; }
+        public Location Location { get; set; }
 
-        //public String Category { get; set; }
+        public String BussinesID { get; set; }
 
-        //public Company Company { get; set; }
+        public String Direction { get; set; }
 
-        //public String Direction { get; set; }
-
-        //public Business Business { get; set; }
+        public Business Business { get; set; }
 
         public List<Commerce> DataBaseCommerce { get; set; }
 
@@ -31,6 +30,24 @@ namespace web.Models
             SearchResult = new List<Commerce>();
         }
 
+
+        public void Search ()
+        {
+            Regex regexName = GetRegexFor(Name);
+            Regex regexDesc = GetRegexFor(Description);
+            if (String.IsNullOrEmpty(BussinesID)|| BussinesID=="-1")
+            {
+                BussinesID = "";
+            }
+            Regex regexBussines =new Regex(BussinesID);
+            SearchResult = (DataBaseCommerce.Where(commerce => regexName.IsMatch(commerce.Name) && regexDesc.IsMatch(commerce.Description) && regexBussines.IsMatch(commerce.Description))).ToList();
+        }
+
+        private Regex GetRegexFor(string value)
+        {
+            var st = value + @"*";
+            return new Regex(value);
+        }
         public List<Commerce> SearchResult { get; set; }
 
         static public List<SearchBy> Load()
