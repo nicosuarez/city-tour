@@ -20,7 +20,14 @@ namespace web.Controllers
 
         public ActionResult Search(string comecommerceName, string commerceDescription, string commerceCategoryID)
         {
-            return Index() ;
+            SearchBy search = new SearchBy()
+                                  {
+                                      Name = comecommerceName,
+                                      Description = commerceDescription,
+                                      BussinesID = commerceCategoryID
+                                  };
+            search.Search();
+            return RedirectToAction("Index", "SearchBy", search);
         }
 
     }
