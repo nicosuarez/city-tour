@@ -15,6 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{939D84BC-E84B-43C9-B335-28B9B18402D8}"
 	ProjectSection(SolutionItems) = preProject
 		Resources\Scripts\Data.Creation.sql = Resources\Scripts\Data.Creation.sql
+		Resources\Scripts\Data.Insert.sql = Resources\Scripts\Data.Insert.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web.Test", "web.Test\web.Test.csproj", "{9399D8B4-CC62-4516-97C4-43129EBEF074}"

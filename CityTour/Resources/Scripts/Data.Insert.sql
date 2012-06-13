@@ -1,0 +1,20 @@
+INSERT INTO [CityTour].[dbo].[Location] ([Latitude],[Longitud],[Name])
+SELECT CAST(-34.617617000 AS Decimal(18, 9)), CAST(-58.368495000 AS Numeric(18, 9)), N'Facultad de Ingeniería de la UBA - Sede Paseo Colon'
+UNION SELECT CAST(-34.588399000 AS Decimal(18, 9)), CAST(-58.396277000 AS Numeric(18, 9)), N'Facultad de Ingeniería de la UBA - Sede Las Heras'
+UNION SELECT CAST(-34.592802000 AS Decimal(18, 9)), CAST(-58.372765000 AS Numeric(18, 9)), N'Sheraton Retiro'
+UNION SELECT CAST(-34.620494959 AS Decimal(18, 9)), CAST(-58.371841907 AS Decimal(18, 9)), N'Plaza Dorrego'
+UNION SELECT CAST(-34.620867988 AS Decimal(18, 9)), CAST(-58.370425701 AS Decimal(18, 9)), N'Museo de la Iglesia Parroquial San Pedro Telmo'
+UNION SELECT CAST(-34.621995895 AS Decimal(18, 9)), CAST(-58.370530307 AS Decimal(18, 9)), N'Museo de Arte Moderno de Buenos Aires'
+UNION SELECT CAST(-34.622196753 AS Decimal(18, 9)), CAST(-58.371195495 AS Decimal(18, 9)), N'Museo del Cine Pablo C. Ducros Hicken'
+UNION SELECT CAST(-34.626745737 AS Decimal(18, 9)), CAST(-58.370972871 AS Decimal(18, 9)), N'Museo Histórico Nacional'
+UNION SELECT CAST(-34.627416696 AS Decimal(18, 9)), CAST(-58.369288444 AS Decimal(18, 9)), N'Parque Lezama'
+UNION SELECT CAST(-34.629058759 AS Decimal(18, 9)), CAST(-58.377501368 AS Decimal(18, 9)), N'Hospital de Niños Pedro de Elizalde'
+UNION SELECT CAST(-34.603640 AS Decimal(18, 9)), CAST(-58.381552 AS Decimal(18, 9)), N'Obelisco'
+UNION SELECT CAST(-34.565155 AS Decimal(18, 9)), CAST(-58.404803 AS Decimal(18, 9)), N'Aeroparque Jorge Newberry'
+UNION SELECT CAST(-34.635556 AS Decimal(18, 9)), CAST(-58.364722 AS Decimal(18, 9)), N'Cancha de Boca'
+UNION SELECT CAST(-34.545278 AS Decimal(18, 9)), CAST(-58.449722 AS Decimal(18, 9)), N'Cancha de River'
+UNION SELECT CAST(-34.643333 AS Decimal(18, 9)), CAST(-58.396667 AS Decimal(18, 9)), N'Cancha de Huracán'
+UNION SELECT CAST(-34.651944 AS Decimal(18, 9)), CAST(-58.440278 AS Decimal(18, 9)), N'Cancha de San Lorenzo de Almagro'
+UNION SELECT CAST(-34.5845 AS Decimal(18, 9)), CAST(-58.390532 AS Decimal(18, 9)), N'Hard Rock Cafe'
+GO
+
