@@ -68,6 +68,9 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchByController.cs" />
+    <Compile Include="Core\Configuration.cs" />
+    <Compile Include="Core\IClientNotifier.cs" />
+    <Compile Include="Core\MailNotifier.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
