@@ -26,7 +26,7 @@ namespace SampleTesting
             Person person = new Person
             {
                 Name = "Fulanito",
-                EmailAddress = "ralejandro22000@gmail.com"            
+                EmailAddress = "FareakyRat@mailinator.com"            
             };
 
             BookingCommerce bookingCommerce = new BookingCommerce
