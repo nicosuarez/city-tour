@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio Guías.
+        /// </summary>
+        internal static string AudioGuides {
+            get {
+                return ResourceManager.GetString("AudioGuides", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CityTour.
         /// </summary>
         internal static string CityTour {
@@ -133,11 +142,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obténgalo desde el Market!.
+        /// </summary>
+        internal static string GetItFromMarket {
+            get {
+                return ResourceManager.GetString("GetItFromMarket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hora.
         /// </summary>
         internal static string Hour {
             get {
                 return ResourceManager.GetString("Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enlace.
+        /// </summary>
+        internal static string Link {
+            get {
+                return ResourceManager.GetString("Link", resourceCulture);
             }
         }
         

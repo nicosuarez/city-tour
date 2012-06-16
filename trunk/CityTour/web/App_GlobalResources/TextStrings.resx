@@ -180,4 +180,13 @@
   <data name="ReservationCancelled" xml:space="preserve">
     <value>Cancelada</value>
   </data>
+  <data name="AudioGuides" xml:space="preserve">
+    <value>Audio Guías</value>
+  </data>
+  <data name="GetItFromMarket" xml:space="preserve">
+    <value>Obténgalo desde el Market!</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Enlace</value>
+  </data>
 </root>

@@ -114,6 +114,7 @@ CREATE TABLE [dbo].[AudioGuide](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Description] [nvarchar](max) NOT NULL,
 	[CommerceID] [int] NOT NULL,
+	[Link] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_AudioGuide] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC

@@ -96,6 +96,7 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CommerceID" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="BookingCommerce">
           <Key>
@@ -518,6 +519,7 @@
           <NavigationProperty Name="Commerce" Relationship="web.Models.FK_AudioGuide_Commerce" FromRole="AudioGuide" ToRole="Commerce" />
           <NavigationProperty Name="PersonAudioGuide" Relationship="web.Models.FK_PersonAudioGuide_AudioGuide" FromRole="AudioGuide" ToRole="PersonAudioGuide" />
           <NavigationProperty Name="PersonAudioGuideEvent" Relationship="web.Models.FK_PersonAudioGuideEvent_AudioGuide" FromRole="AudioGuide" ToRole="PersonAudioGuideEvent" />
+          <Property Type="String" Name="Link" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="BookingCommerce">
           <Key>
@@ -857,6 +859,7 @@
           <EntitySetMapping Name="AudioGuide">
             <EntityTypeMapping TypeName="web.Models.AudioGuide">
               <MappingFragment StoreEntitySet="AudioGuide">
+                <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="CommerceID" ColumnName="CommerceID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
