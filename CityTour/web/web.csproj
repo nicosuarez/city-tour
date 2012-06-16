@@ -88,8 +88,22 @@
     <Compile Include="Views\DataContracts\ReservationData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\audioguides\santelmo\01-Introducción a San Telmo %28Defensa y Bethlem%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\02-Casa Mínima %28Pasaje San Lorenzo 380%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\03-El Viejo Almacén %28Balcarce y Av. Independencia%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\04-Monumento del Canto al Trabajo y  Facultad de Ingeniería.mp3" />
+    <Content Include="Content\audioguides\santelmo\05-Iglesia Dinamarquesa %28Carlos Calvo 257%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\06-Mercado de San Telmo %28Defensa 961%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\07-Plaza Dorrego y Feria de Antigüedades  %28Defensa y Humberto 1º%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\08-Museo Penitenciario Argentino %28Humberto 1º 378%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\09-Iglesia de San Pedro Telmo %28Humberto 1º 340%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\10-Galería del Viejo Hotel %28Balcarce 1053.mp3" />
+    <Content Include="Content\audioguides\santelmo\11-Parque Lezama -  Museo Histórico Nacional %28Defensa y Brasil%29.mp3" />
+    <Content Include="Content\audioguides\santelmo\12-Iglesia Ortodoxa Rusa %28Brasil 315%29.mp3" />
     <Content Include="Content\images\accept.png" />
+    <Content Include="Content\images\androidMarket.png" />
     <Content Include="Content\images\cancel.png" />
+    <Content Include="Content\images\marketInstall.png" />
     <Content Include="Content\images\person.png" />
     <Content Include="Content\SearchBy.css" />
     <Content Include="Content\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
@@ -111,6 +125,7 @@
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\modernizr.custom.js" />
     <Content Include="Scripts\site.js" />
+    <Content Include="Market\market.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -163,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SearchBy\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\_AudioGuides.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

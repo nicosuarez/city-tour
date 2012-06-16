@@ -13,6 +13,7 @@
 		    <li><a href="#myReservationsTab"><%: TextStrings.MyReservations%></a></li>
 		    <li><a href="#myItineraryTab"><%: TextStrings.MyItinerary%></a></li>
             <li><a href="#scheduledReservationsTab"><%: TextStrings.ScheduledReservations%></a></li>
+            <li><a href="#audioGuidesTab"><%: TextStrings.AudioGuides%></a></li>
 	    </ul>
 	    <div id="nearLocationsTab">
             <div id="map" class="mapCanvas"></div>
@@ -24,8 +25,11 @@
 	    <div id="myItineraryTab">            
 		    <% Html.RenderPartial("_Events", ViewData["Events"]); %>            
 	    </div>
-         <div id="scheduledReservationsTab">            
+        <div id="scheduledReservationsTab">            
 		    <% Html.RenderPartial("_ScheduledReservations", ViewData["ScheduledReservations"]); %>            
 	    </div>
+        <div id="audioGuidesTab">
+            <% Html.RenderPartial("_AudioGuides", ViewData["AudioGuides"]); %>    
+        </div>
     </div>
 </asp:Content>

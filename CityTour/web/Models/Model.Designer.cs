@@ -424,12 +424,14 @@ namespace web.Models
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="commerceID">Initial value of the CommerceID property.</param>
-        public static AudioGuide CreateAudioGuide(global::System.Int32 id, global::System.String description, global::System.Int32 commerceID)
+        /// <param name="link">Initial value of the Link property.</param>
+        public static AudioGuide CreateAudioGuide(global::System.Int32 id, global::System.String description, global::System.Int32 commerceID, global::System.String link)
         {
             AudioGuide audioGuide = new AudioGuide();
             audioGuide.ID = id;
             audioGuide.Description = description;
             audioGuide.CommerceID = commerceID;
+            audioGuide.Link = link;
             return audioGuide;
         }
 
@@ -510,6 +512,30 @@ namespace web.Models
         private global::System.Int32 _CommerceID;
         partial void OnCommerceIDChanging(global::System.Int32 value);
         partial void OnCommerceIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Link
+        {
+            get
+            {
+                return _Link;
+            }
+            set
+            {
+                OnLinkChanging(value);
+                ReportPropertyChanging("Link");
+                _Link = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Link");
+                OnLinkChanged();
+            }
+        }
+        private global::System.String _Link;
+        partial void OnLinkChanging(global::System.String value);
+        partial void OnLinkChanged();
 
         #endregion
     

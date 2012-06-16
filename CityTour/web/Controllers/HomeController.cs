@@ -18,9 +18,11 @@ namespace web.Controllers
         {
             CreateDummyEvents();
             CreateDummyReservations();
+            CreateDummyAudioGuides();
             ViewData["Events"] = entities.Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
             ViewData["SearchBy"] = new List<SearchBy> {new SearchBy()};
-            ViewData["ScheduledReservations"] = entities.Reservation.OrderBy(r => r.ReservationDate).ToList(); 
+            ViewData["ScheduledReservations"] = entities.Reservation.OrderBy(r => r.ReservationDate).ToList();
+            ViewData["AudioGuides"] = entities.AudioGuide.ToList(); 
             return View();          
         }
 
@@ -196,6 +198,36 @@ namespace web.Controllers
             CreateDummyReservation(400, commerce.BookingCommerce, booker4, anotherDay);
            
             entities.SaveChanges();           
+        }
+
+        private void CreateDummyAudioGuides()
+        {
+            Commerce commerce = entities.Commerce.Where(c => c.Name.ToUpper().Contains("FIUBA")).FirstOrDefault();
+            if (commerce != null)
+	        {
+                AudioGuide ag = entities.AudioGuide.Where(a => a.Description == commerce.Name).FirstOrDefault();
+                if (ag == null)
+                {
+                    AudioGuide audioGuide1 = new AudioGuide
+                    {
+                        Commerce = commerce,
+                        Description = commerce.Name,
+                        Link = string.Format("{0}Market/market.html", HttpContext.Request.Url.AbsoluteUri)
+                    };
+
+                    AudioGuide audioGuide2 = new AudioGuide
+                    {
+                        Commerce = commerce,
+                        Description = commerce.Name,
+                        Link = string.Format("{0}Market/market.html", HttpContext.Request.Url.AbsoluteUri)
+                    };
+
+                    entities.AudioGuide.AddObject(audioGuide1);
+                    entities.AudioGuide.AddObject(audioGuide1);
+
+                    entities.SaveChanges();
+                }		       
+	        }           
         }
 
         private Person CreateDummyPerson(string name)

@@ -1,0 +1,21 @@
+﻿@using Resources
+@model IEnumerable<web.Models.AudioGuide>
+<div class="item_list right">
+    <h2>@TextStrings.AudioGuides</h2>
+    <div class="inner">
+        <ul>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <li>
+                    <a href="@item.Link" target="_blank"> 
+                        <span>@TextStrings.Description: @item.Description</span>
+                        <span>@TextStrings.GetItFromMarket</span>
+                    </a>                            
+                </li>     
+                }
+            }
+        </ul>
+    </div>
+</div>
