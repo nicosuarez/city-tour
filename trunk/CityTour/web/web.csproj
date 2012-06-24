@@ -59,6 +59,14 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Wurfl, Version=1.4.1.0, Culture=neutral, PublicKeyToken=816aeec277aa13b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>App_Data\Wurfl\Bin\Wurfl.dll</HintPath>
+    </Reference>
+    <Reference Include="Wurfl.Aspnet.Extensions, Version=1.4.0.0, Culture=neutral, PublicKeyToken=816aeec277aa13b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>App_Data\Wurfl\Bin\Wurfl.Aspnet.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_GlobalResources\TextStrings.Designer.cs">
@@ -71,6 +79,8 @@
     <Compile Include="Core\Configuration.cs" />
     <Compile Include="Core\IClientNotifier.cs" />
     <Compile Include="Core\MailNotifier.cs" />
+    <Compile Include="Core\WurflManagerApplicationExtension.cs" />
+    <Compile Include="Core\WurflViewEngine.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -88,6 +98,8 @@
     <Compile Include="Views\DataContracts\ReservationData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Wurfl\Bin\Wurfl.Aspnet.Extensions.dll" />
+    <Content Include="App_Data\Wurfl\Bin\Wurfl.dll" />
     <Content Include="Content\audioguides\santelmo\01-Introducción a San Telmo %28Defensa y Bethlem%29.mp3" />
     <Content Include="Content\audioguides\santelmo\02-Casa Mínima %28Pasaje San Lorenzo 380%29.mp3" />
     <Content Include="Content\audioguides\santelmo\03-El Viejo Almacén %28Balcarce y Av. Independencia%29.mp3" />
@@ -154,9 +166,7 @@
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -181,6 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\_AudioGuides.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\Wurfl\wurfl-2.3.1.xml.gz" />
+    <Content Include="ViewsSmartphone\Web.config" />
+    <Content Include="ViewsSmartphone\Shared\_SmartphoneLayout.cshtml" />
+    <Content Include="ViewsSmartphone\Home\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

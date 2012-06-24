@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using web.Core;
 
 namespace web
 {
@@ -30,6 +31,10 @@ namespace web
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            Application.ConfigureWurflManager();
+
+            ViewEngines.Engines.Insert(0, new WurflViewEngine());
         }
     }
 }
