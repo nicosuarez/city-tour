@@ -2,6 +2,7 @@
 <%@ Import Namespace="web.Models" %>
 
 <asp:Content ID="homeHead" ContentPlaceHolderID="HeadContent" runat="server">
+    <link href="<%: Url.Content("~/Content/site.css") %>" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyB8R77stdNg_eXQLpwKEI1_uFyu8tLW2Sw&sensor=true"></script>
 </asp:Content>
 
@@ -10,6 +11,7 @@
 	    <ul>
 		    <li><a href="#nearLocationsTab"><%: TextStrings.NearLocations%></a></li>
             <li><a href="../SearchBy/"><%: TextStrings.SearchBy%></a></li>
+            <%--<li><a href="#SearchByTab"><%: TextStrings.SearchBy%></a></li>--%>
 		    <li><a href="#myReservationsTab"><%: TextStrings.MyReservations%></a></li>
 		    <li><a href="#myItineraryTab"><%: TextStrings.MyItinerary%></a></li>
             <li><a href="#scheduledReservationsTab"><%: TextStrings.ScheduledReservations%></a></li>
@@ -31,5 +33,8 @@
         <div id="audioGuidesTab">
             <% Html.RenderPartial("_AudioGuides", ViewData["AudioGuides"]); %>    
         </div>
+        <%--<div id="SearchByTab">
+            <% Html.RenderPartial("Index", "SearchBy", ViewData["SearchBy"]); %>    
+        </div>--%>
     </div>
 </asp:Content>

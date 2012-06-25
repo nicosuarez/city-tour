@@ -20,7 +20,8 @@ namespace web.Controllers
             CreateDummyReservations();
             CreateDummyAudioGuides();
             ViewData["Events"] = entities.Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
-            ViewData["SearchBy"] = new List<SearchBy> {new SearchBy()};
+            //ViewData["SearchBy"] = new List<SearchBy> {new SearchBy()};
+            ViewData["SearchBy"] = new SearchBy();
             ViewData["ScheduledReservations"] = entities.Reservation.OrderBy(r => r.ReservationDate).ToList();
             ViewData["AudioGuides"] = entities.AudioGuide.ToList(); 
             return View();          
