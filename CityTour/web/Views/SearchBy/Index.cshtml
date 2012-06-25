@@ -1,42 +1,12 @@
-﻿
+﻿@model web.Models.SearchBy
 @using Resources
-@using web.Models
-@model web.Models.SearchBy
-<link href="@Url.Content("~/Content/SearchBy.css")" rel="stylesheet" type="text/css"></link>
-<div class="item_list right">
-    <h2>@TextStrings.SearchBy</h2>
-    <div class="Search">
-        @using(Html.BeginForm("Search", "SearchBy")) {
-            <!-- <label for="searchByName" class="select">Rubro:</label>-->
-            <div class="search-by"><span>@Html.Label(TextStrings.CommerceName):</span> @Html.TextBox("comecommerceName")</div>
-             <div class="search-by"><span>@Html.Label(TextStrings.Description):</span> @Html.TextBox("commerceDescription")</div>
-             <div class="search-by"><span>@Html.Label(TextStrings.CommerceCategory):</span> 
-	             <select name="commerceCategoryID" id="commerceCategory" >
-                        <option value="-1">Todos</option>
-                        @if ((Model != null))
-                        {
-                            var business = Model.DataBaseCommerce.Select(aCommerce => aCommerce.Company.Business).Distinct();
-                            foreach (var aBusiness in business)
-                            {
-                                    <option value= @aBusiness.ID.ToString()>@aBusiness.Name</option>
-                            }
-                        }
-                </select>
-            </div>
-            <input type="submit" value="Search" />
-        }
-    </div>
-</div>
-<div class="itinerary_map">
-    <div id="itineraryMap" class="itinerary_map_canvas"></div>
-</div>
 
 <script type="text/javascript">
     function loadMap() {
         $.ajax({
-            url: './Home/GetEventLocations',
+            url: './SearchBy/GetEventLocations',
             success: function (locations) {
-                renderMap('itineraryMap', locations);
+                renderMap('Map', locations);
             }
         });
     }
@@ -78,7 +48,7 @@
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
 
-                    var map = new google.maps.Map(document.getElementById('itineraryMap'), options);
+                    var map = new google.maps.Map(document.getElementById('Map'), options);
                     setMarkers(map, places);
 
                     //Adds current location to places;
@@ -111,3 +81,37 @@
         loadMap();
     });
 </script>
+
+@*<link href="@Url.Content("~/Content/SearchBy.css")" rel="stylesheet" type="text/css"></link>*@
+<div class="item_list right">
+    <h2>@TextStrings.SearchBy</h2>
+    <div class="Search">
+        @*@using(Html.BeginForm("Search", "SearchBy"))
+         {
+         }*@
+            
+           <form method="POST" action="@Url.Action("Index","SearchBy")">
+            <!-- <label for="searchByName" class="select">Rubro:</label>-->
+            <div class="search-by"><span>@Html.Label(TextStrings.CommerceName):</span> @Html.TextBox("comecommerceName")</div>
+             <div class="search-by"><span>@Html.Label(TextStrings.Description):</span> @Html.TextBox("commerceDescription")</div>
+             <div class="search-by"><span>@Html.Label(TextStrings.CommerceCategory):</span> 
+	             <select name="commerceCategoryID" id="commerceCategory" >
+                        <option value="-1">Todos</option>
+                        @if (Model != null)
+                        {
+                            var business = Model.DataBaseCommerce.Select(aCommerce => aCommerce.Company.Business).Distinct();
+                            foreach (var aBusiness in business)
+                            {
+                                    <option value= @aBusiness.ID.ToString()>@aBusiness.Name</option>
+                            }
+                        }
+                </select>
+            </div>
+            <input type="submit" value="Search" />
+           </form>
+        @*}*@
+    </div>
+</div>
+<div class="itinerary_map">
+    <div id="Map" class="itinerary_map_canvas"></div>
+</div>
