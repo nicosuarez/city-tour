@@ -6,80 +6,11 @@
         $.ajax({
             url: './SearchBy/GetEventLocations',
             success: function (locations) {
-                renderMap('Map', locations);
+                citytour.map.setLocations(locations)
             }
         });
     }
 
-    function renderMap(elementId, locations) {
-        if (google.maps.Map) {
-            if (Modernizr.geolocation) {
-                var places = locations;
-
-                function setMarkers(map, locations) {
-                    var image = new google.maps.MarkerImage('content/images/person.png',
-                        new google.maps.Size(40, 40), // This size of the marker.
-                        new google.maps.Point(0, 0), // The origin for this image.
-                        new google.maps.Point(20, 30) // The anchor for this image.
-                    );
-
-                    var youAreHereMarker = new google.maps.Marker({
-                        position: new google.maps.LatLng(map.center.$a, map.center.ab),
-                        map: map,
-                        icon: image,
-                        title: 'You are here',
-                        zIndex: 1
-                    });
-
-                    $.each(locations, function (i, location) {
-                        var marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(location.lat, location.long),
-                            map: map,
-                            title: location.name,
-                            zIndex: location.ranking
-                        });
-                    });
-                }
-
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var options = {
-                        zoom: 15,
-                        center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    };
-
-                    var map = new google.maps.Map(document.getElementById('Map'), options);
-                    setMarkers(map, places);
-
-                    //Adds current location to places;
-                    places.push({ lat: position.coords.latitude, long: position.coords.longitude });
-                    joinLocations(map, places);
-                });
-
-
-                function joinLocations(map, locations) {
-                    var lineCordinates = [];
-                    $.each(locations, function (i, location) {
-                        lineCordinates.push(new google.maps.LatLng(location.lat, location.long));
-                    });
-                    var Line = new google.maps.Polyline({
-                        path: lineCordinates,
-                        strokeColor: "#FF0000",
-                        strokeOpacity: 1.0,
-                        strokeWeight: 2
-                    });
-                    Line.setMap(map);
-                }
-            }
-            else {
-                // Identificación manual por dirección.
-            }
-        }
-    }
-
-    $(document).ready(function () {
-        loadMap();
-    });
 </script>
 
 @*<link href="@Url.Content("~/Content/SearchBy.css")" rel="stylesheet" type="text/css"></link>*@
@@ -112,6 +43,4 @@
         @*}*@
     </div>
 </div>
-<div class="itinerary_map">
-    <div id="Map" class="itinerary_map_canvas"></div>
-</div>
+<div class="map"></div>

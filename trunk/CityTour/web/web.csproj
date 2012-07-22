@@ -198,6 +198,7 @@
     <Content Include="ViewsSmartphone\Web.config" />
     <Content Include="ViewsSmartphone\Shared\_SmartphoneLayout.cshtml" />
     <Content Include="ViewsSmartphone\Home\Index.cshtml" />
+    <Content Include="Views\Home\_Map.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

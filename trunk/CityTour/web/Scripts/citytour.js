@@ -2,6 +2,8 @@
     map: {
         googleMap: null,
 
+        currentLocation: null,
+
         setMarkers: function (locations, currentLocation) {
             var self = this;
             if (self.googleMap) {
@@ -51,7 +53,7 @@
             }
         },
 
-        render: function (elementId, locations) {
+        render: function (elementId) {
             var self = this;
             if (google.maps.Map) {
                 if (Modernizr.geolocation) {
@@ -64,16 +66,18 @@
 
                         self.googleMap = new google.maps.Map(document.getElementById(elementId), options);
 
-                        var currentLocation = {
+                        self.currentLocation = {
                             lat: position.coords.latitude,
                             long: position.coords.longitude
                         }
-
-                        self.setMarkers(locations, currentLocation);
-                        self.joinLocations(locations, currentLocation);
                     });
                 }
             }
+        },
+
+        setLocations: function (locations) {            
+            this.setMarkers(locations, this.currentLocation);
+            this.joinLocations(locations, this.currentLocation);            
         },
 
         resize: function () {

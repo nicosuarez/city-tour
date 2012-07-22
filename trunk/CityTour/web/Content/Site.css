@@ -55,12 +55,14 @@ input[type='text'], input[type='password']
     font-weight: bold;
 }
 
+/*
 .mapCanvas
 {
     width: 640px;
     height: 480px;
     margin: 0 auto;
 }
+*/
 
 #homeTabs.ui-widget-content
 {
@@ -126,13 +128,12 @@ input[type='text'], input[type='password']
    height: 400px;
 }
 
-
 .itinerary_map
 {
     float: left;
 }
 
-.itinerary_map_canvas
+.map_canvas
 {
     width: 540px;
     height: 470px;
