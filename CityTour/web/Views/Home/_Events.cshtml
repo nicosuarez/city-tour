@@ -20,16 +20,14 @@
         </ul>
     </div>
 </div>
-<div class="itinerary_map">
-    <div id="itineraryMap" class="itinerary_map_canvas"></div>
-</div>
+<div class="map itinerary_map"></div>
 
 <script type="text/javascript">
     function loadMap() {
         $.ajax({
             url: './Home/GetEventLocations',
             success: function (locations) {
-                citytour.map.render('itineraryMap', locations);
+                citytour.map.setLocations(locations);
             }
         });
     }

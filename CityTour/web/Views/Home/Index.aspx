@@ -10,15 +10,15 @@
     <div id="homeTabs">
 	    <ul>
 		    <li><a href="#nearLocationsTab"><%: TextStrings.NearLocations%></a></li>
-            <li><a href="../SearchBy/"><%: TextStrings.SearchBy%></a></li>
-            <%--<li><a href="#SearchByTab"><%: TextStrings.SearchBy%></a></li>--%>
 		    <li><a href="#myReservationsTab"><%: TextStrings.MyReservations%></a></li>
 		    <li><a href="#myItineraryTab"><%: TextStrings.MyItinerary%></a></li>
             <li><a href="#scheduledReservationsTab"><%: TextStrings.ScheduledReservations%></a></li>
             <li><a href="#audioGuidesTab"><%: TextStrings.AudioGuides%></a></li>
 	    </ul>
 	    <div id="nearLocationsTab">
-            <div id="map" class="mapCanvas"></div>
+            <div class="map">
+                <% Html.RenderPartial("_Map"); %> 
+            </div>
 	    </div>
 
 	    <div id="myReservationsTab">
@@ -32,9 +32,6 @@
 	    </div>
         <div id="audioGuidesTab">
             <% Html.RenderPartial("_AudioGuides", ViewData["AudioGuides"]); %>    
-        </div>
-        <%--<div id="SearchByTab">
-            <% Html.RenderPartial("Index", "SearchBy", ViewData["SearchBy"]); %>    
-        </div>--%>
+        </div>              
     </div>
 </asp:Content>
