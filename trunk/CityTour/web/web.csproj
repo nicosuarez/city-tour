@@ -134,6 +134,7 @@
     <Content Include="Content\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\cupertino\jquery-ui-1.8.20.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\citytour.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\modernizr.custom.js" />
     <Content Include="Scripts\site.js" />
