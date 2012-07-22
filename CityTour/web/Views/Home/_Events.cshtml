@@ -23,7 +23,7 @@
 <div class="map itinerary_map"></div>
 
 <script type="text/javascript">
-    function loadMap() {
+    function loadEventLocations() {
         $.ajax({
             url: './Home/GetEventLocations',
             success: function (locations) {
@@ -32,7 +32,9 @@
         });
     }
     
-    $(document).ready(function () {
-        loadMap();
+    $(document).ready(function () {        
+        $(window).bind('itinerary', function(){
+            loadEventLocations();
+        });
     });
 </script>
