@@ -86,6 +86,10 @@
                             lat: position.coords.latitude,
                             long: position.coords.longitude
                         }
+
+                        google.maps.event.addListenerOnce(self.googleMap, 'idle', function () {
+                            $(window).trigger('mapLoaded');
+                        });
                     });
                 }
             }
