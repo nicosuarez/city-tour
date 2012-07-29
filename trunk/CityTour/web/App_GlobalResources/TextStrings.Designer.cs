@@ -205,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se encontraron lugares cerca de su ubicación..
+        /// </summary>
+        internal static string NearLocationsEmpty {
+            get {
+                return ResourceManager.GetString("NearLocationsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Account.
         /// </summary>
         internal static string NewAccount {
