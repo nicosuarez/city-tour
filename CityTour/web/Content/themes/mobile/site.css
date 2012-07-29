@@ -1,0 +1,17 @@
+﻿img.home-logo
+{
+    margin: 0 auto;
+    display: block;
+}
+
+.ui-header .ui-title
+{
+    margin: .6em 20% .8em;
+}
+
+.map-canvas
+{
+    width: 90%;
+    height: 300px;
+    margin: 0 auto;
+}

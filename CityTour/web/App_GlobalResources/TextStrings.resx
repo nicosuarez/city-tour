@@ -189,4 +189,7 @@
   <data name="Link" xml:space="preserve">
     <value>Enlace</value>
   </data>
+  <data name="NearLocationsEmpty" xml:space="preserve">
+    <value>No se encontraron lugares cerca de su ubicación.</value>
+  </data>
 </root>

@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Areas/Mobile/Views/Shared/_PageLayout.cshtml";
+}
+
+@section pageId {page_locations}
+
+@section header {
+    <h1>@TextStrings.NearLocations</h1>
+    <a href="#page_home" data-icon="home" data-iconpos="notext" data-direction="reverse"></a>
+}
+
+@section content {
+    <div id="map_locations" class="map-canvas"></div>
+    <div id="near_locations_list" data-apiurl="@Url.Action("GetNearLocations", "JSONAPI")" data-empty="@TextStrings.NearLocationsEmpty"></div>
+}
