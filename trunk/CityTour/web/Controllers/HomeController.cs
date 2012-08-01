@@ -7,6 +7,7 @@ using web.Views.DataContracts.Assemblers;
 using System.Web.Helpers;
 using web.Views.DataContracts;
 using System.Web.Script.Serialization;
+using System.Device.Location;
 
 namespace web.Controllers
 {
@@ -270,6 +271,32 @@ namespace web.Controllers
             return new DataContractJsonResult
             {
                 Data = ReservationAssembler.Assemble(reservation),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        /// <summary>
+        /// Calcula la distancia en metros.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        private decimal CalculateDistance(Location source, Location target)
+        {
+            var sourceCoordinate = new GeoCoordinate((double)source.Latitude, (double)source.Longitud);
+            var targetCoordinate = new GeoCoordinate((double)target.Latitude, (double)target.Longitud);
+
+            return (decimal)targetCoordinate.GetDistanceTo(sourceCoordinate);
+        }
+                
+        public JsonResult GetNearLocations(decimal latitude, decimal longitude)
+        {
+            decimal maxDistance = 1000; //Distancia en metros;
+            var nearLocations = entities.Location.ToList().Where(l => CalculateDistance(l, new Location { Latitude = latitude, Longitud = longitude }) < maxDistance);
+
+            return new DataContractJsonResult
+            {
+                Data = nearLocations.Select(l => LocationAssembler.Assemble(l)).ToList(),
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
