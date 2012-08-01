@@ -6,7 +6,7 @@
         $.ajax({
             url: './SearchBy/GetEventLocations',
             success: function (locations) {
-                citytour.map.setLocations(locations)
+                citytour.map.setLocations(locations, false);
             }
         });
     }

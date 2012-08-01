@@ -95,9 +95,11 @@
             }
         },
 
-        setLocations: function (locations) {
+        setLocations: function (locations, joinLocations) {
             this.setMarkers(locations, this.currentLocation);
-            this.joinLocations(locations, this.currentLocation);
+            if (joinLocations) {
+                this.joinLocations(locations, this.currentLocation);
+            }
         },
 
         resize: function () {

@@ -45,7 +45,7 @@
             url: './Home/GetNearLocations',            
             data: { latitude: currentLocation.lat, longitude: currentLocation.long },            
             success: function (locations) {
-                citytour.map.setLocations(locations);
+                citytour.map.setLocations(locations, false);
             }
         });
     }

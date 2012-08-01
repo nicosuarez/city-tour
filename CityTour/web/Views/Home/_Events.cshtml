@@ -27,7 +27,7 @@
         $.ajax({
             url: './Home/GetEventLocations',
             success: function (locations) {
-                citytour.map.setLocations(locations);
+                citytour.map.setLocations(locations, true);
             }
         });
     }
