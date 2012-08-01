@@ -30,19 +30,24 @@
 
     $(window).bind('nearLocations', function () {
         if (citytour && citytour.map) {
-            citytour.map.setLocations(getNearLocations(citytour.map.currentLocation));
+            getNearLocations(citytour.map.currentLocation);
         }
     })
 
     $(window).bind('mapLoaded', function () {
         if (citytour && citytour.map) {
-            citytour.map.setLocations(getNearLocations(citytour.map.currentLocation));
+            getNearLocations(citytour.map.currentLocation);
         }
     })
 
     function getNearLocations(currentLocation) {
-        //Llamada ajax con la current location;
-        return [];
+        $.ajax({
+            url: './Home/GetNearLocations',            
+            data: { latitude: currentLocation.lat, longitude: currentLocation.long },            
+            success: function (locations) {
+                citytour.map.setLocations(locations);
+            }
+        });
     }
 
 });
