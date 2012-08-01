@@ -16,5 +16,6 @@ UNION SELECT CAST(-34.545278 AS Decimal(18, 9)), CAST(-58.449722 AS Decimal(18, 
 UNION SELECT CAST(-34.643333 AS Decimal(18, 9)), CAST(-58.396667 AS Decimal(18, 9)), N'Cancha de Huracán'
 UNION SELECT CAST(-34.651944 AS Decimal(18, 9)), CAST(-58.440278 AS Decimal(18, 9)), N'Cancha de San Lorenzo de Almagro'
 UNION SELECT CAST(-34.5845 AS Decimal(18, 9)), CAST(-58.390532 AS Decimal(18, 9)), N'Hard Rock Cafe'
+UNION SELECT CAST(-34.608717 AS Decimal(18, 9)), CAST(-58.378825 AS Decimal(18, 9)), N'Cafe Tortoni'
 GO
 
