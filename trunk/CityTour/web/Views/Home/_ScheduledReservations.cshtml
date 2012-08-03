@@ -1,31 +1,58 @@
 ﻿@using Resources
 @model IEnumerable<web.Models.Reservation>
 <script type="text/javascript">
-    function toggleReservation(reservationId) {
+    function toggleReservation(reservationId) {        
+        $(".cancel-dialog").dialog({
+            title: "Mensaje de notificacion",
+            modal: true,
+            autoOpen: true,
+            buttons: [
+            {
+                text: "Ok",
+                click: function () {
+                    var message = $(this).find('.cancel-message').val();
+                    updateReservation(reservationId, message);
+                    $(this).dialog("close");
+                }
+            },
+            {
+                text: "Cancel",
+                click: function () { $(this).dialog("close"); }
+            }
+        ]
+        });
+    }
+
+    function updateReservation(reservationId, message) {
         var actionUrl = '@Url.Action("ToggleReservation", "Home")';
 
         $.ajax({
             url: actionUrl,
             type: 'POST',
             dataType: 'json',
-            data: { reservationId: reservationId },
+            data: { reservationId: reservationId, message: message },
             success: function (reservation) {
                 var messageSpan = $('#reservation_' + reservationId);
                 if (reservation.accepted) {
-                    messageSpan.html("@TextStrings.ReservationAccepted")
+                    messageSpan.html("@TextStrings.ReservationAccepted"+"<span>"+"@TextStrings.ClickToCancel"+"</span>")                           
                     .removeClass("reservation_cancelled")
                     .addClass("reservation_accepted");
                 }
                 else {
-                    messageSpan.html("@TextStrings.ReservationCancelled")
+                    messageSpan.html("@TextStrings.ReservationCancelled"+"<span>"+"@TextStrings.ClickToAccept"+"</span>")
                     .removeClass("reservation_accepted")
                     .addClass("reservation_cancelled");
                 }
             }
         })
     }
+      
 </script>
-           
+ <div class="cancel-dialog" style="display:none;">
+     <textarea class="cancel-message" rows="4" cols="30">
+     </textarea>
+ </div>
+         
 <div class="item_list left">
     <h2>@TextStrings.ScheduledReservations</h2>
     <div class="inner">
@@ -42,8 +69,11 @@
                         <span>@TextStrings.Date: @reservation.ReservationDate.ToShortDateString()</span>
                         <span>@TextStrings.Hour: @reservation.ReservationDate.ToString("hh:mm")</span>
                         <span id=@("reservation_" + reservation.ID) class=@(reservation.Accepted ? "reservation_accepted" : "reservation_cancelled")>
-                            @(reservation.Accepted ? TextStrings.ReservationAccepted : TextStrings.ReservationCancelled)
-                        </span>
+                            @(reservation.Accepted ? TextStrings.ReservationAccepted : TextStrings.ReservationCancelled)   
+                            <span>
+                             @(reservation.Accepted ? TextStrings.ClickToCancel : TextStrings.ClickToAccept)
+                            </span>                          
+                        </span>            
                     </a>                            
                 </li>     
                 }

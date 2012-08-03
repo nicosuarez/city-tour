@@ -192,4 +192,10 @@
   <data name="NearLocationsEmpty" xml:space="preserve">
     <value>No se encontraron lugares cerca de su ubicación.</value>
   </data>
+  <data name="ClickToAccept" xml:space="preserve">
+    <value>(Click para aceptar)</value>
+  </data>
+  <data name="ClickToCancel" xml:space="preserve">
+    <value>(Click para cancelar)</value>
+  </data>
 </root>
