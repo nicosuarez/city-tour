@@ -8,12 +8,14 @@ using System.Web.Helpers;
 using web.Views.DataContracts;
 using System.Web.Script.Serialization;
 using System.Device.Location;
+using web.Core;
 
 namespace web.Controllers
 {
     public class HomeController : Controller
     {
         private static CityTourEntities entities = new CityTourEntities();
+        private readonly IClientNotifier notifier = new MailNotifier();
 
         public ActionResult Index()
         {
@@ -185,11 +187,11 @@ namespace web.Controllers
         {    
             Location location = CreateDummyLocation("Sheraton Retiro", -34.592802M, -58.372765M);
             Commerce commerce = CreateDummyCommerce("Sheraton Retiro", location);
-            
-            Person booker1 = CreateDummyPerson("Vanesa");
-            Person booker2 = CreateDummyPerson("Ruben");
-            Person booker3 = CreateDummyPerson("Marisol");
-            Person booker4 = CreateDummyPerson("Ariel");
+
+            Person booker1 = CreateDummyPerson("Vanesa", "dummy@dummy.com");
+            Person booker2 = CreateDummyPerson("Ruben", "dummy@dummy.com");
+            Person booker3 = CreateDummyPerson("Marisol", "dummy@dummy.com");
+            Person booker4 = CreateDummyPerson("Ariel", "dummy@dummy.com");
 
             DateTime oneDay = new DateTime(2012, 6, 10);
             DateTime anotherDay = new DateTime(2012, 10, 3);
@@ -232,7 +234,7 @@ namespace web.Controllers
 	        }           
         }
 
-        private Person CreateDummyPerson(string name)
+        private Person CreateDummyPerson(string name, string emailAddress)
         {
             Person person = entities.Person.Where(p => p.Name == name).FirstOrDefault();
             if (person == null)
@@ -240,7 +242,7 @@ namespace web.Controllers
                 person = new Person
                 {
                     Name = name,
-                    EmailAddress = "dummy@dummy.com",
+                    EmailAddress = emailAddress,
                     Created = DateTime.Now
                 };
             }
@@ -248,7 +250,7 @@ namespace web.Controllers
             return person;
         }
 
-        public JsonResult ToggleReservation(int reservationID)
+        public JsonResult ToggleReservation(int reservationID, string message)
         {
             Reservation reservation = entities.Reservation.Where(r => r.ID == reservationID).FirstOrDefault();
             
@@ -258,11 +260,13 @@ namespace web.Controllers
                 {
                     reservation.Accepted = false;
                     reservation.CancellationDate = DateTime.Now;
+                    notifier.NotifyReservationCancelled(reservation, message);
                 }
                 else
                 {
                     reservation.Accepted = true;
                     reservation.CancellationDate = null;
+                    notifier.NotifyReservationConfirmed(reservation);
                 }
 
                 entities.SaveChanges();

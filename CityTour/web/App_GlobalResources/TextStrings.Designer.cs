@@ -79,6 +79,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Click para aceptar).
+        /// </summary>
+        internal static string ClickToAccept {
+            get {
+                return ResourceManager.GetString("ClickToAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Click para cancelar).
+        /// </summary>
+        internal static string ClickToCancel {
+            get {
+                return ResourceManager.GetString("ClickToCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre del Cliente.
         /// </summary>
         internal static string ClientName {
