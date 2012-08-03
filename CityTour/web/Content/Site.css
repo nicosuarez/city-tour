@@ -219,3 +219,12 @@ input[type='text'], input[type='password']
     padding-right: 20px;
 }
 
+.scheduled-reservation
+{
+    width: 100%; 
+}
+
+.scheduled-reservation a
+{
+    width: 90%;
+}
