@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Areas/Mobile/Views/Shared/_PageLayout.cshtml";
+}
+
+@section header {
+    <h1>@TextStrings.SearchBy</h1>
+}
+
+<form action="@Url.Action("Index", "Locations")" method="post">
+    <label for="searchAddress">@TextStrings.EnterYourLocation</label>
+    <input type="text" id="searchAddress" name="searchAddress" value="" />
+    <button type="submit" data-theme="b" name="submit">@TextStrings.SearchBy</button>
+</form>

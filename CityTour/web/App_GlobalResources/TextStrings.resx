@@ -190,12 +190,18 @@
     <value>Enlace</value>
   </data>
   <data name="NearLocationsEmpty" xml:space="preserve">
-    <value>No se encontraron lugares cerca de su ubicación.</value>
+    <value>No se encontraron lugares cerca de su ubicación</value>
   </data>
   <data name="ClickToAccept" xml:space="preserve">
     <value>(Click para aceptar)</value>
   </data>
   <data name="ClickToCancel" xml:space="preserve">
     <value>(Click para cancelar)</value>
+  </data>
+  <data name="GettingLocationMessage" xml:space="preserve">
+    <value>Obteniendo su ubicación. Active su GPS si se encuentra deshabilitado y actualice la pantalla.</value>
+  </data>
+  <data name="EnterYourLocation" xml:space="preserve">
+    <value>Ingrese su ubicación (ej: Paseo Colón 850, CABA)</value>
   </data>
 </root>

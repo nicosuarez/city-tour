@@ -1,13 +1,9 @@
-﻿@{
-    Layout = "~/Areas/Mobile/Views/Shared/_MobileLayout.cshtml";
-}
-
-@Html.Partial("_Home")
-
-@Html.Partial("_Locations")
-
-@Html.Partial("_Reservations")
-
-@Html.Partial("_Itinerary")
-
-@Html.Partial("_AudioGuides")
+﻿<div>
+    <img class="home-logo" src="@Url.Content("~/Content/themes/mobile/images/logo.png")" alt="@TextStrings.CityTour" />
+</div>
+<ul data-role="listview" data-inset="true">
+    <li><a href="@Url.Action("Index", "Locations")">@TextStrings.NearLocations</a></li>
+    <li><a href="@Url.Action("Index", "Reservations")">@TextStrings.MyReservations</a></li>
+    <li><a href="@Url.Action("Index", "Itinerary")">@TextStrings.MyItinerary</a></li>
+    <li><a href="@Url.Action("Index", "AudioGuides")">@TextStrings.AudioGuides</a></li>
+</ul>

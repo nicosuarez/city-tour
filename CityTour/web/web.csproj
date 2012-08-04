@@ -75,6 +75,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TextStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Mobile\Controllers\AudioGuidesController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\ReservationsController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\LocationsController.cs" />
+    <Compile Include="Areas\Mobile\Controllers\ItineraryController.cs" />
     <Compile Include="Areas\Mobile\Controllers\JSONAPIController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MainController.cs" />
     <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
@@ -217,13 +221,14 @@
     <Content Include="Views\Home\_Map.cshtml" />
     <Content Include="Areas\Mobile\Views\Web.config" />
     <Content Include="Areas\Mobile\Views\Main\Index.cshtml" />
-    <Content Include="Areas\Mobile\Views\Main\_AudioGuides.cshtml" />
-    <Content Include="Areas\Mobile\Views\Main\_Home.cshtml" />
-    <Content Include="Areas\Mobile\Views\Main\_Itinerary.cshtml" />
-    <Content Include="Areas\Mobile\Views\Main\_Locations.cshtml" />
-    <Content Include="Areas\Mobile\Views\Main\_Reservations.cshtml" />
+    <Content Include="Areas\Mobile\Views\AudioGuides\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Itinerary\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Locations\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Reservations\Index.cshtml" />
     <Content Include="Areas\Mobile\Views\Shared\_PageLayout.cshtml" />
     <Content Include="Areas\Mobile\Views\Shared\_MobileLayout.cshtml" />
+    <Content Include="Areas\Mobile\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Mobile\Views\Locations\Search.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -160,11 +160,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ingrese su ubicación (ej: Paseo Colón 850, CABA).
+        /// </summary>
+        internal static string EnterYourLocation {
+            get {
+                return ResourceManager.GetString("EnterYourLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obténgalo desde el Market!.
         /// </summary>
         internal static string GetItFromMarket {
             get {
                 return ResourceManager.GetString("GetItFromMarket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obteniendo su ubicación. Active su GPS si se encuentra deshabilitado y actualice la pantalla..
+        /// </summary>
+        internal static string GettingLocationMessage {
+            get {
+                return ResourceManager.GetString("GettingLocationMessage", resourceCulture);
             }
         }
         
@@ -223,7 +241,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No se encontraron lugares cerca de su ubicación..
+        ///   Looks up a localized string similar to No se encontraron lugares cerca de su ubicación.
         /// </summary>
         internal static string NearLocationsEmpty {
             get {

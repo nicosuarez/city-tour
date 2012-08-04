@@ -6,6 +6,7 @@ namespace web.Areas.Mobile.Controllers
 {
     public class JSONAPIController : Controller
     {
+        [HttpGet]
         public JsonResult GetNearLocations(decimal latitude, decimal longitude)
         {
             using (CityTourEntities entities = new CityTourEntities())
