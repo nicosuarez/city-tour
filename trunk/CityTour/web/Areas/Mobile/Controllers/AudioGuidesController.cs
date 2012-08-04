@@ -2,7 +2,7 @@
 
 namespace web.Areas.Mobile.Controllers
 {
-    public class MainController : Controller
+    public class AudioGuidesController : Controller
     {
         [HttpGet]
         public ActionResult Index()
