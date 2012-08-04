@@ -22,12 +22,49 @@ namespace web.Controllers
             CreateDummyEvents();
             CreateDummyReservations();
             CreateDummyAudioGuides();
-            ViewData["Events"] = entities.Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
+            CreateDummyTour();
+
+            Person currentUser = GetCurrentUser();
+
+            ViewData["Events"] = GetTour(currentUser).Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
             //ViewData["SearchBy"] = new List<SearchBy> {new SearchBy()};
             ViewData["SearchBy"] = new SearchBy();
             ViewData["ScheduledReservations"] = entities.Reservation.OrderBy(r => r.ReservationDate).ToList();
             ViewData["AudioGuides"] = entities.AudioGuide.ToList(); 
             return View();          
+        }
+
+        private void CreateDummyTour()
+        {
+            Person currentUser = GetCurrentUser();
+            Tour tour = entities.Tour.Where(t => t.PersonID == currentUser.ID).FirstOrDefault();
+            if (tour == null)
+            {
+                tour = new Tour
+                {
+                    Person = currentUser,
+                    Created = DateTime.Now
+                };
+                entities.Tour.AddObject(tour);
+
+                var allEvents = entities.Event.ToList();
+
+                tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Paseo")).First());
+                tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Las Heras")).First());
+                tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Sheraton")).First());
+
+                entities.SaveChanges();
+            }
+        }
+
+        private Person GetCurrentUser()
+        {
+            return CreateDummyPerson("Ruben", "dummy@mail.com");
+        }
+
+        private Tour GetTour(Person person)
+        {
+            return entities.Tour.Where(t => t.PersonID == person.ID).FirstOrDefault();
         }
 
         public ActionResult SearchBy()
@@ -37,7 +74,7 @@ namespace web.Controllers
 
         private void CreateDummyEvents()
         {
-            const int eventsToCreate = 4;
+            const int eventsToCreate = 2;
             
             Commerce commerce1 = CreateDummyCommerce("Fiuba Paseo Colon", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Paseo Colon", -34.617617M, -58.368495M));
             Commerce commerce2 = CreateDummyCommerce("Fiuba Las Heras", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Las Heras", -34.588399M, -58.396277M));

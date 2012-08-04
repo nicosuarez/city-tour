@@ -93,8 +93,10 @@
     </Compile>
     <Compile Include="Models\SearchByModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\DataContracts\Assemblers\CommerceAssembler.cs" />
     <Compile Include="Views\DataContracts\Assemblers\LocationAssembler.cs" />
     <Compile Include="Views\DataContracts\Assemblers\ReservationAssembler.cs" />
+    <Compile Include="Views\DataContracts\CommerceData.cs" />
     <Compile Include="Views\DataContracts\DataContractJsonResult.cs" />
     <Compile Include="Views\DataContracts\LocationData.cs" />
     <Compile Include="Views\DataContracts\ReservationData.cs" />
