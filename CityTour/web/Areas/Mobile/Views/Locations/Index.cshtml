@@ -4,7 +4,7 @@
     <a href="@Url.Action("Search", "Locations")" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="pop"></a>
 }
 
-<div class="map-canvas" data-locations='{"apiurl":"@Url.Action("GetNearLocations", "JSONAPI")", "listId":"near_locations_list", "address": "@Html.AttributeEncode(ViewBag.SearchAddress)", "emptymsg":"@TextStrings.NearLocationsEmpty"}'>
+<div class="map-canvas" data-locations='{"apiurl":"@Url.Action("GetNear", "Locations", new { area = "Api" })", "listId":"near_locations_list", "address": "@Html.AttributeEncode(ViewBag.SearchAddress)", "emptymsg":"@TextStrings.NearLocationsEmpty"}'>
     <p class="map-locating">@TextStrings.GettingLocationMessage</p>
 </div>
 <div id="near_locations_list"></div>
