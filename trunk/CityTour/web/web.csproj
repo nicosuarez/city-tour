@@ -75,11 +75,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TextStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\LocationsController.cs" />
+    <Compile Include="Areas\Api\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Mobile\Controllers\AudioGuidesController.cs" />
     <Compile Include="Areas\Mobile\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Mobile\Controllers\LocationsController.cs" />
     <Compile Include="Areas\Mobile\Controllers\ItineraryController.cs" />
-    <Compile Include="Areas\Mobile\Controllers\JSONAPIController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MainController.cs" />
     <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
