@@ -1,8 +1,6 @@
 package com.citytour.sms;
 
 import java.io.File;
-import java.net.URLEncoder;
-
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -61,15 +59,16 @@ public class SmsReceiver extends BroadcastReceiver
 	public String generateResponse(Context context, String smsBody) throws Exception
 	{
 		String[] tokens = smsBody.split(" ");
-		String response = context.getString(R.string.InvalidBodySMS);
-		if (tokens[0].equals(context.getString(R.string.SMSTaxi)) && tokens.length>2)
+		String response = "";
+		
+		if (tokens.length>2 && tokens[0].equals(context.getString(R.string.SMSTaxi)))
 		{
 			String address = smsBody.substring(tokens[0].length() + 1);
-			//response = HTTPUtil.connect(smsActivity.WSUrl + "/taxi?address=" + URLEncoder.encode(address, "utf-8") );
-			response = "Taxi reservado. Movil 1520 TaxiPremium";
-		} else if (tokens[0].equals(context.getString(R.string.SMSPay)) && tokens.length == 4) {
-			//TODO: Hacer llamado a web services para generar el pago			
-			response = "Pago aceptado por $120,40. Nro 1234. Movil 1529";   
+			response = HTTPUtil.requestTaxi(address);
+		} else if ((tokens.length == 4) && tokens[0].equals(context.getString(R.string.SMSPay))) {
+			response = HTTPUtil.payTaxi(tokens[2], tokens[3]);			
+		} else {
+			response = context.getString(R.string.InvalidBodySMS);			
 		}
 			
 		return response;

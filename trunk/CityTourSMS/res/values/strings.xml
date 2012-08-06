@@ -10,6 +10,6 @@
     <string name="SMSSuccessAudioguide">Te enviamos la audioguia que solicitaste</string>
     <string name="SMSFailureAudioguide">La audioguia solicitada no existe</string>
     <string name="TitleTextFieldUrl">Ingrese la URL del web services</string>
-    <string name="WSURLDefault">http://192.168.1.4</string>
+    <string name="WSURLDefault">http://192.168.42.2</string>
 	<string name="Save">Guardar</string>
 </resources>

@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import com.citytour.sms.library.HTTPUtil;
 
 public class SMSActivity extends Activity implements View.OnClickListener {
 	private EditText urlTextField;
 	private Button saveBtn;
-	public String WSUrl;
 	
     /** Called when the activity is first created. */
     @Override
@@ -25,7 +25,7 @@ public class SMSActivity extends Activity implements View.OnClickListener {
     }
     
     public void onClick(View v) {
-    	WSUrl = urlTextField.getText().toString();
+    	HTTPUtil.WSURL = urlTextField.getText().toString();
     }
     
     public void sendMMS(String phoneNumber, String message, String filePath, String mimeType)
