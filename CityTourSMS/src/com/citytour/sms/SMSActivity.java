@@ -4,14 +4,28 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-public class SMSActivity extends Activity {
+public class SMSActivity extends Activity implements View.OnClickListener {
+	private EditText urlTextField;
+	private Button saveBtn;
+	public String WSUrl;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        urlTextField = (EditText) this.findViewById(R.id.editText1);
+        saveBtn = (Button) this.findViewById(R.id.button1);
+        saveBtn.setOnClickListener(this);
         SmsReceiver.smsActivity = this;
+    }
+    
+    public void onClick(View v) {
+    	WSUrl = urlTextField.getText().toString();
     }
     
     public void sendMMS(String phoneNumber, String message, String filePath, String mimeType)
@@ -23,4 +37,5 @@ public class SMSActivity extends Activity {
     	smsIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(filePath));    	    	
     	startActivity(smsIntent);    	
     }
+    
 }

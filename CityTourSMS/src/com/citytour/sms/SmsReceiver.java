@@ -1,15 +1,18 @@
 package com.citytour.sms;
 
 import java.io.File;
+import java.net.URLEncoder;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
+import com.citytour.sms.library.HTTPUtil;
 
 public class SmsReceiver extends BroadcastReceiver
 {
@@ -36,8 +39,12 @@ public class SmsReceiver extends BroadcastReceiver
             	{
             		sendAudioguide(context, originalAddress, smsBody);
             	} else {
-                	String response = generateResponse(context, smsBody);
-            		sendSMS(context, originalAddress, response);
+					try {
+						String response = generateResponse(context, smsBody);
+	            		sendSMS(context, originalAddress, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
             	}
                 
                 showMessage(context, originalAddress, smsBody);
@@ -51,13 +58,14 @@ public class SmsReceiver extends BroadcastReceiver
 		return tokens[0].equals(context.getString(R.string.SMSAudioguide)) && tokens.length == 2;
 	}
 	
-	public String generateResponse(Context context, String smsBody)
+	public String generateResponse(Context context, String smsBody) throws Exception
 	{
 		String[] tokens = smsBody.split(" ");
 		String response = context.getString(R.string.InvalidBodySMS);
 		if (tokens[0].equals(context.getString(R.string.SMSTaxi)) && tokens.length>2)
 		{
-			//TODO: Hacer llamado a web services para generar la reserva
+			String address = smsBody.substring(tokens[0].length() + 1);
+			//response = HTTPUtil.connect(smsActivity.WSUrl + "/taxi?address=" + URLEncoder.encode(address, "utf-8") );
 			response = "Taxi reservado. Movil 1520 TaxiPremium";
 		} else if (tokens[0].equals(context.getString(R.string.SMSPay)) && tokens.length == 4) {
 			//TODO: Hacer llamado a web services para generar el pago			
@@ -78,7 +86,7 @@ public class SmsReceiver extends BroadcastReceiver
     public void sendAudioguide(Context context, String phoneNumber, String smsBody)
     {
     	String[] tokens = smsBody.split(" ");
-    	String filePath = "/sdcard/" + tokens[1] + ".3gp";
+    	String filePath = Environment.getExternalStorageDirectory().getPath() + "/" + tokens[1] + ".mp3";
     	if (!this.fileExists(context, filePath))
     	{
     		sendSMS(context, phoneNumber, context.getString(R.string.SMSFailureAudioguide));
@@ -86,7 +94,7 @@ public class SmsReceiver extends BroadcastReceiver
     	}
 
     	String message = context.getString(R.string.SMSSuccessAudioguide);
-    	smsActivity.sendMMS(phoneNumber, message, "file://" + filePath, "video/3gp");
+    	smsActivity.sendMMS(phoneNumber, message, "file://" + filePath, "audio/*");
     	    	
     }
 	  
@@ -102,4 +110,5 @@ public class SmsReceiver extends BroadcastReceiver
     	File file = new File(fileName);
     	return file.exists();    	
     }
+    
 }
