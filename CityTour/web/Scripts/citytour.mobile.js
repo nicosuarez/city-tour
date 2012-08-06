@@ -75,20 +75,23 @@
         render: function (mapElement, position, locations) {
             var self = this;
 
-            if (position) {
-                self.currentLocation = position;
+            self.currentLocation = position ? position : (locations ? locations[0] : null);
 
-                if (google.maps.Map) {
-                    var options = {
-                        zoom: 15,
-                        center: new google.maps.LatLng(self.currentLocation.lat, self.currentLocation.long),
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    };
+            if (self.currentLocation) {
+                var options = {
+                    zoom: 15,
+                    center: new google.maps.LatLng(self.currentLocation.lat, self.currentLocation.long),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
 
-                    self.googleMap = new google.maps.Map(mapElement, options);
+                self.googleMap = new google.maps.Map(mapElement, options);
+
+                if (position) {
+                    self.setCurrentLocation();
                 }
+            }
 
-                self.setCurrentLocation();
+            if (locations) {
                 self.setMarkers(locations);
             }
         }
@@ -104,30 +107,37 @@ $(document).bind("pagechange", function (a, b) {
         var mapData = $(map).data("locations");
         var $list = $("#" + mapData.listId, activePage).empty().hide();
 
-        citytour.location.detect(function (position) {
-            $.getJSON(mapData.apiurl,
-                { latitude: position.lat, longitude: position.long },
-                function (data) {
-                    if (data) {
-                        citytour.map.render(map, position, data);
-                        citytour.location.addressDetect(position.lat, position.long, function (address) {
-                            $("<h4>" + address + "</h4>").insertBefore($map);
-                        });
+        if (mapData.location) {
+            citytour.map.render(map, null, [mapData.location]);
+        }
+        else {
+            citytour.location.detect(function (position) {
+                $.getJSON(mapData.apiurl,
+                    { latitude: position.lat, longitude: position.long },
+                    function (data) {
+                        if (data) {
+                            citytour.map.render(map, position, data);
+                            citytour.location.addressDetect(position.lat, position.long, function (address) {
+                                $(".map-address").html(address);
+                            });
 
-                        var $locations = $("<ul data-role=\"listview\" data-inset=\"true\"></ul>");
-                        $.each(data, function (i, location) {
-                            $("<li><a href=\"#\">" + location.name + "</a></li>").appendTo($locations);
-                        });
+                            if (data.length > 0) {
+                                var $locations = $("<ul data-role=\"listview\" data-inset=\"true\"></ul>");
+                                $.each(data, function (i, location) {
+                                    $("<li><a href=\"" + location.url + "\">" + location.name + "</a></li>").appendTo($locations);
+                                });
 
-                        $list.html($locations);
-                        $locations.listview();
-                    }
-                    else {
-                        $list.html($("<p>" + mapData.emptymsg + "</p>"));
-                    }
+                                $list.html($locations);
+                                $locations.listview();
+                            }
+                            else {
+                                $list.html($("<p class=\"map-empty\">" + mapData.emptymsg + "</p>"));
+                            }
 
-                    $list.show();
-                });
-        }, mapData.address);
+                            $list.show();
+                        }
+                    });
+            }, mapData.address);
+        }
     });
 });
