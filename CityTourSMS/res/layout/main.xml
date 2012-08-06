@@ -3,23 +3,27 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/logo" />
+
 	<LinearLayout
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
     	android:orientation="vertical" >
- 
+ 
 	    <TextView
 	        android:id="@+id/textView1"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_horizontal"
+	        android:layout_gravity="left"
 	        android:text="@string/TitleTextFieldUrl" />
+
 	    <EditText
 	        android:id="@+id/editText1"
 	        android:layout_width="fill_parent"
@@ -30,11 +34,14 @@
 	        android:text="@string/WSURLDefault" >
 	        <requestFocus />
 	    </EditText>
+
 	    <Button
 	        android:id="@+id/button1"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center_horizontal"
+	        android:gravity="center"
 	        android:text="@string/Save" />
+
 	</LinearLayout>
 </LinearLayout>

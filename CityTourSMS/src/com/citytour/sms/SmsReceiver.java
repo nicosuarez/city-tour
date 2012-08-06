@@ -100,7 +100,7 @@ public class SmsReceiver extends BroadcastReceiver
     //---display the new SMS message---    
     public void showMessage(Context context, String originalAddress, String smsBody)
     {
-        String str = "SMS from " + originalAddress + " :" + smsBody;
+        String str = "SMS de " + originalAddress + " :" + smsBody;
         Toast.makeText(context, str, Toast.LENGTH_SHORT).show();    	
     }
     

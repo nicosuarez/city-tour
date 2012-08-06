@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.citytour.sms.library.HTTPUtil;
 
 public class SMSActivity extends Activity implements View.OnClickListener {
@@ -26,6 +28,7 @@ public class SMSActivity extends Activity implements View.OnClickListener {
     
     public void onClick(View v) {
     	HTTPUtil.WSURL = urlTextField.getText().toString();
+    	 Toast.makeText(this, getString(R.string.WSURLMessage), Toast.LENGTH_SHORT).show(); 
     }
     
     public void sendMMS(String phoneNumber, String message, String filePath, String mimeType)
