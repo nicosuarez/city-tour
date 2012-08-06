@@ -19,10 +19,10 @@ namespace web.Controllers
 
         public ActionResult Index()
         {
-            CreateDummyEvents();
-            CreateDummyReservations();
-            CreateDummyAudioGuides();
-            CreateDummyTour();
+            //CreateDummyEvents();
+            //CreateDummyReservations();
+            //CreateDummyAudioGuides();
+            //CreateDummyTour();
 
             Person currentUser = GetCurrentUser();
 
@@ -34,32 +34,33 @@ namespace web.Controllers
             return View();          
         }
 
-        private void CreateDummyTour()
-        {
-            Person currentUser = GetCurrentUser();
-            Tour tour = entities.Tour.Where(t => t.PersonID == currentUser.ID).FirstOrDefault();
-            if (tour == null)
-            {
-                tour = new Tour
-                {
-                    Person = currentUser,
-                    Created = DateTime.Now
-                };
-                entities.Tour.AddObject(tour);
+        //private void CreateDummyTour()
+        //{
+        //    Person currentUser = GetCurrentUser();
+        //    Tour tour = entities.Tour.Where(t => t.PersonID == currentUser.ID).FirstOrDefault();
+        //    if (tour == null)
+        //    {
+        //        tour = new Tour
+        //        {
+        //            Person = currentUser,
+        //            Created = DateTime.Now
+        //        };
+        //        entities.Tour.AddObject(tour);
 
-                var allEvents = entities.Event.ToList();
+        //        var allEvents = entities.Event.ToList();
 
-                tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Paseo")).First());
-                tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Las Heras")).First());
-                tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Sheraton")).First());
+        //        tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Paseo")).First());
+        //        tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Las Heras")).First());
+        //        tour.Event.Add(allEvents.Where(e => e.Commerce.Name.Contains("Sheraton")).First());
 
-                entities.SaveChanges();
-            }
-        }
+        //        entities.SaveChanges();
+        //    }
+        //}
 
         private Person GetCurrentUser()
         {
-            return CreateDummyPerson("Ruben", "dummy@mail.com");
+            return entities.Person.First();
+            //return CreateDummyPerson("Ruben", "dummy@mail.com");
         }
 
         private Tour GetTour(Person person)
@@ -72,81 +73,81 @@ namespace web.Controllers
             return View();
         }
 
-        private void CreateDummyEvents()
-        {
-            const int eventsToCreate = 2;
+        //private void CreateDummyEvents()
+        //{
+        //    const int eventsToCreate = 2;
             
-            Commerce commerce1 = CreateDummyCommerce("Fiuba Paseo Colon", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Paseo Colon", -34.617617M, -58.368495M));
-            Commerce commerce2 = CreateDummyCommerce("Fiuba Las Heras", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Las Heras", -34.588399M, -58.396277M));
-            for (int i = 0; i < eventsToCreate; i++)
-            {
-                string eventDescription = string.Format("Evento numero {0}", i);
-                Event myEvent = entities.Event.Where(e => e.Description == eventDescription).FirstOrDefault();
-                if (myEvent == null)
-                {
-                    myEvent = new Event
-                    {
-                        EventDate = DateTime.Now.AddDays(i),
-                        Description = eventDescription,
-                        Commerce = (eventsToCreate % (i + 1)) < 1 ? commerce1 : commerce2
-                    };
+        //    Commerce commerce1 = CreateDummyCommerce("Fiuba Paseo Colon", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Paseo Colon", -34.617617M, -58.368495M));
+        //    Commerce commerce2 = CreateDummyCommerce("Fiuba Las Heras", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Las Heras", -34.588399M, -58.396277M));
+        //    for (int i = 0; i < eventsToCreate; i++)
+        //    {
+        //        string eventDescription = string.Format("Evento numero {0}", i);
+        //        Event myEvent = entities.Event.Where(e => e.Description == eventDescription).FirstOrDefault();
+        //        if (myEvent == null)
+        //        {
+        //            myEvent = new Event
+        //            {
+        //                EventDate = DateTime.Now.AddDays(i),
+        //                Description = eventDescription,
+        //                Commerce = (eventsToCreate % (i + 1)) < 1 ? commerce1 : commerce2
+        //            };
 
-                    if (!entities.Event.Any(e => e.Description == myEvent.Description))
-                    {
-                        entities.Event.AddObject(myEvent);
-                    }    
-                }
-            }
+        //            if (!entities.Event.Any(e => e.Description == myEvent.Description))
+        //            {
+        //                entities.Event.AddObject(myEvent);
+        //            }    
+        //        }
+        //    }
 
-            entities.SaveChanges();                    	        
-        }
+        //    entities.SaveChanges();                    	        
+        //}
 
-        private Commerce CreateDummyCommerce(string commerceName, Location location)
-        {  
-            Commerce commerce = entities.Commerce.Where(c => c.Name == commerceName).FirstOrDefault();
-            if (commerce == null)
-            {   
-                commerce = new Commerce
-                {
-                    Name = commerceName,
-                    Description = "Dummy Commerce",
-                    Address = "Dummy Address"                    
-                };
+        //private Commerce CreateDummyCommerce(string commerceName, Location location)
+        //{  
+        //    Commerce commerce = entities.Commerce.Where(c => c.Name == commerceName).FirstOrDefault();
+        //    if (commerce == null)
+        //    {   
+        //        commerce = new Commerce
+        //        {
+        //            Name = commerceName,
+        //            Description = "Dummy Commerce",
+        //            Address = "Dummy Address"                    
+        //        };
 
-                Company company = CreateDummyCompany();
-                commerce.Location = location;
-                commerce.CompanyID = company.ID;
-                entities.Commerce.AddObject(commerce);
-                entities.SaveChanges();
+        //        Company company = CreateDummyCompany();
+        //        commerce.Location = location;
+        //        commerce.CompanyID = company.ID;
+        //        entities.Commerce.AddObject(commerce);
+        //        entities.SaveChanges();
 
-                BookingCommerce bookingCommerce = CreateBookingCommerce(commerce);
-            }               
+        //        BookingCommerce bookingCommerce = CreateBookingCommerce(commerce);
+        //    }               
 
-            return commerce;
-        }
+        //    return commerce;
+        //}
 
-        private BookingCommerce CreateBookingCommerce(Commerce commerce)
-        {
-            BookingCommerce bookingCommerce = new BookingCommerce { ID = commerce.ID };
-            entities.BookingCommerce.AddObject(bookingCommerce);
-            entities.SaveChanges();
+        //private BookingCommerce CreateBookingCommerce(Commerce commerce)
+        //{
+        //    BookingCommerce bookingCommerce = new BookingCommerce { ID = commerce.ID };
+        //    entities.BookingCommerce.AddObject(bookingCommerce);
+        //    entities.SaveChanges();
 
-            return bookingCommerce;
-        }
+        //    return bookingCommerce;
+        //}
 
-        private Location CreateDummyLocation(string name, decimal latitude, decimal longitude)
-        {           
-            Location location = entities.Location.Where(l => l.Name == name).FirstOrDefault();
+        //private Location CreateDummyLocation(string name, decimal latitude, decimal longitude)
+        //{           
+        //    Location location = entities.Location.Where(l => l.Name == name).FirstOrDefault();
 
-            if (location == null)
-            {
-                location = new Location { Name = name, Latitude = latitude, Longitud = longitude };
-                entities.Location.AddObject(location);
-                entities.SaveChanges();
-            }
+        //    if (location == null)
+        //    {
+        //        location = new Location { Name = name, Latitude = latitude, Longitud = longitude };
+        //        entities.Location.AddObject(location);
+        //        entities.SaveChanges();
+        //    }
 
-            return location;            
-        }
+        //    return location;            
+        //}
 
         public JsonResult GetEventLocations() 
         {
@@ -158,134 +159,134 @@ namespace web.Controllers
             };
         }
 
-        private Company CreateDummyCompany()
-        {
-            const string companyName = "Dummy Company Name";
-            Company company = entities.Company.Where(l => l.Name == companyName).FirstOrDefault();
-            if (company == null)
-            {
-                Business business = CreateDummyBusiness();
-                company = new Company { Name = companyName, CUIT = "123456789", BusinessID = business.ID };
-                entities.Company.AddObject(company);
-                entities.SaveChanges();
-            }
+        //private Company CreateDummyCompany()
+        //{
+        //    const string companyName = "Dummy Company Name";
+        //    Company company = entities.Company.Where(l => l.Name == companyName).FirstOrDefault();
+        //    if (company == null)
+        //    {
+        //        Business business = CreateDummyBusiness();
+        //        company = new Company { Name = companyName, CUIT = "123456789", BusinessID = business.ID };
+        //        entities.Company.AddObject(company);
+        //        entities.SaveChanges();
+        //    }
 
-            return company;
-        }
+        //    return company;
+        //}
 
-        private Business CreateDummyBusiness()
-        {
-            const string businessName = "Dummy business Name";
-            Business business = entities.Business.Where(l => l.Name == businessName).FirstOrDefault();
+        //private Business CreateDummyBusiness()
+        //{
+        //    const string businessName = "Dummy business Name";
+        //    Business business = entities.Business.Where(l => l.Name == businessName).FirstOrDefault();
 
-            if (business == null)
-            {
-                int id = 0;
-                business = new Business { ID = ++id, Name = "Cine" };
-                entities.Business.AddObject(business);
-                int a=entities.SaveChanges();
-                entities.Business.AddObject(new Business { ID = ++id, Name = "Bar"});
-                a = entities.SaveChanges();
-                entities.Business.AddObject(new Business { ID = ++id, Name = "Restaurant" });
-                entities.Business.AddObject(new Business { ID = ++id, Name = "Museo" });
-                entities.Business.AddObject(new Business { ID = ++id, Name = "Teatro" });
-                entities.SaveChanges();
-            }
-            return business;
-        }
+        //    if (business == null)
+        //    {
+        //        int id = 0;
+        //        business = new Business { ID = ++id, Name = "Cine" };
+        //        entities.Business.AddObject(business);
+        //        int a=entities.SaveChanges();
+        //        entities.Business.AddObject(new Business { ID = ++id, Name = "Bar"});
+        //        a = entities.SaveChanges();
+        //        entities.Business.AddObject(new Business { ID = ++id, Name = "Restaurant" });
+        //        entities.Business.AddObject(new Business { ID = ++id, Name = "Museo" });
+        //        entities.Business.AddObject(new Business { ID = ++id, Name = "Teatro" });
+        //        entities.SaveChanges();
+        //    }
+        //    return business;
+        //}
 
-        private Reservation CreateDummyReservation(decimal price, BookingCommerce bookingCommerce, Person person, DateTime reservationDate)
-        {
-            Reservation reservation = entities.Reservation.Where(
-                r => r.ReservationDate.Year == reservationDate.Year
-                && r.ReservationDate.Month == reservationDate.Month
-                && r.ReservationDate.Day == reservationDate.Day    
-                && r.PersonID == person.ID
-                && r.BookingCommerceID == bookingCommerce.ID
-            ).FirstOrDefault();
+        //private Reservation CreateDummyReservation(decimal price, BookingCommerce bookingCommerce, Person person, DateTime reservationDate)
+        //{
+        //    Reservation reservation = entities.Reservation.Where(
+        //        r => r.ReservationDate.Year == reservationDate.Year
+        //        && r.ReservationDate.Month == reservationDate.Month
+        //        && r.ReservationDate.Day == reservationDate.Day    
+        //        && r.PersonID == person.ID
+        //        && r.BookingCommerceID == bookingCommerce.ID
+        //    ).FirstOrDefault();
 
-            if (reservation == null)
-            {
-                reservation = new Reservation
-                {
-                    Price = price,
-                    BookingCommerce = bookingCommerce,
-                    Person = person,
-                    ReservationDate = reservationDate                    
-                };
-                entities.Reservation.AddObject(reservation);
-                entities.SaveChanges();
-            }            
+        //    if (reservation == null)
+        //    {
+        //        reservation = new Reservation
+        //        {
+        //            Price = price,
+        //            BookingCommerce = bookingCommerce,
+        //            Person = person,
+        //            ReservationDate = reservationDate                    
+        //        };
+        //        entities.Reservation.AddObject(reservation);
+        //        entities.SaveChanges();
+        //    }            
 
-            return reservation;
-        }
+        //    return reservation;
+        //}
 
-        private void CreateDummyReservations()
-        {    
-            Location location = CreateDummyLocation("Sheraton Retiro", -34.592802M, -58.372765M);
-            Commerce commerce = CreateDummyCommerce("Sheraton Retiro", location);
+        //private void CreateDummyReservations()
+        //{    
+        //    Location location = CreateDummyLocation("Sheraton Retiro", -34.592802M, -58.372765M);
+        //    Commerce commerce = CreateDummyCommerce("Sheraton Retiro", location);
 
-            Person booker1 = CreateDummyPerson("Vanesa", "dummy@dummy.com");
-            Person booker2 = CreateDummyPerson("Ruben", "dummy@dummy.com");
-            Person booker3 = CreateDummyPerson("Marisol", "dummy@dummy.com");
-            Person booker4 = CreateDummyPerson("Ariel", "dummy@dummy.com");
+        //    Person booker1 = CreateDummyPerson("Vanesa", "dummy@dummy.com");
+        //    Person booker2 = CreateDummyPerson("Ruben", "dummy@dummy.com");
+        //    Person booker3 = CreateDummyPerson("Marisol", "dummy@dummy.com");
+        //    Person booker4 = CreateDummyPerson("Ariel", "dummy@dummy.com");
 
-            DateTime oneDay = new DateTime(2012, 6, 10);
-            DateTime anotherDay = new DateTime(2012, 10, 3);
+        //    DateTime oneDay = new DateTime(2012, 6, 10);
+        //    DateTime anotherDay = new DateTime(2012, 10, 3);
 
-            CreateDummyReservation(100, commerce.BookingCommerce, booker1, oneDay);
-            CreateDummyReservation(200, commerce.BookingCommerce, booker2, oneDay);
-            CreateDummyReservation(300, commerce.BookingCommerce, booker3, anotherDay);
-            CreateDummyReservation(400, commerce.BookingCommerce, booker4, anotherDay);
+        //    CreateDummyReservation(100, commerce.BookingCommerce, booker1, oneDay);
+        //    CreateDummyReservation(200, commerce.BookingCommerce, booker2, oneDay);
+        //    CreateDummyReservation(300, commerce.BookingCommerce, booker3, anotherDay);
+        //    CreateDummyReservation(400, commerce.BookingCommerce, booker4, anotherDay);
            
-            entities.SaveChanges();           
-        }
+        //    entities.SaveChanges();           
+        //}
 
-        private void CreateDummyAudioGuides()
-        {
-            Commerce commerce = entities.Commerce.Where(c => c.Name.ToUpper().Contains("FIUBA")).FirstOrDefault();
-            if (commerce != null)
-	        {
-                AudioGuide ag = entities.AudioGuide.Where(a => a.Description == commerce.Name).FirstOrDefault();
-                if (ag == null)
-                {
-                    AudioGuide audioGuide1 = new AudioGuide
-                    {
-                        Commerce = commerce,
-                        Description = commerce.Name,
-                        Link = string.Format("{0}Market/market.html", HttpContext.Request.Url.AbsoluteUri)
-                    };
+        //private void CreateDummyAudioGuides()
+        //{
+        //    Commerce commerce = entities.Commerce.Where(c => c.Name.ToUpper().Contains("FIUBA")).FirstOrDefault();
+        //    if (commerce != null)
+        //    {
+        //        AudioGuide ag = entities.AudioGuide.Where(a => a.Description == commerce.Name).FirstOrDefault();
+        //        if (ag == null)
+        //        {
+        //            AudioGuide audioGuide1 = new AudioGuide
+        //            {
+        //                Commerce = commerce,
+        //                Description = commerce.Name,
+        //                Link = string.Format("{0}Market/market.html", HttpContext.Request.Url.AbsoluteUri)
+        //            };
 
-                    AudioGuide audioGuide2 = new AudioGuide
-                    {
-                        Commerce = commerce,
-                        Description = commerce.Name,
-                        Link = string.Format("{0}Market/market.html", HttpContext.Request.Url.AbsoluteUri)
-                    };
+        //            AudioGuide audioGuide2 = new AudioGuide
+        //            {
+        //                Commerce = commerce,
+        //                Description = commerce.Name,
+        //                Link = string.Format("{0}Market/market.html", HttpContext.Request.Url.AbsoluteUri)
+        //            };
 
-                    entities.AudioGuide.AddObject(audioGuide1);
-                    entities.AudioGuide.AddObject(audioGuide1);
+        //            entities.AudioGuide.AddObject(audioGuide1);
+        //            entities.AudioGuide.AddObject(audioGuide1);
 
-                    entities.SaveChanges();
-                }		       
-	        }           
-        }
+        //            entities.SaveChanges();
+        //        }		       
+        //    }           
+        //}
 
-        private Person CreateDummyPerson(string name, string emailAddress)
-        {
-            Person person = entities.Person.Where(p => p.Name == name).FirstOrDefault();
-            if (person == null)
-            {
-                person = new Person
-                {
-                    Name = name,
-                    EmailAddress = emailAddress,
-                    Created = DateTime.Now
-                };
-            }
+        //private Person CreateDummyPerson(string name, string emailAddress)
+        //{
+        //    Person person = entities.Person.Where(p => p.Name == name).FirstOrDefault();
+        //    if (person == null)
+        //    {
+        //        person = new Person
+        //        {
+        //            Name = name,
+        //            EmailAddress = emailAddress,
+        //            Created = DateTime.Now
+        //        };
+        //    }
 
-            return person;
-        }
+        //    return person;
+        //}
 
         public JsonResult ToggleReservation(int reservationID, string message)
         {

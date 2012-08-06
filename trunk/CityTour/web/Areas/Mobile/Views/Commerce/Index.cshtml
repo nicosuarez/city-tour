@@ -1,0 +1,16 @@
+﻿@model web.Models.Commerce
+
+@section header {
+    <h1>@TextStrings.NearLocations</h1>
+    <a href="#" data-icon="back" data-rel="back" data-iconpos="notext" data-direction="reverse"></a>
+}
+
+@if (Model != null)
+{
+<div class="commerce-details">     
+    <h1>@Model.Name</h1>
+    <h2>@Model.Address</h2>
+    <div class="map-canvas" data-locations='{"location":{"name": "@Model.Location.Name.Replace("\"", "\\\"")", "lat":"@Model.Location.Latitude", "long":"@Model.Location.Longitud"}}'></div>
+    <p>@Model.Description</p>
+</div>
+}

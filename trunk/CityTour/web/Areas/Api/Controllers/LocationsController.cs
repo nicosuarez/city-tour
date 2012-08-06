@@ -11,14 +11,16 @@ namespace web.Areas.Api.Controllers
         {
             using (CityTourEntities entities = new CityTourEntities())
             {
-                var locationsQuery = from l in entities.Location
-                                     let offset = 0.01M // Aprox +-10 cuadras.
-                                     let insideLatitude = (latitude - offset) <= l.Latitude && l.Latitude <= (latitude + offset)
-                                     let insideLongitude = (longitude - offset) <= l.Longitud && l.Longitud <= (longitude + offset)
-                                     where insideLatitude && insideLongitude
-                                     select new { name = l.Name, lat = l.Latitude, @long = l.Longitud };
+                var query = from c in entities.Commerce
+                            let offset = 0.01M // Aprox +-10 cuadras.
+                            let insideLatitude = (latitude - offset) <= c.Location.Latitude && c.Location.Latitude <= (latitude + offset)
+                            let insideLongitude = (longitude - offset) <= c.Location.Longitud && c.Location.Longitud <= (longitude + offset)
+                            where insideLatitude && insideLongitude
+                            select new { location = c.Location, id = c.ID };
 
-                return Json(locationsQuery.ToList(), JsonRequestBehavior.AllowGet);
+                var locations = query.ToList().Select(q => new { name = q.location.Name, lat = q.location.Latitude, @long = q.location.Longitud, url = Url.Action(@"Index", @"Commerce", new { area = @"Mobile", id = q.id }) });
+
+                return Json(locations, JsonRequestBehavior.AllowGet);
             }
         }
     }
