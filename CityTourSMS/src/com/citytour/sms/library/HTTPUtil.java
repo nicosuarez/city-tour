@@ -4,29 +4,48 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.util.Log;
 
 public class HTTPUtil {
-
-	public static String connect(String url)
+	public static String WSURL;
+	
+	public static String connect(String url, List<NameValuePair> params)
 	{
-
+		String result = "";
+		
 	    HttpClient httpclient = new DefaultHttpClient();
 
 	    // Prepare a request object
-	    HttpGet httpget = new HttpGet(url); 
-
+	    HttpPost httppost = new HttpPost(url);
+	    
+	    //Add parameters
+	    try {
+	    	if (params != null && params.size() > 0)
+	    		httppost.setEntity(new UrlEncodedFormEntity(params));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+			return result;
+		}
+	    
 	    // Execute the request
 	    HttpResponse response;
 	    try {
-	        response = httpclient.execute(httpget);
+	        response = httpclient.execute(httppost);
 	        // Examine the response status
 	        Log.i("Response: ", response.getStatusLine().toString());
 
@@ -34,7 +53,6 @@ public class HTTPUtil {
 	        HttpEntity entity = response.getEntity();
 	        // If the response does not enclose an entity, there is no need
 	        // to worry about connection release
-	        String result = "";
 	        if (entity != null) {
 
 	            // A Simple JSON Response Read
@@ -45,7 +63,7 @@ public class HTTPUtil {
 	        }
             return result;
 	    } catch (Exception e) {
-            return "";
+            return result;
 	    }
 	}	
 	
@@ -75,5 +93,30 @@ public class HTTPUtil {
 	        }
 	    }
 	    return sb.toString();
-	}	
+	}
+    
+    public static String requestTaxi(String address) throws JSONException {
+    	List<NameValuePair> params = new ArrayList<NameValuePair>(1);
+    	params.add(new BasicNameValuePair("address", address));
+    	String rawJson = HTTPUtil.connect(WSURL + "/api/reservations/taxi", params);    	
+		JSONObject json = new JSONObject(rawJson);
+		return json.getString("sms"); 
+    }
+    
+    public static String payTaxi(String patent, String amount) throws JSONException {
+    	List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+    	params.add(new BasicNameValuePair("patent", patent));
+    	params.add(new BasicNameValuePair("amount", amount));    	
+    	String rawJson = HTTPUtil.connect(WSURL + "/api/reservations/pagotaxi", params);
+		JSONObject json = new JSONObject(rawJson);
+		return json.getString("sms"); 
+    }    
+    
+    public static String audioguide(String code) throws JSONException {
+    	List<NameValuePair> params = new ArrayList<NameValuePair>(1);
+    	params.add(new BasicNameValuePair("code", code));
+    	String rawJson = HTTPUtil.connect(WSURL + "/api/audioguia", params);
+		JSONObject json = new JSONObject(rawJson);
+		return json.getString("sms"); 
+    }   
 }
