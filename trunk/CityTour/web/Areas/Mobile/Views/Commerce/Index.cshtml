@@ -7,10 +7,18 @@
 
 @if (Model != null)
 {
-<div class="commerce-details">     
+<div class="commerce-details">
     <h1>@Model.Name</h1>
     <h2>@Model.Address</h2>
-    <div class="map-canvas" data-locations='{"location":{"name": "@Model.Location.Name.Replace("\"", "\\\"")", "lat":"@Model.Location.Latitude", "long":"@Model.Location.Longitud"}}'></div>
+    <div class="map-canvas" data-map='{"commerceLocation":{"name": "@Html.EncodeDoubleQuotes(Model.Location.Name)", "lat":"@Model.Location.Latitude", "long":"@Model.Location.Longitud"}}'></div>
     <p>@Model.Description</p>
+
+    <a href="@Url.Action("AddEvent", "Itinerary", new { id = Model.ID})" data-role="button" data-icon="plus" data-rel="dialog" data-transition="slideup">@TextStrings.AddToItinerary</a>
 </div>
+}
+else 
+{ 
+<p class="commerce-empty">
+    @TextStrings.CommerceEmpty
+</p>
 }

@@ -1,4 +1,33 @@
-﻿@section header {
+﻿@using web.Models
+@model web.Models.Tour
+
+@section header {
     <h1>@TextStrings.MyItinerary</h1>
     <a href="@Url.Action("Index", "Main")" data-icon="home" data-iconpos="notext" data-direction="reverse"></a>
+}
+
+@if (Model != null && Model.Event.Count > 0)
+{
+<div class="map-canvas" data-map='{"itinerary":{"listId":"itinerary_list"}}'>
+    <p class="map-locating">@TextStrings.GettingLocationMessage</p>
+</div>
+<ol id="itinerary_list" data-role="listview" data-inset="true" data-split-icon="gear" data-split-theme="d">
+@foreach (Event tourEvent in Model.Event.OrderBy(e => e.EventDate)) 
+{
+    <li>
+        <a href="#" data-location='{"name":"@Html.EncodeDoubleQuotes(tourEvent.Commerce.Location.Name)", "lat":"@tourEvent.Commerce.Location.Latitude", "long":"@tourEvent.Commerce.Location.Longitud"}'>
+            @tourEvent.Commerce.Location.Name
+            <p>@tourEvent.Description</p>
+            <p class="ui-li-aside"><strong>@tourEvent.EventDate.ToShortDateString() @tourEvent.EventDate.ToShortTimeString()</strong></p>
+        </a>
+        <a href="@Url.Action("Options", "Itinerary", new { id = tourEvent.ID})" data-rel="dialog" data-transition="slideup"></a>
+    </li>
+}
+</ol>
+}
+else
+{
+<p class="itinerary-empty">
+    @TextStrings.ItineraryEmpty
+</p>
 }

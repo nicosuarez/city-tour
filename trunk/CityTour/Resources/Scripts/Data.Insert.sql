@@ -96,10 +96,8 @@ INSERT [dbo].[Commerce] ([ID], [Name], [Description], [LocationID], [Address], [
 SET IDENTITY_INSERT [dbo].[Commerce] OFF
 /****** Object:  Table [dbo].[Event]    Script Date: 08/05/2012 18:40:37 ******/
 SET IDENTITY_INSERT [dbo].[Event] ON
-INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (1, CAST(0x0000A09C00EB4F34 AS DateTime), N'Evento numero 0', 1)
-INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (2, CAST(0x0000A09D00EB4F4A AS DateTime), N'Evento numero 1', 1)
-INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (3, CAST(0x0000A09E00EB4F51 AS DateTime), N'Evento numero 2', 2)
-INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (4, CAST(0x0000A09F00EB4F58 AS DateTime), N'Evento numero 3', 1)
+INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (1, GETDATE(), N'Vamos a la cancha del ciclón!!', 1)
+INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (2, GETDATE(), N'Vamos a la cancha del globo!!', 2)
 SET IDENTITY_INSERT [dbo].[Event] OFF
 /****** Object:  Table [dbo].[BookingCommerce]    Script Date: 08/05/2012 18:40:37 ******/
 INSERT [dbo].[BookingCommerce] ([ID], [ContactPhone], [WebServiceURL], [ContactMail]) VALUES (1, NULL, NULL, NULL)
@@ -113,7 +111,7 @@ SET IDENTITY_INSERT [dbo].[AudioGuide] OFF
 /****** Object:  Table [dbo].[CommerceQuery]    Script Date: 08/05/2012 18:40:37 ******/
 /****** Object:  Table [dbo].[TourEvent]    Script Date: 08/05/2012 18:40:37 ******/
 INSERT [dbo].[TourEvent] ([TourID], [EventID]) VALUES (1, 1)
-INSERT [dbo].[TourEvent] ([TourID], [EventID]) VALUES (1, 3)
+INSERT [dbo].[TourEvent] ([TourID], [EventID]) VALUES (1, 2)
 /****** Object:  Table [dbo].[Reservation]    Script Date: 08/05/2012 18:40:37 ******/
 SET IDENTITY_INSERT [dbo].[Reservation] ON
 INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (1, CAST(0x0000A06C00000000 AS DateTime), 1, 3, CAST(100.000000000 AS Decimal(18, 9)), NULL, 0, NULL)

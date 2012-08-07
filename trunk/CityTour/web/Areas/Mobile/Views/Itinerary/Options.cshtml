@@ -1,0 +1,36 @@
+﻿@model web.Models.Event
+
+@{
+    Layout = null;
+}
+
+<div data-role="dialog">
+    <div data-role="header" data-theme="b">
+        <h1>@TextStrings.Options</h1>
+	</div>
+    <div data-role="content">
+@if (Model != null)
+{
+        <h4>@Model.Commerce.Location.Name</h4>
+        <form action="@ViewBag.Action" method="post" data-ajax="false">
+            <label for="datetime">@TextStrings.Datetime:</label>
+            <input type="datetime" name="datetime" id="datetime" value="@Model.EventDate" />
+            <label for="description">@TextStrings.Description:</label>
+            <textarea name="description" id="description">@Model.Description</textarea>
+            <button type="submit" data-theme="b" name="submit">@TextStrings.Save</button>
+        </form>
+    if (Model.ID > 0) 
+    {
+        <form action="@Url.Action("DeleteEvent", "Itinerary", new { id = Model.ID })" method="post" data-ajax="false">
+            <button type="submit" name="submit">@TextStrings.Delete</button>
+        </form>
+    }
+}
+else
+{
+        <p class="commerce-empty">
+            @TextStrings.EventEmpty
+        </p>    
+}
+	</div>
+</div>
