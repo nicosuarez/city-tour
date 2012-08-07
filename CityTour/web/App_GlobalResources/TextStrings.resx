@@ -204,4 +204,28 @@
   <data name="EnterYourLocation" xml:space="preserve">
     <value>Ingrese su ubicación (ej: Paseo Colón 850, CABA)</value>
   </data>
+  <data name="CommerceEmpty" xml:space="preserve">
+    <value>No se encontró el lugar</value>
+  </data>
+  <data name="ItineraryEmpty" xml:space="preserve">
+    <value>Cree un itinerario para planificar su visita</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
+  <data name="Datetime" xml:space="preserve">
+    <value>Fecha y hora</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="EventEmpty" xml:space="preserve">
+    <value>No se encontró el evento</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="AddToItinerary" xml:space="preserve">
+    <value>Agregar al itinerario</value>
+  </data>
 </root>

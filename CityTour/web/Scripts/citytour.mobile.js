@@ -8,7 +8,7 @@
                 self.geoCoder.geocode({ 'address': address }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var location = results[0].geometry.location;
-                        positionCallback({ lat: location.Ya, long: location.Za });
+                        positionCallback({ lat: location.Xa, long: location.Ya });
                     }
                 });
             }
@@ -94,9 +94,43 @@
             if (locations) {
                 self.setMarkers(locations);
             }
+        },
+        renderDirections: function (map, position, locations) {
+            var self = this;
+            var startLocation = new google.maps.LatLng(position.lat, position.long);
+
+            var lastIndex = locations.length - 1;
+            var endLocation = new google.maps.LatLng(locations[lastIndex].lat, locations[lastIndex].long);
+            var waypoints = [];
+
+            $.each(locations, function (i, location) {
+                if (i < lastIndex) {
+                    waypoints.push({ location: new google.maps.LatLng(location.lat, location.long), stopover: true });
+                }
+            });
+
+            var request = {
+                origin: startLocation,
+                destination: endLocation,
+                waypoints: waypoints,
+                optimizeWaypoints: false,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            };
+
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    var directionsDisplay = new google.maps.DirectionsRenderer();
+                    directionsDisplay.setMap(self.googleMap);
+                    directionsDisplay.setDirections(response);
+                }
+            });
         }
     }
 }
+
+$.ajaxSetup({ cache: false });
+$.mobile.page.prototype.options.domCache = false;
 
 $(document).bind("pagechange", function (a, b) {
     var activePage = $.mobile.activePage;
@@ -104,15 +138,27 @@ $(document).bind("pagechange", function (a, b) {
 
     maps.each(function (i, map) {
         var $map = $(map);
-        var mapData = $(map).data("locations");
-        var $list = $("#" + mapData.listId, activePage).empty().hide();
+        var mapData = $(map).data("map");
 
-        if (mapData.location) {
-            citytour.map.render(map, null, [mapData.location]);
+        if (mapData.commerceLocation) {
+            citytour.map.render(map, null, [mapData.commerceLocation]);
         }
-        else {
+        else if (mapData.itinerary) {
+            var $list = $("#" + mapData.itinerary.listId);
+            var locations = $("a", $list).map(function (i, item) {
+                return $(item).data("location");
+            });
+
             citytour.location.detect(function (position) {
-                $.getJSON(mapData.apiurl,
+                citytour.map.render(map, position);
+                citytour.map.renderDirections(map, position, locations);
+            });
+        }
+        else if (mapData.nearLocations) {
+            var $list = $("#" + mapData.nearLocations.listId, activePage).empty().hide();
+
+            citytour.location.detect(function (position) {
+                $.getJSON(mapData.nearLocations.url,
                     { latitude: position.lat, longitude: position.long },
                     function (data) {
                         if (data) {
@@ -131,13 +177,13 @@ $(document).bind("pagechange", function (a, b) {
                                 $locations.listview();
                             }
                             else {
-                                $list.html($("<p class=\"map-empty\">" + mapData.emptymsg + "</p>"));
+                                $list.html($("<p class=\"map-empty\">" + mapData.nearLocations.emptymsg + "</p>"));
                             }
 
                             $list.show();
                         }
                     });
-            }, mapData.address);
+            }, mapData.nearLocations.address);
         }
     });
 });

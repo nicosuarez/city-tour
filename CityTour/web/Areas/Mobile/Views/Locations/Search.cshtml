@@ -1,13 +1,16 @@
 ﻿@{
-    Layout = "~/Areas/Mobile/Views/Shared/_PageLayout.cshtml";
+    Layout = null;
 }
 
-@section header {
-    <h1>@TextStrings.SearchBy</h1>
-}
-
-<form action="@Url.Action("Index", "Locations")" method="post">
-    <label for="searchAddress">@TextStrings.EnterYourLocation</label>
-    <input type="text" id="searchAddress" name="searchAddress" value="" />
-    <button type="submit" data-theme="b" name="submit">@TextStrings.SearchBy</button>
-</form>
+<div data-role="dialog">
+    <div data-role="header" data-theme="b">
+        <h1>@TextStrings.SearchBy</h1>
+	</div>
+    <div data-role="content">
+        <form action="@Url.Action("Index", "Locations")" method="post" data-ajax="false">
+            <label for="searchAddress">@TextStrings.EnterYourLocation</label>
+            <input type="text" id="searchAddress" name="searchAddress" value="" />
+            <button type="submit" data-theme="b" name="submit">@TextStrings.SearchBy</button>
+        </form>
+	</div>
+</div>

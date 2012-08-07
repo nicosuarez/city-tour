@@ -9,12 +9,11 @@ namespace web.Areas.Mobile.Controllers
         [HttpGet]
         public ActionResult Index(int id)
         {
-            Commerce commerce;
+            Commerce commerce = null;
 
             using (CityTourEntities entities = new CityTourEntities())
             {
-                commerce = entities.Commerce.FirstOrDefault(c => c.ID == id);
-                commerce.LocationReference.Load();
+                commerce = entities.Commerce.Include(@"Location").FirstOrDefault(c => c.ID == id);
             }
 
             return View(commerce);

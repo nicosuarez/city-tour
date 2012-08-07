@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agregar al itinerario.
+        /// </summary>
+        internal static string AddToItinerary {
+            get {
+                return ResourceManager.GetString("AddToItinerary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audio Guías.
         /// </summary>
         internal static string AudioGuides {
@@ -124,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se encontró el lugar.
+        /// </summary>
+        internal static string CommerceEmpty {
+            get {
+                return ResourceManager.GetString("CommerceEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre.
         /// </summary>
         internal static string CommerceName {
@@ -138,6 +156,24 @@ namespace Resources {
         internal static string Date {
             get {
                 return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fecha y hora.
+        /// </summary>
+        internal static string Datetime {
+            get {
+                return ResourceManager.GetString("Datetime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Borrar.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         
@@ -169,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se encontró el evento.
+        /// </summary>
+        internal static string EventEmpty {
+            get {
+                return ResourceManager.GetString("EventEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obténgalo desde el Market!.
         /// </summary>
         internal static string GetItFromMarket {
@@ -192,6 +237,15 @@ namespace Resources {
         internal static string Hour {
             get {
                 return ResourceManager.GetString("Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cree un itinerario para planificar su visita.
+        /// </summary>
+        internal static string ItineraryEmpty {
+            get {
+                return ResourceManager.GetString("ItineraryEmpty", resourceCulture);
             }
         }
         
@@ -259,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opciones.
+        /// </summary>
+        internal static string Options {
+            get {
+                return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contraseña.
         /// </summary>
         internal static string Password {
@@ -291,6 +354,15 @@ namespace Resources {
         internal static string ReservationCancelled {
             get {
                 return ResourceManager.GetString("ReservationCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guardar.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

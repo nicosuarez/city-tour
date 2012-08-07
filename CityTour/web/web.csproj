@@ -84,6 +84,7 @@
     <Compile Include="Areas\Mobile\Controllers\LocationsController.cs" />
     <Compile Include="Areas\Mobile\Controllers\ItineraryController.cs" />
     <Compile Include="Areas\Mobile\Controllers\MainController.cs" />
+    <Compile Include="Areas\Mobile\Extensions\HtmlHelperExtension.cs" />
     <Compile Include="Areas\Mobile\MobileAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchByController.cs" />
@@ -228,11 +229,11 @@
     <Content Include="Areas\Mobile\Views\Itinerary\Index.cshtml" />
     <Content Include="Areas\Mobile\Views\Locations\Index.cshtml" />
     <Content Include="Areas\Mobile\Views\Reservations\Index.cshtml" />
-    <Content Include="Areas\Mobile\Views\Shared\_PageLayout.cshtml" />
     <Content Include="Areas\Mobile\Views\Shared\_MobileLayout.cshtml" />
     <Content Include="Areas\Mobile\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Mobile\Views\Locations\Search.cshtml" />
     <Content Include="Areas\Mobile\Views\Commerce\Index.cshtml" />
+    <Content Include="Areas\Mobile\Views\Itinerary\Options.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
