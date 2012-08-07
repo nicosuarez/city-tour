@@ -16,12 +16,13 @@
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
     	android:orientation="vertical" >
- 
+ 
 	    <TextView
 	        android:id="@+id/textView1"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="left"
+	        android:layout_marginTop="10dp"
 	        android:text="@string/TitleTextFieldUrl" />
 
 	    <EditText
@@ -42,6 +43,13 @@
 	        android:layout_gravity="center_horizontal"
 	        android:gravity="center"
 	        android:text="@string/Save" />
+
+	    <CheckBox
+	        android:id="@+id/checkBox1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:text="@string/TitleCheckBox" />
 
 	</LinearLayout>
 </LinearLayout>

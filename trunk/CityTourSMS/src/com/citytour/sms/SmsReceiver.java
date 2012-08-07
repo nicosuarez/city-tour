@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.telephony.SmsManager;
@@ -17,7 +18,11 @@ public class SmsReceiver extends BroadcastReceiver
 	public static SMSActivity smsActivity;
 	
 	@Override
-	public void onReceive(Context context, Intent intent) {
+	public void onReceive(Context context, Intent intent) {	
+		
+		if (!isServiceEnable(context))
+			return;
+		
         //---get the SMS message passed in---
         Bundle bundle = intent.getExtras();        
         SmsMessage[] msgs = null;
@@ -48,6 +53,12 @@ public class SmsReceiver extends BroadcastReceiver
                 showMessage(context, originalAddress, smsBody);
             }
         } 
+	}
+	
+	public boolean isServiceEnable(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(SMSActivity.PREFS_NAME, 0);
+        return settings.getBoolean("respondSMS", true);
+		
 	}
 	
 	public boolean isAudioguideRequest(Context context, String smsBody)
