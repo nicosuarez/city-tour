@@ -73,11 +73,11 @@ public class SmsReceiver extends BroadcastReceiver
 		String[] tokens = smsBody.split(" ");
 		String response = "";
 		
-		if ((tokens.length > 2) && tokens[0].equals(context.getString(R.string.SMSTaxi)))
+		if (tokens.length>2 && tokens[0].toUpperCase().equals(context.getString(R.string.SMSTaxi).toUpperCase()))
 		{
 			String address = smsBody.substring(tokens[0].length() + 1);
 			response = HTTPUtil.requestTaxi(address);
-		} else if ((tokens.length == 4) && tokens[0].equals(context.getString(R.string.SMSPay)) && tokens[1].equals(context.getString(R.string.SMSTaxi))) {
+		} else if ((tokens.length == 4) && tokens[0].toUpperCase().equals(context.getString(R.string.SMSPay).toUpperCase())) {
 			response = HTTPUtil.payTaxi(tokens[2], tokens[3]);			
 		} else {
 			response = context.getString(R.string.InvalidBodySMS);			
