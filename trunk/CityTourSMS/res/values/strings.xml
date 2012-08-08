@@ -4,9 +4,9 @@
     <string name="hello">CityTour - Escuchando SMS</string>
     <string name="app_name">CityTourSMS</string>
     <string name="InvalidBodySMS">Mensaje Incorrento</string>
-    <string name="SMSAudioguide">Audioguia</string>
-    <string name="SMSTaxi">Taxi</string>
-    <string name="SMSPay">Pago</string>
+    <string name="SMSAudioguide">AUDIOGUIA</string>
+    <string name="SMSTaxi">TAXI</string>
+    <string name="SMSPay">PAGO</string>
     <string name="SMSSuccessAudioguide">Te enviamos la audioguia que solicitaste</string>
     <string name="SMSFailureAudioguide">La audioguia solicitada no existe</string>
     <string name="TitleTextFieldUrl">Ingrese la URL del web services</string>
@@ -14,4 +14,5 @@
     <string name="WSURLDefault">http://192.168.42.2</string>
 	<string name="Save">Guardar</string>
 	<string name="WSURLMessage">La nueva URL fue seteada</string>
+	<string name="Log">LOG:\n</string>
 </resources>

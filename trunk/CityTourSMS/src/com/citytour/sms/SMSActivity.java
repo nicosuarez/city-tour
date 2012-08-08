@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.citytour.sms.library.HTTPUtil;
@@ -17,6 +18,7 @@ public class SMSActivity extends Activity implements View.OnClickListener {
 	private EditText urlTextField;
 	private Button saveBtn;
 	private CheckBox checkBox;
+	private TextView logView;
 	public static final String PREFS_NAME = "CityTourPrefsFile";
 	
     /** Called when the activity is first created. */
@@ -33,8 +35,10 @@ public class SMSActivity extends Activity implements View.OnClickListener {
         checkBox = (CheckBox)this.findViewById(R.id.checkBox1);
         checkBox.setOnClickListener(this);
         
+        logView = (TextView) this.findViewById(R.id.logView);
+
         SmsReceiver.smsActivity = this;
-        
+               
         // Restore preferences
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         String url = settings.getString("WSURL", getString(R.string.WSURLDefault));
@@ -65,6 +69,11 @@ public class SMSActivity extends Activity implements View.OnClickListener {
     	smsIntent.setType(mimeType);
     	smsIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(filePath));    	    	
     	startActivity(smsIntent);    	
+    }
+    
+    public void logSMS(String message)
+    {
+    	logView.append(message + "\n");
     }
     
 }

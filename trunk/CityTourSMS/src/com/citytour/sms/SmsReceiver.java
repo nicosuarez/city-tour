@@ -36,21 +36,22 @@ public class SmsReceiver extends BroadcastReceiver
             for (int i=0; i<msgs.length; i++){           			
                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
             	String originalAddress = msgs[i].getOriginatingAddress();
-            	String smsBody = msgs[i].getMessageBody().toString();             			
+            	String smsBody = msgs[i].getMessageBody().toString().toUpperCase();
             	
-            	if ( isAudioguideRequest(context, smsBody) )
-            	{
-            		sendAudioguide(context, originalAddress, smsBody);
-            	} else {
-					try {
+            	smsActivity.logSMS("[SMS de " + originalAddress + "] " + smsBody);
+            	
+				try {
+	            	if ( isAudioguideRequest(context, smsBody) )
+	            	{
+	            		sendAudioguide(context, originalAddress, smsBody);
+	            	} else {
+	
 						String response = generateResponse(context, smsBody);
-	            		sendSMS(context, originalAddress, response);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-            	}
-                
-                showMessage(context, originalAddress, smsBody);
+	            		sendSMS(context, originalAddress, response);        		
+	            	}
+				} catch (Exception e) {
+					smsActivity.logSMS("[Error de comunicacion]");
+				}                
             }
         } 
 	}
@@ -68,15 +69,15 @@ public class SmsReceiver extends BroadcastReceiver
 	}
 	
 	public String generateResponse(Context context, String smsBody) throws Exception
-	{
+	{	
 		String[] tokens = smsBody.split(" ");
 		String response = "";
 		
-		if (tokens.length>2 && tokens[0].equals(context.getString(R.string.SMSTaxi)))
+		if ((tokens.length > 2) && tokens[0].equals(context.getString(R.string.SMSTaxi)))
 		{
 			String address = smsBody.substring(tokens[0].length() + 1);
 			response = HTTPUtil.requestTaxi(address);
-		} else if ((tokens.length == 4) && tokens[0].equals(context.getString(R.string.SMSPay))) {
+		} else if ((tokens.length == 4) && tokens[0].equals(context.getString(R.string.SMSPay)) && tokens[1].equals(context.getString(R.string.SMSTaxi))) {
 			response = HTTPUtil.payTaxi(tokens[2], tokens[3]);			
 		} else {
 			response = context.getString(R.string.InvalidBodySMS);			
@@ -91,28 +92,28 @@ public class SmsReceiver extends BroadcastReceiver
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(context, context.getClass()), 0);                
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, pi, null);        
+        smsActivity.logSMS("[Respuesta a " + phoneNumber + "] " + message);  
     }  
     
-    public void sendAudioguide(Context context, String phoneNumber, String smsBody)
+    public void sendAudioguide(Context context, String phoneNumber, String smsBody) throws Exception
     {
     	String[] tokens = smsBody.split(" ");
-    	String filePath = Environment.getExternalStorageDirectory().getPath() + "/" + tokens[1] + ".mp3";
+    	String message = HTTPUtil.audioguide(tokens[1]);
+    	
+    	String filePath = Environment.getExternalStorageDirectory().getPath() + "/1234.mp3";
     	if (!this.fileExists(context, filePath))
     	{
     		sendSMS(context, phoneNumber, context.getString(R.string.SMSFailureAudioguide));
     		return;
     	}
 
-    	String message = context.getString(R.string.SMSSuccessAudioguide);
     	smsActivity.sendMMS(phoneNumber, message, "file://" + filePath, "audio/*");
-    	    	
+    	smsActivity.logSMS("[Respuesta a " + phoneNumber + "] " + message);    	    	
     }
-	  
-    //---display the new SMS message---    
-    public void showMessage(Context context, String originalAddress, String smsBody)
+	     
+    public void showMessage(Context context, String message)
     {
-        String str = "SMS de " + originalAddress + " :" + smsBody;
-        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();    	
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();    	
     }
     
     public boolean fileExists(Context context, String fileName)
