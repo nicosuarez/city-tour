@@ -1,4 +1,11 @@
 ﻿@section header {
     <h1>@TextStrings.AudioGuides</h1>
     <a href="@Url.Action("Index", "Main")" data-icon="home" data-iconpos="notext" data-direction="reverse"></a>
+    <a href="@Url.Action("Search", "AudioGuides")" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="pop"></a>
 }
+
+<h4 class="map-address"></h4>
+<div class="map-canvas" data-map='{"nearLocations":{"url":"@Url.Action("GetNearAudioGuides", "Locations", new { area = "Api" })", "listId":"near_locations_list", "address": "@Html.AttributeEncode(ViewBag.SearchAddress)", "emptymsg":"@TextStrings.NearAudioGuidesEmpty"}}'>
+    <p class="map-locating">@TextStrings.GettingLocationMessage</p>
+</div>
+<div id="near_locations_list"></div>

@@ -1,0 +1,30 @@
+﻿@model web.Models.AudioGuide
+
+@section header {
+    <h1>@TextStrings.AudioGuides</h1>
+    <a href="#" data-icon="back" data-rel="back" data-iconpos="notext" data-direction="reverse"></a>
+}
+
+@if (Model != null)
+{
+<h3>@Model.Description</h3>
+    if (Model.PersonAudioGuide.Count > 0)
+    {
+<audio controls="controls">
+    <source src="@Model.Link" type="audio/mpeg" />
+    @TextStrings.AudioNotSupported
+</audio>
+    }
+    else
+    {
+<p class="audioguide-empty">
+    @String.Format(TextStrings.BuyAudioGuideFormat, Model.ID)
+</p>
+    }
+}
+else
+{
+<p class="audioguide-empty">
+    @TextStrings.AudioGuideEmpty
+</p>
+}

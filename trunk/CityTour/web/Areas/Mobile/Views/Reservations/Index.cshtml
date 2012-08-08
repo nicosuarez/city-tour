@@ -1,4 +1,28 @@
-﻿@section header {
+﻿@model List<web.Models.Reservation>
+
+@section header {
     <h1>@TextStrings.MyReservations</h1>
     <a href="@Url.Action("Index", "Main")" data-icon="home" data-iconpos="notext" data-direction="reverse"></a>
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (web.Models.Reservation item in Model.OrderByDescending(m => m.ReservationDate))
+    {
+<div class="reservation-info" data-role="collapsible" data-content-theme="b">
+   <h3>@item.BookingCommerce.Commerce.Name <span class="reservation-accepted">@(item.Accepted ? TextStrings.Ok : String.Empty)</span></h3>
+   <h4><u>@TextStrings.Datetime:</u> @item.ReservationDate</h4>
+@if (item.Accepted)
+{
+    <h4><u>@TextStrings.Price:</u> <span class="reservation-accepted">@item.Price.ToString("C")</span></h4>
+}
+   <p>@item.Detail</p>
+</div>
+    }
+}
+else
+{
+<p class="reservations-empty">
+    @TextStrings.ReservationsEmpty
+</p>
 }

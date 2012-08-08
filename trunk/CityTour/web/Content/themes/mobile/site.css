@@ -16,7 +16,7 @@
     margin: 0 auto;
 }
 
-.map-canvas .map-locating, .map-empty, .commerce-empty, .itinerary-empty
+.map-canvas .map-locating, .map-empty, .commerce-empty, .itinerary-empty, .reservations-empty, .audioguide-empty
 {
     font-size: 110%;
     font-weight: bold;
@@ -41,4 +41,21 @@
 #itinerary_list p.ui-li-desc
 {
     margin-top: 0;
+}
+
+.reservation-info span.reservation-accepted
+{
+    color: #33CC33;
+}
+
+.reservation-info h4, .reservation-info p
+{
+    margin: 4px 0;
+    padding: 0;
+}
+
+audio
+{
+    margin: 0 auto;
+    display: block !important;
 }

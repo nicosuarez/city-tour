@@ -228,4 +228,22 @@
   <data name="AddToItinerary" xml:space="preserve">
     <value>Agregar al itinerario</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="ReservationsEmpty" xml:space="preserve">
+    <value>No tiene reservas</value>
+  </data>
+  <data name="NearAudioGuidesEmpty" xml:space="preserve">
+    <value>No se encontraron audio guías cerca de su ubicación</value>
+  </data>
+  <data name="AudioGuideEmpty" xml:space="preserve">
+    <value>No se encontró la audio guía</value>
+  </data>
+  <data name="AudioNotSupported" xml:space="preserve">
+    <value>Su navegador no soporta elemento de audio</value>
+  </data>
+  <data name="BuyAudioGuideFormat" xml:space="preserve">
+    <value>Para escuchar esta audio guía debe comprarla. Envie un SMS al 1234 con el texto AUDIO {0}</value>
+  </data>
 </root>

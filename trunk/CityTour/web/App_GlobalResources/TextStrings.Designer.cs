@@ -70,11 +70,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se encontró la audio guía.
+        /// </summary>
+        internal static string AudioGuideEmpty {
+            get {
+                return ResourceManager.GetString("AudioGuideEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audio Guías.
         /// </summary>
         internal static string AudioGuides {
             get {
                 return ResourceManager.GetString("AudioGuides", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Su navegador no soporta elemento de audio.
+        /// </summary>
+        internal static string AudioNotSupported {
+            get {
+                return ResourceManager.GetString("AudioNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Para escuchar esta audio guía debe comprarla. Envie un SMS al 1234 con el texto AUDIO {0}.
+        /// </summary>
+        internal static string BuyAudioGuideFormat {
+            get {
+                return ResourceManager.GetString("BuyAudioGuideFormat", resourceCulture);
             }
         }
         
@@ -286,6 +313,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se encontraron audio guías cerca de su ubicación.
+        /// </summary>
+        internal static string NearAudioGuidesEmpty {
+            get {
+                return ResourceManager.GetString("NearAudioGuidesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lugares Cercanos.
         /// </summary>
         internal static string NearLocations {
@@ -309,6 +345,15 @@ namespace Resources {
         internal static string NewAccount {
             get {
                 return ResourceManager.GetString("NewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -354,6 +399,15 @@ namespace Resources {
         internal static string ReservationCancelled {
             get {
                 return ResourceManager.GetString("ReservationCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No tiene reservas.
+        /// </summary>
+        internal static string ReservationsEmpty {
+            get {
+                return ResourceManager.GetString("ReservationsEmpty", resourceCulture);
             }
         }
         
