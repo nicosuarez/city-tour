@@ -44,6 +44,7 @@ INSERT [dbo].[Location] ([ID], [Latitude], [Longitud], [Name]) VALUES (13, CAST(
 INSERT [dbo].[Location] ([ID], [Latitude], [Longitud], [Name]) VALUES (14, CAST(-34.588399000 AS Decimal(18, 9)), CAST(-58.396277000 AS Numeric(18, 9)), N'Facultad de Ingeniería de la UBA - Sede Las Heras')
 INSERT [dbo].[Location] ([ID], [Latitude], [Longitud], [Name]) VALUES (15, CAST(-34.585721 AS Decimal(18, 9)), CAST(-58.393216 AS Numeric(18, 9)), N'Hard Rock Cafe')
 INSERT [dbo].[Location] ([ID], [Latitude], [Longitud], [Name]) VALUES (16, CAST(-34.545278000 AS Decimal(18, 9)), CAST(-58.449722000 AS Numeric(18, 9)), N'Cancha de River')
+INSERT [dbo].[Location] ([ID], [Latitude], [Longitud], [Name]) VALUES (17, CAST(-34.617012 AS Decimal(18, 9)), CAST(-58.370141 AS Numeric(18, 9)), N'El Viejo Almacén')
 SET IDENTITY_INSERT [dbo].[Location] OFF
 /****** Object:  Table [dbo].[Business]    Script Date: 08/05/2012 18:40:37 ******/
 SET IDENTITY_INSERT [dbo].[Business] ON
@@ -74,6 +75,7 @@ INSERT [dbo].[Company] ([ID], [Name], [Description], [CUIT], [BusinessID]) VALUE
 INSERT [dbo].[Company] ([ID], [Name], [Description], [CUIT], [BusinessID]) VALUES (9, N'Hard Rock Cafe', N'Hard Rock Cafe Buenos Aires. Donde vive la música.', N'123456789', 2)
 INSERT [dbo].[Company] ([ID], [Name], [Description], [CUIT], [BusinessID]) VALUES (10, N'Club River Plate', N'El más grande sigue siendo River Plate, el campeón más poderoso de la historia (de la B).', N'123456789', 8)
 INSERT [dbo].[Company] ([ID], [Name], [Description], [CUIT], [BusinessID]) VALUES (11, N'Taxi Premium', N'Usted viaja con máxima seguridad ya que nuestro sistema de identificación digital, nos permite monitorear el vehículo durante todo el trayecto, desde nuestra base operativa.', N'123456789', 6)
+INSERT [dbo].[Company] ([ID], [Name], [Description], [CUIT], [BusinessID]) VALUES (12, N'El Viejo Almacén', N'Donde el Tango vive.', N'123456789', 3)
 SET IDENTITY_INSERT [dbo].[Company] OFF
 /****** Object:  Table [dbo].[Commerce]    Script Date: 08/05/2012 18:40:37 ******/
 SET IDENTITY_INSERT [dbo].[Commerce] ON
@@ -93,32 +95,39 @@ INSERT [dbo].[Commerce] ([ID], [Name], [Description], [LocationID], [Address], [
 INSERT [dbo].[Commerce] ([ID], [Name], [Description], [LocationID], [Address], [CompanyID]) VALUES (14, N'Facultad de Ingeniería de la UBA - Sede Las Heras', N'El edificio de Las Heras 2214 fue concebido entre los años 1909 y 1910 para albergar a la Facultad de Derecho y Ciencias Sociales.', 14, N'Av Gral. Las Heras 2202-2250', 7)
 INSERT [dbo].[Commerce] ([ID], [Name], [Description], [LocationID], [Address], [CompanyID]) VALUES (15, N'Hard Rock Cafe', (SELECT [Description] FROM [Company] WHERE [ID] = 9), 15, N'Shopping Buenos Aires Design', 9)
 INSERT [dbo].[Commerce] ([ID], [Name], [Description], [LocationID], [Address], [CompanyID]) VALUES (16, N'Cancha de River', (SELECT [Description] FROM [Company] WHERE [ID] = 10), 16, N'Av Guillermo Udaondo 912-1200', 10)
+INSERT [dbo].[Commerce] ([ID], [Name], [Description], [LocationID], [Address], [CompanyID]) VALUES (17, N'Taxi Premium', (SELECT [Description] FROM [Company] WHERE [ID] = 11), NULL, N'', 11)
+INSERT [dbo].[Commerce] ([ID], [Name], [Description], [LocationID], [Address], [CompanyID]) VALUES (18, N'El Viejo Almacén', (SELECT [Description] FROM [Company] WHERE [ID] = 12), 17, N'Balcarce y Av. Independencia', 12)
 SET IDENTITY_INSERT [dbo].[Commerce] OFF
 /****** Object:  Table [dbo].[Event]    Script Date: 08/05/2012 18:40:37 ******/
+/*
 SET IDENTITY_INSERT [dbo].[Event] ON
 INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (1, GETDATE(), N'Vamos a la cancha del ciclón!!', 1)
 INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (2, GETDATE(), N'Vamos a la cancha del globo!!', 2)
 SET IDENTITY_INSERT [dbo].[Event] OFF
+*/
 /****** Object:  Table [dbo].[BookingCommerce]    Script Date: 08/05/2012 18:40:37 ******/
-INSERT [dbo].[BookingCommerce] ([ID], [ContactPhone], [WebServiceURL], [ContactMail]) VALUES (1, NULL, NULL, NULL)
-INSERT [dbo].[BookingCommerce] ([ID], [ContactPhone], [WebServiceURL], [ContactMail]) VALUES (2, NULL, NULL, NULL)
-INSERT [dbo].[BookingCommerce] ([ID], [ContactPhone], [WebServiceURL], [ContactMail]) VALUES (3, NULL, NULL, NULL)
+INSERT [dbo].[BookingCommerce] ([ID], [ContactPhone], [WebServiceURL], [ContactMail]) VALUES (17, N'5238-0000', NULL, N'info@taxipremium.com')
 /****** Object:  Table [dbo].[AudioGuide]    Script Date: 08/05/2012 18:40:37 ******/
 SET IDENTITY_INSERT [dbo].[AudioGuide] ON
-INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (1, N'Fiuba Paseo Colon', 1, N'http://localhost:50678/Market/market.html')
-INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (2, N'Fiuba Paseo Colon', 1, N'http://localhost:50678/Market/market.html')
+INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (1, N'El Viejo Almacén', 18, N'santelmo/03-El Viejo Almacén (Balcarce y Av. Independencia).mp3')
+INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (2, N'Introducción a San Telmo', 10, N'santelmo/01-Introducción a San Telmo (Defensa y Bethlem).mp3')
+INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (3, N'Monumento del Canto al Trabajo y  Facultad de Ingeniería', 11, N'santelmo/04-Monumento del Canto al Trabajo y  Facultad de Ingeniería.mp3')
+INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (4, N'Plaza Dorrego y Feria de Antigüedades', 10, N'santelmo/07-Plaza Dorrego y Feria de Antigüedades  (Defensa y Humberto 1º).mp3')
+INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (5, N'Iglesia de San Pedro Telmo', 9, N'santelmo/09-Iglesia de San Pedro Telmo (Humberto 1º 340).mp3')
+INSERT [dbo].[AudioGuide] ([ID], [Description], [CommerceID], [Link]) VALUES (6, N'Parque Lezama y Museo Histórico Nacional', 5, N'santelmo/11-Parque Lezama -  Museo Histórico Nacional (Defensa y Brasil).mp3')
 SET IDENTITY_INSERT [dbo].[AudioGuide] OFF
 /****** Object:  Table [dbo].[CommerceQuery]    Script Date: 08/05/2012 18:40:37 ******/
 /****** Object:  Table [dbo].[TourEvent]    Script Date: 08/05/2012 18:40:37 ******/
+/*
 INSERT [dbo].[TourEvent] ([TourID], [EventID]) VALUES (1, 1)
 INSERT [dbo].[TourEvent] ([TourID], [EventID]) VALUES (1, 2)
+*/
 /****** Object:  Table [dbo].[Reservation]    Script Date: 08/05/2012 18:40:37 ******/
+/*
 SET IDENTITY_INSERT [dbo].[Reservation] ON
-INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (1, CAST(0x0000A06C00000000 AS DateTime), 1, 3, CAST(100.000000000 AS Decimal(18, 9)), NULL, 0, NULL)
-INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (2, CAST(0x0000A06C00000000 AS DateTime), 2, 3, CAST(200.000000000 AS Decimal(18, 9)), NULL, 0, NULL)
-INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (3, CAST(0x0000A0DF00000000 AS DateTime), 3, 3, CAST(300.000000000 AS Decimal(18, 9)), NULL, 0, NULL)
-INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (4, CAST(0x0000A0DF00000000 AS DateTime), 4, 3, CAST(400.000000000 AS Decimal(18, 9)), NULL, 0, NULL)
+INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (1, GETDATE(), 1, 17, 0, NULL, 0, NULL)
 SET IDENTITY_INSERT [dbo].[Reservation] OFF
+*/
 /****** Object:  Table [dbo].[PersonAudioGuideEvent]    Script Date: 08/05/2012 18:40:37 ******/
 /****** Object:  Table [dbo].[PersonAudioGuide]    Script Date: 08/05/2012 18:40:37 ******/
 

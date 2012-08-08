@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using web.Areas;
 using WURFL;
 using WURFL.Aspnet.Extensions.Config;
 
@@ -35,6 +36,8 @@ namespace web
             RegisterRoutes(RouteTable.Routes);
 
             Application.ConfigureWurflManager();
+
+            CityTourContext.Initialize();
         }
     }
 

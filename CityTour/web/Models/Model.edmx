@@ -121,7 +121,7 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
-          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" />
           <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
         </EntityType>
@@ -259,7 +259,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Commerce_Location">
-          <End Role="Location" Type="web.Models.Store.Location" Multiplicity="1" />
+          <End Role="Location" Type="web.Models.Store.Location" Multiplicity="0..1" />
           <End Role="Commerce" Type="web.Models.Store.Commerce" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Location">
@@ -547,7 +547,7 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="LocationID" Nullable="false" />
+          <Property Type="Int32" Name="LocationID" Nullable="true" />
           <Property Type="String" Name="Address" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="CompanyID" Nullable="false" />
           <NavigationProperty Name="AudioGuide" Relationship="web.Models.FK_AudioGuide_Commerce" FromRole="Commerce" ToRole="AudioGuide" />
@@ -724,7 +724,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Commerce_Location">
-          <End Type="web.Models.Location" Role="Location" Multiplicity="1" />
+          <End Type="web.Models.Location" Role="Location" Multiplicity="0..1" />
           <End Type="web.Models.Commerce" Role="Commerce" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Location">

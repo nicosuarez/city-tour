@@ -78,6 +78,7 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\LocationsController.cs" />
     <Compile Include="Areas\Api\Controllers\ReservationsController.cs" />
+    <Compile Include="Areas\CityTourContext.cs" />
     <Compile Include="Areas\Mobile\Controllers\AudioGuidesController.cs" />
     <Compile Include="Areas\Mobile\Controllers\CommerceController.cs" />
     <Compile Include="Areas\Mobile\Controllers\ReservationsController.cs" />
@@ -234,6 +235,8 @@
     <Content Include="Areas\Mobile\Views\Locations\Search.cshtml" />
     <Content Include="Areas\Mobile\Views\Commerce\Index.cshtml" />
     <Content Include="Areas\Mobile\Views\Itinerary\Options.cshtml" />
+    <Content Include="Areas\Mobile\Views\AudioGuides\Search.cshtml" />
+    <Content Include="Areas\Mobile\Views\AudioGuides\Play.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -24,7 +24,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("web.Models", "FK_BookingCommerce_Commerce", "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Commerce), "BookingCommerce", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(web.Models.BookingCommerce), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Company_Business", "Business", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Business), "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Company), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Commerce_Company", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Company), "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Commerce), true)]
-[assembly: EdmRelationshipAttribute("web.Models", "FK_Commerce_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Location), "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Commerce), true)]
+[assembly: EdmRelationshipAttribute("web.Models", "FK_Commerce_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(web.Models.Location), "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Commerce), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_CommerceQuery_Commerce", "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Commerce), "CommerceQuery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.CommerceQuery), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_Event_Commerce", "Commerce", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Commerce), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.Event), true)]
 [assembly: EdmRelationshipAttribute("web.Models", "FK_CommerceQuery_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(web.Models.Person), "CommerceQuery", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(web.Models.CommerceQuery), true)]
@@ -937,15 +937,13 @@ namespace web.Models
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="locationID">Initial value of the LocationID property.</param>
         /// <param name="address">Initial value of the Address property.</param>
         /// <param name="companyID">Initial value of the CompanyID property.</param>
-        public static Commerce CreateCommerce(global::System.Int32 id, global::System.String name, global::System.Int32 locationID, global::System.String address, global::System.Int32 companyID)
+        public static Commerce CreateCommerce(global::System.Int32 id, global::System.String name, global::System.String address, global::System.Int32 companyID)
         {
             Commerce commerce = new Commerce();
             commerce.ID = id;
             commerce.Name = name;
-            commerce.LocationID = locationID;
             commerce.Address = address;
             commerce.CompanyID = companyID;
             return commerce;
@@ -1032,9 +1030,9 @@ namespace web.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 LocationID
+        public Nullable<global::System.Int32> LocationID
         {
             get
             {
@@ -1049,8 +1047,8 @@ namespace web.Models
                 OnLocationIDChanged();
             }
         }
-        private global::System.Int32 _LocationID;
-        partial void OnLocationIDChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _LocationID;
+        partial void OnLocationIDChanging(Nullable<global::System.Int32> value);
         partial void OnLocationIDChanged();
     
         /// <summary>

@@ -108,12 +108,7 @@ namespace web.Areas.Mobile.Controllers
         [NonAction]
         private Tour GetCurrentTour(CityTourEntities entities)
         {
-            Tour tour = null;
-            Person currentPerson = entities.Person.FirstOrDefault();
-
-            if (currentPerson != null)
-                tour = entities.Tour.Include(@"Event.Commerce.Location").FirstOrDefault(t => t.PersonID == currentPerson.ID);
-
+            Tour tour = entities.Tour.Include(@"Event.Commerce.Location").FirstOrDefault(t => t.PersonID == CityTourContext.CurrentPerson.ID);
             return tour;
         }
     }

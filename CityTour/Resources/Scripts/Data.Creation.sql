@@ -207,7 +207,7 @@ CREATE TABLE [dbo].[Commerce](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](200) NOT NULL,
 	[Description] [nvarchar](200) NULL,
-	[LocationID] [int] NOT NULL,
+	[LocationID] [int] NULL,
 	[Address] [nvarchar](200) NOT NULL,
 	[CompanyID] [int] NOT NULL,
  CONSTRAINT [PK_Commerce] PRIMARY KEY CLUSTERED 
