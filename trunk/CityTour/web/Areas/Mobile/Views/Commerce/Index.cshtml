@@ -14,6 +14,22 @@
     <p>@Model.Description</p>
 
     <a href="@Url.Action("AddEvent", "Itinerary", new { id = Model.ID})" data-role="button" data-icon="plus" data-rel="dialog" data-transition="slideup">@TextStrings.AddToItinerary</a>
+
+    <div class="commerce-reviews">
+        <h1>@TextStrings.Reviews</h1>
+        <p>
+            <span>Sebastian - @DateTime.Now.AddDays(-2).ToShortDateString()</span>
+            Genial este lugar, muy recomendable. Quiero volver!!
+        </p>
+        <p>
+            <span>Ruben - @DateTime.Now.AddDays(-1).ToShortDateString()</span>
+            Beautiful, beautiful, beautiful!
+        </p>
+        <p>
+            <span>Leandro - @DateTime.Now.ToShortDateString()</span>
+            Tengan mucho cuidado por la zona. Roban mucho.
+        </p>
+    </div>
 </div>
 }
 else 

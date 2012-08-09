@@ -246,4 +246,7 @@
   <data name="BuyAudioGuideFormat" xml:space="preserve">
     <value>Para escuchar esta audio guía debe comprarla. Envie un SMS al 1566612038 con el texto AUDIOGUIA {0}</value>
   </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Comentarios</value>
+  </data>
 </root>

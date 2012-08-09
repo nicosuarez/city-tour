@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using web.Models;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 using System.Text;
+using web.Models;
 
 namespace web.Core
 {
@@ -17,7 +13,7 @@ namespace web.Core
         {
             if (reservation.Accepted)
             {                
-                const string subject = "Confirmacion de reserva";
+                const string subject = "Confirmación de reserva";
                 var fromAddress = new MailAddress(Configuration.GetNotifierEmailAddress(), senderName);
                 var toAddress = new MailAddress(email, name);
                 string fromPassword = Configuration.GetNotifierEmailPass();
@@ -25,7 +21,7 @@ namespace web.Core
                 StringBuilder body = new StringBuilder();
                 body.AppendFormat("Su reserva en el {0} para la fecha {1} en el horario {2} ha sido confirmada.", reservation.BookingCommerce.Commerce.Name, reservation.ReservationDate.ToShortDateString(), reservation.ReservationDate.ToShortTimeString());
                 body.AppendLine(" ");
-                body.AppendLine(string.Format("Recuerde que el costo es de ${0}", reservation.Price));
+                body.AppendLine(string.Format("Recuerde que el costo es de {0}", reservation.Price.ToString("C")));
                 body.AppendLine(" ");
                 body.AppendLine(string.Format("El responsable dice: {0}", message));
                 body.AppendLine(" ");
@@ -53,7 +49,7 @@ namespace web.Core
 
         public void NotifyReservationCancelled(Reservation reservation, string name, string email, string message)
         {
-            const string subject = "Cancelacion de reserva";
+            const string subject = "Cancelación de reserva";
             var fromAddress = new MailAddress(Configuration.GetNotifierEmailAddress(), senderName);
             var toAddress = new MailAddress(email, name);
             string fromPassword = Configuration.GetNotifierEmailPass();

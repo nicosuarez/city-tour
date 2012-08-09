@@ -38,6 +38,25 @@
     font-size: 80%;
 }
 
+.commerce-details .commerce-reviews
+{
+    margin-top: 20px;
+}
+
+.commerce-details .commerce-reviews span
+{
+    display: block;
+    font-size: 80%;
+    font-weight: bold;
+}
+
+.commerce-details .commerce-reviews p
+{
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #333333;
+}
+
 #itinerary_list p.ui-li-desc
 {
     margin-top: 0;
