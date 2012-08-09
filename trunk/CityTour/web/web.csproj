@@ -76,6 +76,7 @@
       <DependentUpon>TextStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\AudioGuiaController.cs" />
     <Compile Include="Areas\Api\Controllers\LocationsController.cs" />
     <Compile Include="Areas\Api\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\CityTourContext.cs" />

@@ -21,7 +21,7 @@ namespace web.Areas.Api.Controllers
                     Reservation reservation = new Reservation()
                     {
                         Accepted = false,
-                        BookingCommerceID = CityTourContext.CurrentBookingCommerce.ID,
+                        BookingCommerceID = CityTourContext.TaxiBookingCommerce.ID,
                         PersonID = CityTourContext.CurrentPerson.ID,
                         Detail = String.Format(@"Taxi patente {0}, enviado a {1}", patente, address),
                         Price = 0,

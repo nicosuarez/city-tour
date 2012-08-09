@@ -1,20 +1,19 @@
-﻿using System.Web.Mvc;
+﻿using System;
 using System.Collections.Generic;
-using web.Models;
-using System.Linq;
-using System;
-using web.Views.DataContracts.Assemblers;
-using System.Web.Helpers;
-using web.Views.DataContracts;
-using System.Web.Script.Serialization;
 using System.Device.Location;
+using System.Linq;
+using System.Web.Helpers;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using web.Core;
+using web.Models;
+using web.Views.DataContracts;
+using web.Views.DataContracts.Assemblers;
 
 namespace web.Controllers
 {
     public class HomeController : Controller
     {
-        private static CityTourEntities entities = new CityTourEntities();
         private readonly IClientNotifier notifier = new MailNotifier();
 
         public ActionResult Index()
@@ -24,14 +23,18 @@ namespace web.Controllers
             //CreateDummyAudioGuides();
             //CreateDummyTour();
 
-            Person currentUser = GetCurrentUser();
+            using (CityTourEntities entities = new CityTourEntities())
+            {
+                //Person currentUser = GetCurrentUser();
 
-            ViewData["Events"] = GetTour(currentUser).Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
-            //ViewData["SearchBy"] = new List<SearchBy> {new SearchBy()};
-            ViewData["SearchBy"] = new SearchBy();
-            ViewData["ScheduledReservations"] = entities.Reservation.OrderBy(r => r.ReservationDate).ToList();
-            ViewData["AudioGuides"] = entities.AudioGuide.ToList(); 
-            return View();          
+                //ViewData["Events"] = GetTour(currentUser).Event.AsEnumerable().OrderBy(e => e.EventDate).ToList();
+                //ViewData["SearchBy"] = new List<SearchBy> {new SearchBy()};
+                //ViewData["SearchBy"] = new SearchBy();
+                ViewData["ScheduledReservations"] = entities.Reservation.Include(@"BookingCommerce.Commerce").Include(@"Person").OrderBy(r => r.ReservationDate).ToList();
+                //ViewData["AudioGuides"] = entities.AudioGuide.ToList();
+            }
+
+            return View();
         }
 
         //private void CreateDummyTour()
@@ -57,26 +60,26 @@ namespace web.Controllers
         //    }
         //}
 
-        private Person GetCurrentUser()
-        {
-            return entities.Person.First();
-            //return CreateDummyPerson("Ruben", "dummy@mail.com");
-        }
+        //private Person GetCurrentUser()
+        //{
+        //    return entities.Person.First();
+        //    //return CreateDummyPerson("Ruben", "dummy@mail.com");
+        //}
 
-        private Tour GetTour(Person person)
-        {
-            return entities.Tour.Where(t => t.PersonID == person.ID).FirstOrDefault();
-        }
+        //private Tour GetTour(Person person)
+        //{
+        //    return entities.Tour.Where(t => t.PersonID == person.ID).FirstOrDefault();
+        //}
 
-        public ActionResult SearchBy()
-        {
-            return View();
-        }
+        //public ActionResult SearchBy()
+        //{
+        //    return View();
+        //}
 
         //private void CreateDummyEvents()
         //{
         //    const int eventsToCreate = 2;
-            
+
         //    Commerce commerce1 = CreateDummyCommerce("Fiuba Paseo Colon", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Paseo Colon", -34.617617M, -58.368495M));
         //    Commerce commerce2 = CreateDummyCommerce("Fiuba Las Heras", CreateDummyLocation("Facultad de Ingeniería de la UBA - Sede Las Heras", -34.588399M, -58.396277M));
         //    for (int i = 0; i < eventsToCreate; i++)
@@ -149,15 +152,16 @@ namespace web.Controllers
         //    return location;            
         //}
 
-        public JsonResult GetEventLocations() 
-        {
-            var locations = entities.Event.Select( e => e.Commerce.Location ).Distinct().ToList();
-           
-            return new DataContractJsonResult{
-                Data = locations.Select(l => LocationAssembler.Assemble(l)).ToList(),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
+        //public JsonResult GetEventLocations()
+        //{
+        //    var locations = entities.Event.Select(e => e.Commerce.Location).Distinct().ToList();
+
+        //    return new DataContractJsonResult
+        //    {
+        //        Data = locations.Select(l => LocationAssembler.Assemble(l)).ToList(),
+        //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
+        //    };
+        //}
 
         //private Company CreateDummyCompany()
         //{
@@ -238,7 +242,7 @@ namespace web.Controllers
         //    CreateDummyReservation(200, commerce.BookingCommerce, booker2, oneDay);
         //    CreateDummyReservation(300, commerce.BookingCommerce, booker3, anotherDay);
         //    CreateDummyReservation(400, commerce.BookingCommerce, booker4, anotherDay);
-           
+
         //    entities.SaveChanges();           
         //}
 
@@ -288,26 +292,31 @@ namespace web.Controllers
         //    return person;
         //}
 
-        public JsonResult ToggleReservation(int reservationID, string message)
+        public JsonResult ToggleReservation(int reservationID, string message, string name, string email)
         {
-            Reservation reservation = entities.Reservation.Where(r => r.ID == reservationID).FirstOrDefault();
-            
-            if (reservation != null)
-            {
-                if (reservation.Accepted)
-                {
-                    reservation.Accepted = false;
-                    reservation.CancellationDate = DateTime.Now;
-                    notifier.NotifyReservationCancelled(reservation, message);
-                }
-                else
-                {
-                    reservation.Accepted = true;
-                    reservation.CancellationDate = null;
-                    notifier.NotifyReservationConfirmed(reservation);
-                }
+            Reservation reservation = null;
 
-                entities.SaveChanges();
+            using (CityTourEntities entities = new CityTourEntities())
+            {
+                reservation = entities.Reservation.Where(r => r.ID == reservationID).FirstOrDefault();
+
+                if (reservation != null)
+                {
+                    if (reservation.Accepted)
+                    {
+                        reservation.Accepted = false;
+                        reservation.CancellationDate = DateTime.Now;
+                        notifier.NotifyReservationCancelled(reservation, name, email, message);
+                    }
+                    else
+                    {
+                        reservation.Accepted = true;
+                        reservation.CancellationDate = null;
+                        notifier.NotifyReservationConfirmed(reservation, name, email, message);
+                    }
+
+                    entities.SaveChanges();
+                }
             }
 
             return new DataContractJsonResult
@@ -323,24 +332,24 @@ namespace web.Controllers
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        private decimal CalculateDistance(Location source, Location target)
-        {
-            var sourceCoordinate = new GeoCoordinate((double)source.Latitude, (double)source.Longitud);
-            var targetCoordinate = new GeoCoordinate((double)target.Latitude, (double)target.Longitud);
+        //private decimal CalculateDistance(Location source, Location target)
+        //{
+        //    var sourceCoordinate = new GeoCoordinate((double)source.Latitude, (double)source.Longitud);
+        //    var targetCoordinate = new GeoCoordinate((double)target.Latitude, (double)target.Longitud);
 
-            return (decimal)targetCoordinate.GetDistanceTo(sourceCoordinate);
-        }
-                
-        public JsonResult GetNearLocations(decimal latitude, decimal longitude)
-        {
-            decimal maxDistance = 1000; //Distancia en metros;
-            var nearLocations = entities.Location.ToList().Where(l => CalculateDistance(l, new Location { Latitude = latitude, Longitud = longitude }) < maxDistance);
+        //    return (decimal)targetCoordinate.GetDistanceTo(sourceCoordinate);
+        //}
 
-            return new DataContractJsonResult
-            {
-                Data = nearLocations.Select(l => LocationAssembler.Assemble(l)).ToList(),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
+        //public JsonResult GetNearLocations(decimal latitude, decimal longitude)
+        //{
+        //    decimal maxDistance = 1000; //Distancia en metros;
+        //    var nearLocations = entities.Location.ToList().Where(l => CalculateDistance(l, new Location { Latitude = latitude, Longitud = longitude }) < maxDistance);
+
+        //    return new DataContractJsonResult
+        //    {
+        //        Data = nearLocations.Select(l => LocationAssembler.Assemble(l)).ToList(),
+        //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
+        //    };
+        //}
     }
 }

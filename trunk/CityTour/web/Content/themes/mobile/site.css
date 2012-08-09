@@ -48,6 +48,11 @@
     color: #33CC33;
 }
 
+.reservation-info span.reservation-cancelled
+{
+    color: #CC0000;
+}
+
 .reservation-info h4, .reservation-info p
 {
     margin: 4px 0;

@@ -1,6 +1,8 @@
 USE [CityTour]
 GO
 
+DELETE FROM [dbo].[PersonAudioGuideEvent];
+DELETE FROM [dbo].[PersonAudioGuide];
 DELETE FROM [dbo].[AudioGuide];
 DELETE FROM [dbo].[Reservation];
 DELETE FROM [dbo].[BookingCommerce];
@@ -13,17 +15,15 @@ DELETE FROM [dbo].[Business];
 DELETE FROM [dbo].[CommerceQuery];
 DELETE FROM [dbo].[Location];
 DELETE FROM [dbo].[Person];
-DELETE FROM [dbo].[PersonAudioGuide];
-DELETE FROM [dbo].[PersonAudioGuideEvent];
 
 /****** Object:  Table [dbo].[Person]    Script Date: 08/05/2012 18:40:37 ******/
 SET IDENTITY_INSERT [dbo].[Person] ON
-INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (1, N'Vanesa', N'vanesa@citytour.com', GETDATE())
+INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (1, N'Sebastian', N'scamjayi@gmail.com', GETDATE())
 INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (2, N'Ruben', N'ruben@citytour.com', GETDATE())
 INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (3, N'Leandro', N'leandro@citytour.com', GETDATE())
 INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (4, N'Nestor', N'nestor@citytour.com', GETDATE())
 INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (5, N'Nicolás', N'nicolas@citytour.com', GETDATE())
-INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (6, N'Sebastian', N'sebastian@citytour.com', GETDATE())
+INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (6, N'Vanesa', N'vanesa@citytour.com', GETDATE())
 INSERT [dbo].[Person] ([ID], [Name], [EmailAddress], [Created]) VALUES (7, N'Diego', N'diego@citytour.com', GETDATE())
 SET IDENTITY_INSERT [dbo].[Person] OFF
 /****** Object:  Table [dbo].[Location]    Script Date: 08/05/2012 18:40:37 ******/
@@ -106,6 +106,7 @@ INSERT [dbo].[Event] ([ID], [EventDate], [Description], [CommerceID]) VALUES (2,
 SET IDENTITY_INSERT [dbo].[Event] OFF
 */
 /****** Object:  Table [dbo].[BookingCommerce]    Script Date: 08/05/2012 18:40:37 ******/
+INSERT [dbo].[BookingCommerce] ([ID], [ContactPhone], [WebServiceURL], [ContactMail]) VALUES (13, N'0800-333-3456', NULL, N'booking@sheratonhotels.com')
 INSERT [dbo].[BookingCommerce] ([ID], [ContactPhone], [WebServiceURL], [ContactMail]) VALUES (17, N'5238-0000', NULL, N'info@taxipremium.com')
 /****** Object:  Table [dbo].[AudioGuide]    Script Date: 08/05/2012 18:40:37 ******/
 SET IDENTITY_INSERT [dbo].[AudioGuide] ON
@@ -123,11 +124,9 @@ INSERT [dbo].[TourEvent] ([TourID], [EventID]) VALUES (1, 1)
 INSERT [dbo].[TourEvent] ([TourID], [EventID]) VALUES (1, 2)
 */
 /****** Object:  Table [dbo].[Reservation]    Script Date: 08/05/2012 18:40:37 ******/
-/*
 SET IDENTITY_INSERT [dbo].[Reservation] ON
-INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (1, GETDATE(), 1, 17, 0, NULL, 0, NULL)
+INSERT [dbo].[Reservation] ([ID], [ReservationDate], [PersonID], [BookingCommerceID], [Price], [CancellationDate], [Accepted], [Detail]) VALUES (1, GETDATE(), 1, 13, 2000, NULL, 0, NULL)
 SET IDENTITY_INSERT [dbo].[Reservation] OFF
-*/
 /****** Object:  Table [dbo].[PersonAudioGuideEvent]    Script Date: 08/05/2012 18:40:37 ******/
 /****** Object:  Table [dbo].[PersonAudioGuide]    Script Date: 08/05/2012 18:40:37 ******/
 

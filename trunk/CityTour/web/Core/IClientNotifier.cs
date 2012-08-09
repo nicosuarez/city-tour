@@ -8,7 +8,7 @@ namespace web.Core
 {
     public interface IClientNotifier
     {
-        void NotifyReservationConfirmed(Reservation reservation);
-        void NotifyReservationCancelled(Reservation reservation, string message);
+        void NotifyReservationConfirmed(Reservation reservation, string name, string email, string message);
+        void NotifyReservationCancelled(Reservation reservation, string name, string email, string message);
     }
 }

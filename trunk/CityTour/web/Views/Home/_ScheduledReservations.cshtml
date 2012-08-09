@@ -1,17 +1,24 @@
 ﻿@using Resources
 @model IEnumerable<web.Models.Reservation>
 <script type="text/javascript">
-    function toggleReservation(reservationId) {        
+    function toggleReservation(reservationId, name, email) {
+        $('.cancel-dialog input.cancel-name:first').val(name);
+        $('.cancel-dialog input.cancel-email:first').val(email);
+        $('.cancel-dialog textarea.cancel-message:first').val('');
+
         $(".cancel-dialog").dialog({
-            title: "Mensaje de notificacion",
+            title: "Mensaje de notificación",
             modal: true,
             autoOpen: true,
+            resizable: false,
             buttons: [
             {
                 text: "Ok",
                 click: function () {
+                    var name = $(this).find('.cancel-name').val();
+                    var email = $(this).find('.cancel-email').val();
                     var message = $(this).find('.cancel-message').val();
-                    updateReservation(reservationId, message);
+                    updateReservation(reservationId, message, name, email);
                     $(this).dialog("close");
                 }
             },
@@ -23,36 +30,44 @@
         });
     }
 
-    function updateReservation(reservationId, message) {
+    function updateReservation(reservationId, message, name, email) {
         var actionUrl = '@Url.Action("ToggleReservation", "Home")';
+        var messageSpan = $('#reservation_' + reservationId)
+            .removeClass("reservation_cancelled")
+            .removeClass("reservation_accepted")
+            .html("Enviado notificación...");
 
         $.ajax({
             url: actionUrl,
             type: 'POST',
             dataType: 'json',
-            data: { reservationId: reservationId, message: message },
+            data: { reservationId: reservationId, message: message, email: email, name: name },
             success: function (reservation) {
-                var messageSpan = $('#reservation_' + reservationId);
                 if (reservation.accepted) {
                     messageSpan.html("@TextStrings.ReservationAccepted"+"<span>"+"@TextStrings.ClickToCancel"+"</span>")                           
-                    .removeClass("reservation_cancelled")
                     .addClass("reservation_accepted");
                 }
                 else {
                     messageSpan.html("@TextStrings.ReservationCancelled"+"<span>"+"@TextStrings.ClickToAccept"+"</span>")
-                    .removeClass("reservation_accepted")
                     .addClass("reservation_cancelled");
                 }
             }
         })
     }
-      
 </script>
+
  <div class="cancel-dialog" style="display:none;">
-     <textarea class="cancel-message" rows="4" cols="30">
-     </textarea>
+    <p>@TextStrings.ClientName
+    <input type="text" class="cancel-name" value="" style="width:100%" />
+    </p>
+    <p>@TextStrings.Mail
+    <input type="email" class="cancel-email" value="" style="width:100%" />
+    </p>
+    <p>@TextStrings.Description
+    <textarea class="cancel-message" rows="4" cols="35" style="width:100%"></textarea>
+    </p>
  </div>
-         
+
 <div class="item_list left scheduled-reservation">
     <h2>@TextStrings.ScheduledReservations</h2>
     <div class="inner">
@@ -62,17 +77,17 @@
                 foreach (var reservation in Model)
                 {
                 <li>
-                    <a href="javascript:toggleReservation('@reservation.ID')">                    
+                    <a href="javascript:toggleReservation('@reservation.ID', '@reservation.Person.Name', '@reservation.Person.EmailAddress')">                    
                         <span style="font-size:1.8em;">@reservation.BookingCommerce.Commerce.Name</span>                
-                        <span>@TextStrings.Price: @reservation.Price</span>
+                        <span>@TextStrings.Price: @reservation.Price.ToString("C")</span>
                         <span>@TextStrings.ClientName: @reservation.Person.Name</span>
                         <span>@TextStrings.Mail: @reservation.Person.EmailAddress</span>    
                         <span>@TextStrings.Date: @reservation.ReservationDate.ToShortDateString()</span>
                         <span>@TextStrings.Hour: @reservation.ReservationDate.ToString("hh:mm")</span>
-                        <span id=@("reservation_" + reservation.ID) class=@(reservation.Accepted ? "reservation_accepted" : "reservation_cancelled")>
-                            @(reservation.Accepted ? TextStrings.ReservationAccepted : TextStrings.ReservationCancelled)   
+                        <span id=@("reservation_" + reservation.ID) class="reservation_status @(reservation.Accepted ? "reservation_accepted" : (reservation.CancellationDate.HasValue ? "reservation_cancelled" : String.Empty))">
+                            @(reservation.Accepted ? TextStrings.ReservationAccepted : (reservation.CancellationDate.HasValue ? TextStrings.ReservationCancelled : String.Empty))   
                             <span>
-                             @(reservation.Accepted ? TextStrings.ClickToCancel : TextStrings.ClickToAccept)
+                             @(reservation.Accepted ? TextStrings.ClickToCancel : (!reservation.CancellationDate.HasValue ? TextStrings.ClickToAccept : String.Empty))
                             </span>                          
                         </span>            
                     </a>                            
