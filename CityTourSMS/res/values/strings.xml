@@ -5,6 +5,7 @@
     <string name="app_name">CityTourSMS</string>
     <string name="InvalidBodySMS">Mensaje Incorrento</string>
     <string name="SMSAudioguide">AUDIOGUIA</string>
+    <string name="SMSAudioguide2">AUDIOGUÍA</string>
     <string name="SMSTaxi">TAXI</string>
     <string name="SMSPay">PAGO</string>
     <string name="SMSSuccessAudioguide">Te enviamos la audioguia que solicitaste</string>
