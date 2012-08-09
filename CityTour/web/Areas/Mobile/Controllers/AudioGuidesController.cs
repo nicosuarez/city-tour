@@ -34,19 +34,6 @@ namespace web.Areas.Mobile.Controllers
             using (CityTourEntities entities = new CityTourEntities())
             {
                 audioGuide = entities.AudioGuide.Include(@"PersonAudioGuide").FirstOrDefault(a => a.ID == id);
-
-                if (audioGuide.PersonAudioGuide.Count > 0)
-                {
-                    PersonAudioGuideEvent audioGuideEvent = new PersonAudioGuideEvent()
-                    {
-                        PersonID = CityTourContext.CurrentPerson.ID,
-                        AudioGuideID = audioGuide.ID,
-                        PlayDate = DateTime.Now
-                    };
-
-                    entities.AddToPersonAudioGuideEvent(audioGuideEvent);
-                    entities.SaveChanges();
-                }
             }
 
             audioGuide.Link = Url.Content(@"~/content/audioguides/" + audioGuide.Link);

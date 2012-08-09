@@ -9,8 +9,9 @@
 {
     foreach (web.Models.Reservation item in Model.OrderByDescending(m => m.ReservationDate))
     {
+        var cancelada = !item.Accepted && item.CancellationDate.HasValue;
 <div class="reservation-info" data-role="collapsible" data-content-theme="b">
-   <h3>@item.BookingCommerce.Commerce.Name <span class="reservation-accepted">@(item.Accepted ? TextStrings.Ok : String.Empty)</span></h3>
+   <h3>@item.BookingCommerce.Commerce.Name <span class="@(item.Accepted ? "reservation-accepted" : (cancelada ? "reservation-cancelled" : String.Empty))">@(item.Accepted ? TextStrings.Ok : (cancelada ? "CANCELADO" : String.Empty))</span></h3>
    <h4><u>@TextStrings.Datetime:</u> @item.ReservationDate</h4>
 @if (item.Accepted)
 {

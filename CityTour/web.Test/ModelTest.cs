@@ -50,7 +50,7 @@ namespace SampleTesting
                 ReservationDate = DateTime.Now
             };
 
-            notifier.NotifyReservationConfirmed(reservation);
+            notifier.NotifyReservationConfirmed(reservation, person.Name, person.EmailAddress, @"Hola Mundo");
         }
     }
 } 

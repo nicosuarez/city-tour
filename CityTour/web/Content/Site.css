@@ -203,20 +203,23 @@ input[type='text'], input[type='password']
     float: right;
 }
 
-.reservation_accepted
+.reservation_status
 {
     float: right;
     display: block;
-    background: url('images/accept.png') no-repeat right; 
     padding-right: 20px;
+    text-align: right;
+    background: none;
 }
 
-.reservation_cancelled
+.reservation_status.reservation_accepted
 {
-    float: right;
-    display: block;
+    background: url('images/accept.png') no-repeat right; 
+}
+
+.reservation_status.reservation_cancelled
+{
     background: url('images/cancel.png') no-repeat right; 
-    padding-right: 20px;
 }
 
 .scheduled-reservation

@@ -6,16 +6,16 @@ namespace web.Areas
     public static class CityTourContext
     {
         private static Person _person;
-        private static BookingCommerce _bookingCommerce;
+        private static BookingCommerce _taxiBookingCommerce;
 
         public static Person CurrentPerson
         {
             get { return _person; }
         }
 
-        public static BookingCommerce CurrentBookingCommerce
+        public static BookingCommerce TaxiBookingCommerce
         {
-            get { return _bookingCommerce; }
+            get { return _taxiBookingCommerce; }
         }
 
         public static void Initialize()
@@ -23,7 +23,7 @@ namespace web.Areas
             using (CityTourEntities entities = new CityTourEntities())
             {
                 _person = entities.Person.FirstOrDefault();
-                _bookingCommerce = entities.BookingCommerce.FirstOrDefault();
+                _taxiBookingCommerce = entities.BookingCommerce.FirstOrDefault(b => b.ID == 17);
             }
         }
     }

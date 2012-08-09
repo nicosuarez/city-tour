@@ -130,7 +130,7 @@
     <value>Fecha</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Descripcion</value>
+    <value>Descripción</value>
   </data>
   <data name="Enter" xml:space="preserve">
     <value>Entrar</value>
@@ -169,7 +169,7 @@
     <value>Rubro</value>
   </data>
   <data name="CommerceDescription" xml:space="preserve">
-    <value>Descripcion</value>
+    <value>Descripción</value>
   </data>
   <data name="CommerceName" xml:space="preserve">
     <value>Nombre</value>
@@ -244,6 +244,6 @@
     <value>Su navegador no soporta elemento de audio</value>
   </data>
   <data name="BuyAudioGuideFormat" xml:space="preserve">
-    <value>Para escuchar esta audio guía debe comprarla. Envie un SMS al 1234 con el texto AUDIO {0}</value>
+    <value>Para escuchar esta audio guía debe comprarla. Envie un SMS al 1566612038 con el texto AUDIOGUIA {0}</value>
   </data>
 </root>

@@ -97,7 +97,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Para escuchar esta audio guía debe comprarla. Envie un SMS al 1234 con el texto AUDIO {0}.
+        ///   Looks up a localized string similar to Para escuchar esta audio guía debe comprarla. Envie un SMS al 1566612038 con el texto AUDIOGUIA {0}.
         /// </summary>
         internal static string BuyAudioGuideFormat {
             get {
@@ -151,7 +151,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descripcion.
+        ///   Looks up a localized string similar to Descripción.
         /// </summary>
         internal static string CommerceDescription {
             get {
@@ -205,7 +205,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descripcion.
+        ///   Looks up a localized string similar to Descripción.
         /// </summary>
         internal static string Description {
             get {

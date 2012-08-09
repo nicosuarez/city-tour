@@ -16,7 +16,8 @@ namespace web.Areas.Api
         {
             context.MapRoute(
                 @"ApiDefault",
-                @"Api/{controller}/{action}"
+                @"Api/{controller}/{action}",
+                new { action = @"Index" }
             );
         }
     }
