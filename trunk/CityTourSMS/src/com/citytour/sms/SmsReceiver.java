@@ -65,7 +65,9 @@ public class SmsReceiver extends BroadcastReceiver
 	public boolean isAudioguideRequest(Context context, String smsBody)
 	{
 		String[] tokens = smsBody.split(" ");
-		return tokens[0].equals(context.getString(R.string.SMSAudioguide)) && tokens.length == 2;
+		if (tokens[0].equals(context.getString(R.string.SMSAudioguide)) || tokens[0].equals(context.getString(R.string.SMSAudioguide2)))
+			return (tokens.length == 2); 
+		return  false ;
 	}
 	
 	public String generateResponse(Context context, String smsBody) throws Exception
@@ -100,15 +102,16 @@ public class SmsReceiver extends BroadcastReceiver
     	String[] tokens = smsBody.split(" ");
     	String message = HTTPUtil.audioguide(tokens[1]);
     	
-    	String filePath = Environment.getExternalStorageDirectory().getPath() + "/1234.mp3";
+    	String filePath = Environment.getExternalStorageDirectory().getPath() + "/"+ tokens[1] + ".mp3";
     	if (!this.fileExists(context, filePath))
     	{
     		sendSMS(context, phoneNumber, context.getString(R.string.SMSFailureAudioguide));
-    		return;
+    	} else {
+    	
+    		sendSMS(context, phoneNumber, message);
+    		smsActivity.logSMS("[Respuesta a " + phoneNumber + "] " + message);
+    		smsActivity.sendMMS(phoneNumber, context.getString(R.string.SMSSuccessAudioguide), "file://" + filePath, "audio/*");
     	}
-
-    	smsActivity.sendMMS(phoneNumber, message, "file://" + filePath, "audio/*");
-    	smsActivity.logSMS("[Respuesta a " + phoneNumber + "] " + message);    	    	
     }
 	     
     public void showMessage(Context context, String message)
